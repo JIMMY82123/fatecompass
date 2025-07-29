@@ -3,13 +3,16 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Star, ArrowRight, Heart, Target, Briefcase, Users, Calendar, Phone, Mail } from 'lucide-react'
+import { Star, ArrowRight, Heart, Target, Briefcase, Users, Calendar, Phone, Mail, Send } from 'lucide-react'
+import Lottie from 'lottie-react'
 import Navigation from '@/components/Navigation'
 import SEOHead from '@/components/SEOHead'
 
 export default function Home() {
   const [currentQuote, setCurrentQuote] = useState(0)
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
+  const [animationData, setAnimationData] = useState(null)
+  const [email, setEmail] = useState('')
 
   const quotes = [
     "When you feel lost, the ancient wisdom becomes your compass.",
@@ -22,81 +25,91 @@ export default function Home() {
       name: "Sarah Johnson",
       avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
       rating: 5,
-      text: "I was completely lost in my career. 玄印's analysis helped me discover my true calling. Now I'm finally doing what I love!",
+      text: "I was completely lost in my career. 玄印's analysis helped me discover my true calling. Now I'm finally doing what I love and making a real difference in people's lives!",
       location: "New York, USA",
-      problem: "Career Confusion"
+      problem: "Career Confusion",
+      emotion: "Overwhelmed → Fulfilled"
     },
     {
       name: "Michael Chen",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
       rating: 5,
-      text: "My relationship was falling apart. The compatibility analysis showed us exactly what we needed to fix. We're stronger than ever now.",
+      text: "My relationship was falling apart. The compatibility analysis showed us exactly what we needed to fix. We're stronger than ever now and planning our wedding!",
       location: "Toronto, Canada",
-      problem: "Relationship Issues"
+      problem: "Relationship Issues",
+      emotion: "Heartbroken → In Love"
     },
     {
       name: "Emma Wilson",
       avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
       rating: 5,
-      text: "I felt stuck and directionless. 玄印's reading revealed my life purpose and gave me the confidence to make major changes.",
+      text: "I felt stuck and directionless. 玄印's reading revealed my life purpose and gave me the confidence to make major changes. I've never been happier!",
       location: "London, UK",
-      problem: "Life Purpose"
+      problem: "Life Purpose",
+      emotion: "Lost → Purposeful"
     },
     {
       name: "David Kim",
       avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
       rating: 5,
-      text: "After losing my job, I was desperate for guidance. 玄印's career analysis led me to a better opportunity I never considered.",
+      text: "After losing my job, I was desperate for guidance. 玄印's career analysis led me to a better opportunity I never considered. I'm making 40% more now!",
       location: "Seoul, Korea",
-      problem: "Career Transition"
+      problem: "Career Transition",
+      emotion: "Desperate → Thriving"
     },
     {
       name: "Lisa Rodriguez",
       avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
       rating: 5,
-      text: "I was struggling with self-doubt and couldn't decide on my next steps. The reading gave me clarity and renewed confidence.",
+      text: "I was struggling with self-doubt and couldn't decide on my next steps. The reading gave me clarity and renewed confidence. I finally feel like myself again!",
       location: "Madrid, Spain",
-      problem: "Self-Doubt"
+      problem: "Self-Doubt",
+      emotion: "Confused → Confident"
     },
     {
       name: "James Thompson",
       avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
       rating: 5,
-      text: "Divorce left me questioning everything. 玄印 helped me understand my patterns and find hope for the future.",
+      text: "Divorce left me questioning everything. 玄印 helped me understand my patterns and find hope for the future. I'm dating again and feeling optimistic!",
       location: "Sydney, Australia",
-      problem: "Life Crisis"
+      problem: "Life Crisis",
+      emotion: "Hopeless → Hopeful"
     },
     {
       name: "Anna Kowalski",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
       rating: 5,
-      text: "I was in a toxic relationship but couldn't see it clearly. The compatibility analysis opened my eyes and gave me strength to leave.",
+      text: "I was in a toxic relationship but couldn't see it clearly. The compatibility analysis opened my eyes and gave me strength to leave. I'm free and happy now!",
       location: "Warsaw, Poland",
-      problem: "Toxic Relationship"
+      problem: "Toxic Relationship",
+      emotion: "Trapped → Free"
     },
     {
       name: "Carlos Silva",
       avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
       rating: 5,
-      text: "Financial struggles were overwhelming me. The wealth analysis showed me the right timing and opportunities to turn things around.",
+      text: "Financial struggles were overwhelming me. The wealth analysis showed me the right timing and opportunities to turn things around. I'm debt-free now!",
       location: "São Paulo, Brazil",
-      problem: "Financial Struggles"
+      problem: "Financial Struggles",
+      emotion: "Stressed → Secure"
     },
     {
       name: "Yuki Tanaka",
       avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
       rating: 5,
-      text: "I felt spiritually empty despite material success. 玄印 helped me find deeper meaning and purpose in life.",
+      text: "I felt spiritually empty despite material success. 玄印 helped me find deeper meaning and purpose in life. I'm finally at peace with myself!",
       location: "Tokyo, Japan",
-      problem: "Spiritual Crisis"
+      problem: "Spiritual Crisis",
+      emotion: "Empty → Fulfilled"
     },
     {
       name: "Maria Garcia",
       avatar: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
       rating: 5,
-      text: "As a single mom, I was overwhelmed with decisions. The reading gave me clarity on priorities and timing for major life changes.",
+      text: "As a single mom, I was overwhelmed with decisions. The reading gave me clarity on priorities and timing for major life changes. My kids are thriving!",
       location: "Barcelona, Spain",
-      problem: "Life Balance"
+      problem: "Life Balance",
+      emotion: "Overwhelmed → Balanced"
     }
   ]
 
@@ -133,11 +146,33 @@ export default function Home() {
       setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
     }, 4000)
 
+    // Load Lottie animation data
+    const loadAnimation = async () => {
+      try {
+        const response = await fetch('/assets/ink-flow.json')
+        const data = await response.json()
+        setAnimationData(data)
+      } catch (error) {
+        console.error('Failed to load Lottie animation:', error)
+        // Fallback to a simple gradient background if animation fails
+      }
+    }
+
+    loadAnimation()
+
     return () => {
       clearInterval(quoteInterval)
       clearInterval(testimonialInterval)
     }
   }, [quotes.length, testimonials.length])
+
+  const handleEmailSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    // Here you would typically send the email to your backend
+    console.log('Email submitted:', email)
+    setEmail('')
+    alert('Thank you for subscribing! You\'ll receive weekly wisdom tips.')
+  }
 
   return (
     <>
@@ -152,10 +187,27 @@ export default function Home() {
       <div className="min-h-screen">
         <Navigation />
         
-        {/* Hero Section with Simple Background */}
+        {/* Hero Section with Lottie Animation Background */}
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-          {/* Simple Gradient Background */}
-          <div className="absolute inset-0 z-0 bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800" />
+          {/* Lottie Animation Background */}
+          <div className="absolute inset-0 z-0">
+            {animationData ? (
+              <Lottie
+                animationData={animationData}
+                loop={true}
+                autoplay={true}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  opacity: 0.8,
+                  objectFit: 'cover'
+                }}
+              />
+            ) : (
+              // Fallback gradient background
+              <div className="w-full h-full bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800" />
+            )}
+          </div>
           
           {/* Mist Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent z-10" />
@@ -302,12 +354,12 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Testimonials Section */}
+        {/* Enhanced Testimonials Section */}
         <section className="py-20 bg-white">
           <div className="max-w-6xl mx-auto px-4">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold text-gray-900 mb-4">
-                Real People, Real Results
+                Real People, Real Transformations
               </h2>
               <p className="text-xl text-gray-600">
                 See how 玄印 has helped lost souls find their compass and transform their lives.
@@ -321,13 +373,13 @@ export default function Home() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-gray-50 p-6 rounded-xl hover:shadow-lg transition-shadow"
+                  className="bg-gray-50 p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105"
                 >
                   <div className="flex items-center mb-4">
                     <img
                       src={testimonial.avatar}
                       alt={testimonial.name}
-                      className="w-12 h-12 rounded-full mr-4"
+                      className="w-12 h-12 rounded-full mr-4 object-cover"
                     />
                     <div>
                       <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
@@ -339,6 +391,9 @@ export default function Home() {
                     <span className="inline-block bg-primary-100 text-primary-800 text-xs px-2 py-1 rounded-full mb-2">
                       {testimonial.problem}
                     </span>
+                    <div className="text-xs text-gray-500 font-medium">
+                      {testimonial.emotion}
+                    </div>
                   </div>
 
                   <div className="flex mb-3">
@@ -347,7 +402,7 @@ export default function Home() {
                     ))}
                   </div>
 
-                  <p className="text-gray-700 italic">"{testimonial.text}"</p>
+                  <p className="text-gray-700 italic leading-relaxed">"{testimonial.text}"</p>
                 </motion.div>
               ))}
             </div>
@@ -490,7 +545,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Newsletter Section */}
+        {/* Enhanced Newsletter Section */}
         <section className="py-20 bg-gradient-to-r from-primary-600 to-secondary-700">
           <div className="max-w-4xl mx-auto px-4 text-center">
             <h2 className="text-4xl font-bold text-white mb-4">
@@ -500,20 +555,27 @@ export default function Home() {
               Join thousands of seekers who receive weekly insights on finding their compass and living their best life.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
               <input
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
+                required
                 className="flex-1 px-6 py-4 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
               />
-              <button className="bg-white text-primary-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-                Get Free Tips
+              <button 
+                type="submit"
+                className="bg-white text-primary-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors flex items-center justify-center space-x-2"
+              >
+                <span>Get Free Tips</span>
+                <Send className="w-4 h-4" />
               </button>
-            </div>
+            </form>
           </div>
         </section>
 
-        {/* Footer */}
+        {/* Enhanced Footer */}
         <footer className="bg-gray-900 text-white py-16">
           <div className="max-w-6xl mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -530,13 +592,44 @@ export default function Home() {
                 <p className="text-gray-400 mb-6 max-w-md">
                   Your Destiny. Decoded. Helping lost souls find their compass through ancient Eastern wisdom.
                 </p>
-                <div className="flex space-x-4">
-                  <a href="https://wa.me/8615914228258" className="text-gray-400 hover:text-white transition-colors">
+                <div className="flex space-x-4 mb-6">
+                  <a 
+                    href="https://wa.me/8615914228258" 
+                    className="text-gray-400 hover:text-white transition-colors flex items-center space-x-2"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <Phone className="w-5 h-5" />
+                    <span>+86 15914228258</span>
                   </a>
-                  <a href="mailto:chenxiao0801@hotmail.com" className="text-gray-400 hover:text-white transition-colors">
+                  <a 
+                    href="mailto:chenxiao0801@hotmail.com" 
+                    className="text-gray-400 hover:text-white transition-colors flex items-center space-x-2"
+                  >
                     <Mail className="w-5 h-5" />
+                    <span>chenxiao0801@hotmail.com</span>
                   </a>
+                </div>
+                
+                {/* Email Subscription in Footer */}
+                <div className="mb-6">
+                  <h4 className="text-lg font-semibold mb-3">Stay Connected</h4>
+                  <form onSubmit={handleEmailSubmit} className="flex space-x-2">
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Your email"
+                      required
+                      className="flex-1 px-4 py-2 rounded-lg text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    />
+                    <button 
+                      type="submit"
+                      className="bg-primary-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-primary-600 transition-colors"
+                    >
+                      Subscribe
+                    </button>
+                  </form>
                 </div>
               </div>
               
@@ -546,6 +639,7 @@ export default function Home() {
                   <li><Link href="/services" className="hover:text-white transition-colors">Life Purpose Reading</Link></li>
                   <li><Link href="/services" className="hover:text-white transition-colors">Career Guidance</Link></li>
                   <li><Link href="/services" className="hover:text-white transition-colors">Relationship Compatibility</Link></li>
+                  <li><Link href="/services" className="hover:text-white transition-colors">Business Timing</Link></li>
                 </ul>
               </div>
               
@@ -555,12 +649,14 @@ export default function Home() {
                   <li><Link href="/about" className="hover:text-white transition-colors">About 玄印</Link></li>
                   <li><Link href="/blog" className="hover:text-white transition-colors">Blog</Link></li>
                   <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
+                  <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
                 </ul>
               </div>
             </div>
             
             <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
               <p>© 2025 Fate Compass · Powered by 玄印命理师 Xuan Yin</p>
+              <p className="text-sm mt-2">Ancient wisdom for modern souls</p>
             </div>
           </div>
         </footer>
