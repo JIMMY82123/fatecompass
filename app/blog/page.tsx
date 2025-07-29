@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { Calendar, Clock, User, ArrowRight, Search } from 'lucide-react'
 import Link from 'next/link'
 import SEOHead from '@/components/SEOHead'
+import Navigation from '@/components/Navigation'
 
 export default function Blog() {
   const blogPosts = [
@@ -98,6 +99,8 @@ export default function Blog() {
         canonical="https://fatecompass.net/blog"
       />
 
+      <Navigation />
+      
       <div className="min-h-screen bg-cream-50">
         {/* Hero Section */}
         <section className="pt-32 pb-20 bg-gradient-to-br from-navy-900 via-purple-900 to-navy-900 relative overflow-hidden">

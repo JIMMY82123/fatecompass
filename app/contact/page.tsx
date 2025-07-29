@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Phone, Mail, MapPin, Clock, MessageCircle, Send } from 'lucide-react'
 import SEOHead from '@/components/SEOHead'
+import Navigation from '@/components/Navigation'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -88,6 +89,8 @@ export default function Contact() {
         canonical="https://fatecompass.net/contact"
       />
 
+      <Navigation />
+      
       <div className="min-h-screen bg-cream-50">
         {/* Hero Section */}
         <section className="pt-32 pb-20 bg-gradient-to-br from-navy-900 via-purple-900 to-navy-900 relative overflow-hidden">

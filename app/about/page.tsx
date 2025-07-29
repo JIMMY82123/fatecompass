@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { Phone, Mail, BookOpen, Heart, Target, Shield, Star } from 'lucide-react'
 import Image from 'next/image'
 import SEOHead from '@/components/SEOHead'
+import Navigation from '@/components/Navigation'
 
 export default function About() {
   const achievements = [
@@ -59,6 +60,8 @@ export default function About() {
         canonical="https://fatecompass.net/about"
       />
 
+      <Navigation />
+      
       <div className="min-h-screen bg-cream-50">
         {/* Hero Section */}
         <section className="pt-32 pb-20 bg-gradient-to-br from-navy-900 via-purple-900 to-navy-900 relative overflow-hidden">

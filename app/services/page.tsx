@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { Phone, Mail, Clock, Shield, Heart, Target, CheckCircle } from 'lucide-react'
 import Link from 'next/link'
 import SEOHead from '@/components/SEOHead'
+import Navigation from '@/components/Navigation'
 
 export default function Services() {
   const services = [
@@ -107,6 +108,8 @@ export default function Services() {
         canonical="https://fatecompass.net/services"
       />
 
+      <Navigation />
+      
       <div className="min-h-screen bg-cream-50">
         {/* Hero Section */}
         <section className="pt-32 pb-20 bg-gradient-to-br from-navy-900 via-purple-900 to-navy-900 relative overflow-hidden">
