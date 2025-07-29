@@ -154,189 +154,192 @@ export default function Home() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800 flex items-center justify-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="text-center text-white"
-        >
-          <div className="w-16 h-16 border-4 border-white/20 border-t-white rounded-full animate-spin mx-auto mb-4"></div>
-          <h2 className="text-2xl font-bold mb-2">玄印 · Xuan Yin</h2>
-          <p className="text-gray-300">Loading ancient wisdom...</p>
-        </motion.div>
-      </div>
-    )
-  }
-
   return (
-    <div className="relative min-h-screen">
-      <SEOHead 
-        title="Fate Compass | 玄印命理师 - Your Destiny Decoded"
-        description="Feeling lost? Let Master 玄印 guide you with ancient Eastern wisdom. Bazi readings, love compatibility, and spiritual guidance for confused souls seeking direction."
+    <>
+      <SEOHead
+        title="Fate Compass | Find Your Life Purpose with Eastern Wisdom"
+        description="Feeling lost in life? Master 玄印 helps you discover your destiny through ancient Eastern astrology. Career guidance, relationship compatibility, and life purpose readings."
+        keywords="life purpose, career guidance, relationship compatibility, Eastern astrology, BaZi reading, destiny, lost feeling, compass, 玄印"
+        ogTitle="Fate Compass | Your Destiny. Decoded by 玄印"
+        ogDescription="Discover your life purpose with Master 玄印. Ancient Eastern wisdom for modern souls seeking clarity and direction."
+        canonical="https://fatecompass.net"
       />
       
-      {/* Optimized Dynamic Background */}
-      <div className="fixed inset-0 z-0">
-        {/* Base gradient background */}
-        <div className="w-full h-full bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800" />
-        
-        {/* Reduced animated elements for better performance */}
-        <div className="absolute inset-0">
-          {/* Main circles */}
-          <div 
-            className="absolute top-1/4 left-1/4 w-96 h-96 bg-black/10 rounded-full"
-            style={{
-              animation: 'customPulse 8s ease-in-out infinite',
-              transformOrigin: 'center'
-            }}
-          />
+      <div className="min-h-screen relative overflow-hidden">
+        {/* Mystical Background */}
+        <div className="fixed inset-0 z-0">
+          {/* Dark gradient base */}
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"></div>
           
-          <div 
-            className="absolute top-1/3 right-1/4 w-80 h-80 bg-blue-900/15 rounded-full"
-            style={{
-              animation: 'customPulse 10s ease-in-out infinite 2s',
-              transformOrigin: 'center'
-            }}
-          />
-          
-          <div 
-            className="absolute bottom-1/4 left-1/3 w-72 h-72 bg-indigo-900/12 rounded-full"
-            style={{
-              animation: 'customPulse 12s ease-in-out infinite 4s',
-              transformOrigin: 'center'
-            }}
-          />
-          
-          {/* Floating particles - reduced count */}
+          {/* Mystical elements */}
           <div className="absolute inset-0">
-            {[...Array(15)].map((_, i) => (
+            {/* Yin Yang symbol */}
+            <div className="absolute top-20 left-20 w-32 h-32 opacity-20">
+              <div className="w-full h-full rounded-full bg-gradient-to-br from-white to-gray-300 relative">
+                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-16 h-16 bg-slate-900 rounded-full"></div>
+                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-16 bg-slate-900 rounded-full"></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full"></div>
+                <div className="absolute bottom-1/2 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-4 h-4 bg-white rounded-full"></div>
+              </div>
+            </div>
+            
+            {/* Trigrams (Ba Gua) */}
+            <div className="absolute top-40 right-20 opacity-15">
+              <div className="space-y-2">
+                {[...Array(3)].map((_, i) => (
+                  <div key={i} className="flex space-x-1">
+                    {[...Array(3)].map((_, j) => (
+                      <div key={j} className={`w-8 h-2 ${Math.random() > 0.5 ? 'bg-white' : 'bg-transparent border border-white'}`}></div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Floating stars */}
+            {[...Array(20)].map((_, i) => (
               <div
                 key={i}
-                className={`absolute rounded-full ${
-                  i % 3 === 0 ? 'w-3 h-3 bg-white/25' : 
-                  i % 3 === 1 ? 'w-2 h-2 bg-blue-400/20' : 
-                  'w-1 h-1 bg-yellow-400/30'
-                }`}
+                className="absolute w-1 h-1 bg-yellow-300 rounded-full animate-pulse"
                 style={{
-                  left: `${10 + (i % 5) * 15}%`,
-                  top: `${20 + Math.floor(i / 5) * 20}%`,
-                  animation: `customBounce ${4 + i * 0.5}s ease-in-out infinite ${i * 0.4}s`
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 3}s`,
+                  animationDuration: `${2 + Math.random() * 2}s`
                 }}
-              />
+              ></div>
             ))}
+            
+            {/* Mystical lines */}
+            <div className="absolute inset-0">
+              <svg className="w-full h-full opacity-10">
+                <defs>
+                  <linearGradient id="mysticalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#8B5CF6" />
+                    <stop offset="50%" stopColor="#EC4899" />
+                    <stop offset="100%" stopColor="#3B82F6" />
+                  </linearGradient>
+                </defs>
+                <path
+                  d="M0,50 Q25,25 50,50 T100,50"
+                  stroke="url(#mysticalGradient)"
+                  strokeWidth="2"
+                  fill="none"
+                  className="animate-pulse"
+                />
+                <path
+                  d="M0,80 Q25,55 50,80 T100,80"
+                  stroke="url(#mysticalGradient)"
+                  strokeWidth="1"
+                  fill="none"
+                  className="animate-pulse"
+                  style={{ animationDelay: '1s' }}
+                />
+              </svg>
+            </div>
+            
+            {/* Floating Chinese characters */}
+            <div className="absolute top-1/4 left-1/4 text-6xl text-white/10 font-bold animate-bounce" style={{ animationDuration: '4s' }}>
+              命
+            </div>
+            <div className="absolute top-1/3 right-1/3 text-4xl text-white/10 font-bold animate-bounce" style={{ animationDuration: '5s', animationDelay: '1s' }}>
+              理
+            </div>
+            <div className="absolute bottom-1/4 left-1/3 text-5xl text-white/10 font-bold animate-bounce" style={{ animationDuration: '6s', animationDelay: '2s' }}>
+              玄
+            </div>
+            
+            {/* Energy waves */}
+            <div className="absolute bottom-0 left-0 right-0 h-32">
+              <div className="w-full h-full bg-gradient-to-t from-purple-900/30 to-transparent"></div>
+            </div>
           </div>
         </div>
-      </div>
-      
-      {/* Content wrapper with relative positioning */}
-      <div className="relative z-10">
+
+        {/* Loading State */}
+        {isLoading && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/95 backdrop-blur-sm">
+            <div className="text-center">
+              <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+              <p className="text-white text-lg font-medium">Loading ancient wisdom...</p>
+            </div>
+          </div>
+        )}
+
         <Navigation />
-        
+
         {/* Hero Section */}
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-          {/* Mist overlay for hero */}
-          <div className="absolute inset-0 bg-gradient-to-t from-white/10 via-transparent to-transparent z-10" />
-          
-          {/* Content */}
-          <div className="relative z-20 text-center text-white px-4 max-w-6xl mx-auto">
+        <section className="relative z-10 pt-32 pb-20 min-h-screen flex items-center">
+          <div className="max-w-6xl mx-auto px-4 text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
+              className="mb-8"
             >
-              {/* Main Title */}
-              <h1 className="text-6xl md:text-8xl font-bold mb-4 font-serif">
-                玄印 · Master Xuan Yin
+              <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+                <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                  玄印 · Xuan Yin
+                </span>
               </h1>
-              
-              {/* Subtitle */}
-              <h2 className="text-2xl md:text-3xl mb-8 font-light text-gray-200">
-                Let Eastern Wisdom Illuminate Your Path
-              </h2>
-              
-              {/* Description */}
-              <p className="text-xl md:text-2xl mb-8 max-w-4xl mx-auto text-gray-300 leading-relaxed">
-                Feeling lost, confused, or stuck in life? Let ancient Eastern wisdom be your compass. 
-                Master 玄印 guides lost souls to find their true path through personalized destiny readings.
+              <p className="text-2xl md:text-3xl text-gray-300 mb-8 font-light">
+                Your Destiny. Decoded by Eastern Wisdom
               </p>
+              <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+                Feeling lost in life? Let ancient Eastern astrology guide you to clarity, 
+                purpose, and success. Discover your true path with Master 玄印.
+              </p>
+            </motion.div>
 
-              {/* Animated Quote */}
-              <div className="mb-12 h-20 flex items-center justify-center">
-                <motion.p
-                  key={currentQuote}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.5 }}
-                  className="text-lg md:text-xl italic text-gray-200 font-serif"
-                >
-                  "{quotes[currentQuote]}"
-                </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
+            >
+              <a
+                href="https://wa.me/8615914228258"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 flex items-center space-x-2 shadow-lg hover:shadow-xl"
+              >
+                <Phone className="w-5 h-5" />
+                <span>Start Your Journey</span>
+              </a>
+              <Link href="/services">
+                <button className="border-2 border-purple-400 text-purple-400 px-8 py-4 rounded-full font-semibold hover:bg-purple-400 hover:text-white transition-all duration-300">
+                  Explore Services
+                </button>
+              </Link>
+            </motion.div>
+
+            {/* Mystical stats */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto"
+            >
+              <div className="text-center">
+                <div className="text-3xl font-bold text-purple-400 mb-2">20+</div>
+                <div className="text-gray-400">Years of Wisdom</div>
               </div>
-
-              {/* Feature Icons */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 max-w-5xl mx-auto">
-                <motion.div 
-                  className="flex flex-col items-center space-y-3"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <span className="text-5xl">🧭</span>
-                  <h3 className="text-xl font-semibold">Find Your Compass</h3>
-                  <p className="text-sm text-gray-300">Discover your true direction</p>
-                </motion.div>
-                <motion.div 
-                  className="flex flex-col items-center space-y-3"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <span className="text-5xl">💼</span>
-                  <h3 className="text-xl font-semibold">Career Clarity</h3>
-                  <p className="text-sm text-gray-300">Navigate your professional path</p>
-                </motion.div>
-                <motion.div 
-                  className="flex flex-col items-center space-y-3"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <span className="text-5xl">❤️</span>
-                  <h3 className="text-xl font-semibold">Relationship Harmony</h3>
-                  <p className="text-sm text-gray-300">Find lasting love and connection</p>
-                </motion.div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-purple-400 mb-2">2,847+</div>
+                <div className="text-gray-400">Lives Transformed</div>
               </div>
-
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                <Link href="/services">
-                  <motion.button 
-                    className="bg-gradient-to-r from-primary-500 to-secondary-600 text-white px-10 py-5 rounded-full font-semibold text-xl hover:from-primary-600 hover:to-secondary-700 transition-all duration-300 flex items-center justify-center space-x-3 shadow-2xl"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <span>Get Your Free Reading</span>
-                    <ArrowRight className="w-6 h-6" />
-                  </motion.button>
-                </Link>
-                <Link href="/about">
-                  <motion.button 
-                    className="border-2 border-white text-white px-10 py-5 rounded-full font-semibold text-xl hover:bg-white hover:text-gray-900 transition-all duration-300 shadow-2xl"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    See How It Works
-                  </motion.button>
-                </Link>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-purple-400 mb-2">94%</div>
+                <div className="text-gray-400">Success Rate</div>
               </div>
             </motion.div>
           </div>
         </section>
 
         {/* Problems We Solve Section */}
-        <section className="py-20 bg-white/5 backdrop-blur-sm">
-          <div className="max-w-6xl mx-auto px-4">
+        <section className="py-20 bg-slate-900/50 backdrop-blur-sm relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-900/20 to-pink-900/20"></div>
+          <div className="relative z-10 max-w-6xl mx-auto px-4">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
                 Problems We Solve
@@ -381,8 +384,9 @@ export default function Home() {
         </section>
 
         {/* Testimonials Section */}
-        <section className="py-20 bg-white/5 backdrop-blur-sm">
-          <div className="max-w-6xl mx-auto px-4">
+        <section className="py-20 bg-slate-800/50 backdrop-blur-sm relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-pink-900/20 to-blue-900/20"></div>
+          <div className="relative z-10 max-w-6xl mx-auto px-4">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
                 Real People, Real Results
@@ -558,8 +562,9 @@ export default function Home() {
         </section>
 
         {/* How We Help You Find Your Compass */}
-        <section className="py-20 bg-white/5 backdrop-blur-sm">
-          <div className="max-w-6xl mx-auto px-4">
+        <section className="py-20 bg-slate-900/50 backdrop-blur-sm relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-purple-900/20"></div>
+          <div className="relative z-10 max-w-6xl mx-auto px-4">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
                 How We Help You Find Your Compass
@@ -652,8 +657,9 @@ export default function Home() {
         </section>
 
         {/* Enhanced Footer */}
-        <footer className="bg-gray-900 text-white py-16">
-          <div className="max-w-6xl mx-auto px-4">
+        <footer className="bg-slate-900 text-white py-16 relative">
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-purple-900/20 to-slate-900"></div>
+          <div className="relative z-10 max-w-6xl mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div className="col-span-1 md:col-span-2">
                 <div className="flex items-center space-x-3 mb-4">
@@ -789,6 +795,6 @@ export default function Home() {
           </svg>
         </motion.button>
       </div>
-    </div>
+    </>
   )
 } 
