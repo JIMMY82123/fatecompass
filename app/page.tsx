@@ -4,14 +4,12 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Star, ArrowRight, Heart, Target, Briefcase, Users, Calendar, Phone, Mail } from 'lucide-react'
-import Lottie from 'lottie-react'
 import Navigation from '@/components/Navigation'
 import SEOHead from '@/components/SEOHead'
 
 export default function Home() {
   const [currentQuote, setCurrentQuote] = useState(0)
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
-  const [animationData, setAnimationData] = useState(null)
 
   const quotes = [
     "When you feel lost, the ancient wisdom becomes your compass.",
@@ -135,20 +133,6 @@ export default function Home() {
       setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
     }, 4000)
 
-    // Load Lottie animation data
-    const loadAnimation = async () => {
-      try {
-        const response = await fetch('/assets/water-ink.json')
-        const data = await response.json()
-        setAnimationData(data)
-      } catch (error) {
-        console.error('Failed to load Lottie animation:', error)
-        // Fallback to a simple gradient background if animation fails
-      }
-    }
-
-    loadAnimation()
-
     return () => {
       clearInterval(quoteInterval)
       clearInterval(testimonialInterval)
@@ -168,27 +152,10 @@ export default function Home() {
       <div className="min-h-screen">
         <Navigation />
         
-        {/* Hero Section with Lottie Animation Background */}
+        {/* Hero Section with Simple Background */}
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-          {/* Lottie Animation Background */}
-          <div className="absolute inset-0 z-0">
-            {animationData ? (
-              <Lottie
-                animationData={animationData}
-                loop={true}
-                autoplay={true}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  opacity: 0.8,
-                  objectFit: 'cover'
-                }}
-              />
-            ) : (
-              // Fallback gradient background
-              <div className="w-full h-full bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800" />
-            )}
-          </div>
+          {/* Simple Gradient Background */}
+          <div className="absolute inset-0 z-0 bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800" />
           
           {/* Mist Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent z-10" />
