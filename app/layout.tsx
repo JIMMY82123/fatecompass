@@ -3,6 +3,8 @@ import type { Metadata } from 'next'
 import { Inter, Noto_Serif_SC } from 'next/font/google'
 import './globals.css'
 import MobileOptimizer from '@/components/MobileOptimizer'
+import PerformanceMonitor from '@/components/PerformanceMonitor'
+import Accessibility from '@/components/Accessibility'
 
 const inter = Inter({ subsets: ['latin'] })
 const notoSerif = Noto_Serif_SC({ 
@@ -71,6 +73,8 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <MobileOptimizer />
+        <PerformanceMonitor />
+        <Accessibility />
         {children}
       </body>
     </html>
