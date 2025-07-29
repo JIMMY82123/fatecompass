@@ -5,6 +5,8 @@ import { Phone, Mail, Clock, Shield, Heart, Target, CheckCircle } from 'lucide-r
 import Link from 'next/link'
 import SEOHead from '@/components/SEOHead'
 import Navigation from '@/components/Navigation'
+import Breadcrumb from '@/components/Breadcrumb'
+import TrustIndicators from '@/components/TrustIndicators'
 
 export default function Services() {
   const services = [
@@ -147,6 +149,7 @@ export default function Services() {
         {/* Services Section */}
         <section className="py-20">
           <div className="max-w-6xl mx-auto px-4">
+            <Breadcrumb items={[{ label: 'Services' }]} />
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {services.map((service, index) => (
                 <motion.div
@@ -287,6 +290,9 @@ export default function Services() {
             </div>
           </div>
         </section>
+
+        {/* Trust Indicators Section */}
+        <TrustIndicators />
 
         {/* FAQ Section */}
         <section className="py-20 bg-cream-100">

@@ -7,6 +7,7 @@ import { Phone, Mail, Heart, Target, Briefcase, Star, ArrowRight } from 'lucide-
 import Navigation from '@/components/Navigation'
 import Testimonials from '@/components/Testimonials'
 import SEOHead from '@/components/SEOHead'
+import StructuredData from '@/components/StructuredData'
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true)
@@ -55,6 +56,9 @@ export default function Home() {
         ogDescription="Discover your life purpose with Master 玄印. Ancient Eastern wisdom for modern souls seeking clarity and direction."
         canonical="https://fatecompass.net"
       />
+      
+      <StructuredData type="website" data={{}} />
+      <StructuredData type="organization" data={{}} />
       
       <div className="min-h-screen relative overflow-hidden">
         {/* Dynamic Background */}
