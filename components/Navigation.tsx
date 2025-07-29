@@ -88,7 +88,7 @@ export default function Navigation() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-white p-2"
+            className="md:hidden text-white p-3 touch-manipulation"
             aria-label="Toggle menu"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -106,35 +106,35 @@ export default function Navigation() {
             <div className="px-4 py-6 space-y-4">
               <Link 
                 href="/" 
-                className="block text-cream-200 hover:text-white transition-colors font-medium"
+                className="block text-cream-200 hover:text-white transition-colors font-medium py-3 touch-manipulation"
                 onClick={() => setIsOpen(false)}
               >
                 Home
               </Link>
               <Link 
                 href="/services" 
-                className="block text-cream-200 hover:text-white transition-colors font-medium"
+                className="block text-cream-200 hover:text-white transition-colors font-medium py-3 touch-manipulation"
                 onClick={() => setIsOpen(false)}
               >
                 Services
               </Link>
               <Link 
                 href="/blog" 
-                className="block text-cream-200 hover:text-white transition-colors font-medium"
+                className="block text-cream-200 hover:text-white transition-colors font-medium py-3 touch-manipulation"
                 onClick={() => setIsOpen(false)}
               >
                 Blog
               </Link>
               <Link 
                 href="/about" 
-                className="block text-cream-200 hover:text-white transition-colors font-medium"
+                className="block text-cream-200 hover:text-white transition-colors font-medium py-3 touch-manipulation"
                 onClick={() => setIsOpen(false)}
               >
                 About
               </Link>
               <Link 
                 href="/contact" 
-                className="block text-cream-200 hover:text-white transition-colors font-medium"
+                className="block text-cream-200 hover:text-white transition-colors font-medium py-3 touch-manipulation"
                 onClick={() => setIsOpen(false)}
               >
                 Contact

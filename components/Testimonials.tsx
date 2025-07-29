@@ -9,7 +9,7 @@ const testimonials = [
   {
     id: 1,
     name: "Anna L.",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
+    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
     review: "This reading gave me clarity and peace. Now I know where I'm going.",
     rating: 5,
     category: "Life Purpose"
