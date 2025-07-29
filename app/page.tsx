@@ -169,90 +169,162 @@ export default function Home() {
       <div className="min-h-screen relative overflow-hidden">
         {/* Mystical Background */}
         <div className="fixed inset-0 z-0">
-          {/* Dark gradient base */}
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"></div>
+          {/* Advanced gradient base */}
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-purple-950 to-slate-900"></div>
           
           {/* Mystical elements */}
           <div className="absolute inset-0">
-            {/* Yin Yang symbol */}
-            <div className="absolute top-20 left-20 w-32 h-32 opacity-20">
-              <div className="w-full h-full rounded-full bg-gradient-to-br from-white to-gray-300 relative">
-                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-16 h-16 bg-slate-900 rounded-full"></div>
-                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-16 bg-slate-900 rounded-full"></div>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full"></div>
-                <div className="absolute bottom-1/2 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-4 h-4 bg-white rounded-full"></div>
+            {/* Large Yin Yang symbol with glow */}
+            <div className="absolute top-10 left-10 w-40 h-40 opacity-30">
+              <div className="w-full h-full rounded-full bg-gradient-to-br from-white via-gray-200 to-gray-300 relative shadow-2xl">
+                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-20 h-20 bg-slate-950 rounded-full shadow-inner"></div>
+                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-20 bg-slate-950 rounded-full shadow-inner"></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-5 h-5 bg-white rounded-full shadow-lg"></div>
+                <div className="absolute bottom-1/2 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-5 h-5 bg-white rounded-full shadow-lg"></div>
+                {/* Glow effect */}
+                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-400/20 to-pink-400/20 blur-xl"></div>
               </div>
             </div>
             
-            {/* Trigrams (Ba Gua) */}
-            <div className="absolute top-40 right-20 opacity-15">
-              <div className="space-y-2">
-                {[...Array(3)].map((_, i) => (
-                  <div key={i} className="flex space-x-1">
-                    {[...Array(3)].map((_, j) => (
-                      <div key={j} className={`w-8 h-2 ${Math.random() > 0.5 ? 'bg-white' : 'bg-transparent border border-white'}`}></div>
-                    ))}
-                  </div>
-                ))}
+            {/* Advanced Ba Gua (Eight Trigrams) */}
+            <div className="absolute top-32 right-16 opacity-25">
+              <div className="relative">
+                {/* Outer circle */}
+                <div className="w-32 h-32 rounded-full border-2 border-purple-400/30 relative">
+                  {/* Eight trigrams around the circle */}
+                  {[...Array(8)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="absolute"
+                      style={{
+                        top: '50%',
+                        left: '50%',
+                        transform: `translate(-50%, -50%) rotate(${i * 45}deg) translateY(-60px)`,
+                      }}
+                    >
+                      <div className="space-y-1">
+                        {[...Array(3)].map((_, j) => (
+                          <div
+                            key={j}
+                            className={`w-8 h-1.5 ${Math.random() > 0.5 ? 'bg-purple-400/60' : 'bg-transparent border border-purple-400/40'}`}
+                          ></div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                {/* Inner circle */}
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-400/30"></div>
               </div>
             </div>
             
-            {/* Floating stars */}
-            {[...Array(20)].map((_, i) => (
-              <div
-                key={i}
-                className="absolute w-1 h-1 bg-yellow-300 rounded-full animate-pulse"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                  animationDelay: `${Math.random() * 3}s`,
-                  animationDuration: `${2 + Math.random() * 2}s`
-                }}
-              ></div>
-            ))}
+            {/* Floating mystical symbols */}
+            <div className="absolute top-1/4 left-1/3 text-8xl text-purple-400/20 font-bold animate-pulse" style={{ animationDuration: '8s' }}>
+              道
+            </div>
+            <div className="absolute top-1/3 right-1/4 text-6xl text-pink-400/20 font-bold animate-pulse" style={{ animationDuration: '10s', animationDelay: '2s' }}>
+              德
+            </div>
+            <div className="absolute bottom-1/3 left-1/4 text-7xl text-blue-400/20 font-bold animate-pulse" style={{ animationDuration: '12s', animationDelay: '4s' }}>
+              易
+            </div>
             
-            {/* Mystical lines */}
+            {/* Advanced star field */}
             <div className="absolute inset-0">
-              <svg className="w-full h-full opacity-10">
+              {[...Array(50)].map((_, i) => (
+                <div
+                  key={i}
+                  className={`absolute rounded-full ${
+                    i % 4 === 0 ? 'w-2 h-2 bg-yellow-300/60' :
+                    i % 4 === 1 ? 'w-1.5 h-1.5 bg-purple-300/50' :
+                    i % 4 === 2 ? 'w-1 h-1 bg-pink-300/40' :
+                    'w-0.5 h-0.5 bg-blue-300/30'
+                  }`}
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                    animationDelay: `${Math.random() * 5}s`,
+                    animationDuration: `${3 + Math.random() * 4}s`,
+                    animation: 'twinkle'
+                  }}
+                ></div>
+              ))}
+            </div>
+            
+            {/* Mystical energy lines */}
+            <div className="absolute inset-0">
+              <svg className="w-full h-full opacity-15">
                 <defs>
-                  <linearGradient id="mysticalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#8B5CF6" />
-                    <stop offset="50%" stopColor="#EC4899" />
-                    <stop offset="100%" stopColor="#3B82F6" />
+                  <linearGradient id="energyGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#8B5CF6" stopOpacity="0.8" />
+                    <stop offset="50%" stopColor="#EC4899" stopOpacity="0.6" />
+                    <stop offset="100%" stopColor="#3B82F6" stopOpacity="0.8" />
+                  </linearGradient>
+                  <linearGradient id="energyGradient2" x1="100%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#F59E0B" stopOpacity="0.6" />
+                    <stop offset="50%" stopColor="#10B981" stopOpacity="0.8" />
+                    <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.6" />
                   </linearGradient>
                 </defs>
+                {/* Curved energy paths */}
                 <path
-                  d="M0,50 Q25,25 50,50 T100,50"
-                  stroke="url(#mysticalGradient)"
+                  d="M0,30 Q25,10 50,30 T100,30"
+                  stroke="url(#energyGradient1)"
+                  strokeWidth="3"
+                  fill="none"
+                  className="animate-pulse"
+                  style={{ animationDuration: '6s' }}
+                />
+                <path
+                  d="M0,70 Q25,50 50,70 T100,70"
+                  stroke="url(#energyGradient2)"
                   strokeWidth="2"
                   fill="none"
                   className="animate-pulse"
+                  style={{ animationDuration: '8s', animationDelay: '2s' }}
                 />
                 <path
-                  d="M0,80 Q25,55 50,80 T100,80"
-                  stroke="url(#mysticalGradient)"
-                  strokeWidth="1"
+                  d="M0,50 Q25,30 50,50 T100,50"
+                  stroke="url(#energyGradient1)"
+                  strokeWidth="1.5"
                   fill="none"
                   className="animate-pulse"
-                  style={{ animationDelay: '1s' }}
+                  style={{ animationDuration: '10s', animationDelay: '4s' }}
                 />
               </svg>
             </div>
             
-            {/* Floating Chinese characters */}
-            <div className="absolute top-1/4 left-1/4 text-6xl text-white/10 font-bold animate-bounce" style={{ animationDuration: '4s' }}>
-              命
-            </div>
-            <div className="absolute top-1/3 right-1/3 text-4xl text-white/10 font-bold animate-bounce" style={{ animationDuration: '5s', animationDelay: '1s' }}>
-              理
-            </div>
-            <div className="absolute bottom-1/4 left-1/3 text-5xl text-white/10 font-bold animate-bounce" style={{ animationDuration: '6s', animationDelay: '2s' }}>
-              玄
+            {/* Floating particles with trails */}
+            <div className="absolute inset-0">
+              {[...Array(15)].map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute w-1 h-1 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                    animation: `float ${8 + Math.random() * 8}s ease-in-out infinite ${Math.random() * 5}s`,
+                  }}
+                >
+                  {/* Particle trail */}
+                  <div className="absolute w-20 h-0.5 bg-gradient-to-r from-purple-400/30 to-transparent transform -translate-x-full top-1/2"></div>
+                </div>
+              ))}
             </div>
             
-            {/* Energy waves */}
-            <div className="absolute bottom-0 left-0 right-0 h-32">
-              <div className="w-full h-full bg-gradient-to-t from-purple-900/30 to-transparent"></div>
+            {/* Mystical fog layers */}
+            <div className="absolute inset-0">
+              <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-purple-900/20 via-transparent to-transparent"></div>
+              <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-900/30 via-transparent to-transparent"></div>
+              <div className="absolute top-0 bottom-0 left-0 w-32 bg-gradient-to-r from-purple-900/15 via-transparent to-transparent"></div>
+              <div className="absolute top-0 bottom-0 right-0 w-32 bg-gradient-to-l from-pink-900/15 via-transparent to-transparent"></div>
+            </div>
+            
+            {/* Central energy vortex */}
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 opacity-10">
+              <div className="w-full h-full rounded-full border border-purple-400/20 animate-spin" style={{ animationDuration: '20s' }}></div>
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full border border-pink-400/15 animate-spin" style={{ animationDuration: '15s', animationDirection: 'reverse' }}></div>
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full border border-blue-400/10 animate-spin" style={{ animationDuration: '10s' }}></div>
             </div>
           </div>
         </div>
