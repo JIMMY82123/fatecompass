@@ -152,16 +152,23 @@ export default function Home() {
       <div className="min-h-screen">
         <Navigation />
         
-        {/* Hero Section with Background */}
+        {/* Hero Section with Eastern Mountain Background */}
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-          {/* Background Image with Overlay */}
+          {/* Background Image with Multiple Overlays */}
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
               backgroundImage: `url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')`
             }}
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/70"></div>
+            {/* Primary Overlay - Dark gradient for readability */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
+            
+            {/* Top White Mist Gradient */}
+            <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-transparent"></div>
+            
+            {/* Additional Atmospheric Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30"></div>
           </div>
           
           {/* Content */}
@@ -171,58 +178,65 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h1 className="text-5xl md:text-7xl font-bold mb-6">
-                Your Destiny. Decoded by 玄印
+              {/* Main Title */}
+              <h1 className="text-6xl md:text-8xl font-bold mb-4 font-serif">
+                玄印 · Master Xuan Yin
               </h1>
               
-              <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+              {/* Subtitle */}
+              <h2 className="text-2xl md:text-3xl mb-8 font-light text-gray-200">
+                Let Eastern Wisdom Illuminate Your Path
+              </h2>
+              
+              {/* Description */}
+              <p className="text-xl md:text-2xl mb-8 max-w-4xl mx-auto text-gray-300 leading-relaxed">
                 Feeling lost, confused, or stuck in life? Let ancient Eastern wisdom be your compass. 
                 Master 玄印 guides lost souls to find their true path through personalized destiny readings.
               </p>
 
               {/* Animated Quote */}
-              <div className="mb-8 h-16 flex items-center justify-center">
+              <div className="mb-12 h-20 flex items-center justify-center">
                 <motion.p
                   key={currentQuote}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.5 }}
-                  className="text-lg md:text-xl italic text-gray-200"
+                  className="text-lg md:text-xl italic text-gray-200 font-serif"
                 >
                   "{quotes[currentQuote]}"
                 </motion.p>
               </div>
 
               {/* Feature Icons */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto">
-                <div className="flex flex-col items-center space-y-2">
-                  <span className="text-4xl">🧭</span>
-                  <h3 className="text-lg font-semibold">Find Your Compass</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 max-w-5xl mx-auto">
+                <div className="flex flex-col items-center space-y-3">
+                  <span className="text-5xl">🧭</span>
+                  <h3 className="text-xl font-semibold">Find Your Compass</h3>
                   <p className="text-sm text-gray-300">Discover your true direction</p>
                 </div>
-                <div className="flex flex-col items-center space-y-2">
-                  <span className="text-4xl">💼</span>
-                  <h3 className="text-lg font-semibold">Career Clarity</h3>
+                <div className="flex flex-col items-center space-y-3">
+                  <span className="text-5xl">💼</span>
+                  <h3 className="text-xl font-semibold">Career Clarity</h3>
                   <p className="text-sm text-gray-300">Navigate your professional path</p>
                 </div>
-                <div className="flex flex-col items-center space-y-2">
-                  <span className="text-4xl">❤️</span>
-                  <h3 className="text-lg font-semibold">Relationship Harmony</h3>
+                <div className="flex flex-col items-center space-y-3">
+                  <span className="text-5xl">❤️</span>
+                  <h3 className="text-xl font-semibold">Relationship Harmony</h3>
                   <p className="text-sm text-gray-300">Find lasting love and connection</p>
                 </div>
               </div>
 
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <Link href="/services">
-                  <button className="bg-gradient-to-r from-primary-500 to-secondary-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-primary-600 hover:to-secondary-700 transition-all duration-300 flex items-center justify-center space-x-2">
+                  <button className="bg-gradient-to-r from-primary-500 to-secondary-600 text-white px-10 py-5 rounded-full font-semibold text-xl hover:from-primary-600 hover:to-secondary-700 transition-all duration-300 flex items-center justify-center space-x-3 shadow-2xl">
                     <span>Get Your Free Reading</span>
-                    <ArrowRight className="w-5 h-5" />
+                    <ArrowRight className="w-6 h-6" />
                   </button>
                 </Link>
                 <Link href="/about">
-                  <button className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-gray-900 transition-all duration-300">
+                  <button className="border-2 border-white text-white px-10 py-5 rounded-full font-semibold text-xl hover:bg-white hover:text-gray-900 transition-all duration-300 shadow-2xl">
                     See How It Works
                   </button>
                 </Link>
