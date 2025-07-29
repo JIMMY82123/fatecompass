@@ -154,21 +154,131 @@ export default function Home() {
         
         {/* Hero Section with Eastern Mountain Background */}
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-          {/* Background Image with Multiple Overlays */}
-          <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: `url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')`
-            }}
-          >
-            {/* Primary Overlay - Dark gradient for readability */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
+          {/* Dynamic Eastern Landscape Background */}
+          <div className="absolute inset-0">
+            {/* Animated Mountains */}
+            <div className="absolute inset-0">
+              <svg className="w-full h-full" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+                {/* Background Gradient */}
+                <defs>
+                  <linearGradient id="mountainGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#1a1a2e" stopOpacity="1">
+                      <animate attributeName="stop-color" values="#1a1a2e;#16213e;#1a1a2e" dur="8s" repeatCount="indefinite"/>
+                    </stop>
+                    <stop offset="50%" stopColor="#16213e" stopOpacity="1">
+                      <animate attributeName="stop-color" values="#16213e;#0f3460;#16213e" dur="8s" repeatCount="indefinite"/>
+                    </stop>
+                    <stop offset="100%" stopColor="#0f3460" stopOpacity="1">
+                      <animate attributeName="stop-color" values="#0f3460;#1a1a2e;#0f3460" dur="8s" repeatCount="indefinite"/>
+                    </stop>
+                  </linearGradient>
+                  
+                  <linearGradient id="mistGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="rgba(255,255,255,0.3)" stopOpacity="1">
+                      <animate attributeName="stop-opacity" values="0.3;0.1;0.3" dur="6s" repeatCount="indefinite"/>
+                    </stop>
+                    <stop offset="100%" stopColor="rgba(255,255,255,0)" stopOpacity="1"/>
+                  </linearGradient>
+                </defs>
+                
+                {/* Background */}
+                <rect width="100%" height="100%" fill="url(#mountainGradient)"/>
+                
+                {/* Animated Mist Layer */}
+                <rect width="100%" height="100%" fill="url(#mistGradient)">
+                  <animate attributeName="opacity" values="0.3;0.8;0.3" dur="8s" repeatCount="indefinite"/>
+                </rect>
+                
+                {/* Mountain Range 1 - Far Background */}
+                <path d="M0,600 L200,400 L400,500 L600,350 L800,450 L1000,300 L1200,400 L1200,800 L0,800 Z" 
+                      fill="#0a0a1a" opacity="0.8">
+                  <animate attributeName="opacity" values="0.8;0.6;0.8" dur="10s" repeatCount="indefinite"/>
+                </path>
+                
+                {/* Mountain Range 2 - Middle */}
+                <path d="M0,650 L150,500 L300,550 L450,400 L600,500 L750,350 L900,450 L1050,300 L1200,400 L1200,800 L0,800 Z" 
+                      fill="#1a1a3a" opacity="0.9">
+                  <animate attributeName="opacity" values="0.9;0.7;0.9" dur="12s" repeatCount="indefinite"/>
+                </path>
+                
+                {/* Mountain Range 3 - Foreground */}
+                <path d="M0,700 L100,550 L250,600 L400,450 L550,550 L700,400 L850,500 L1000,350 L1150,450 L1200,400 L1200,800 L0,800 Z" 
+                      fill="#2a2a4a" opacity="1">
+                  <animate attributeName="opacity" values="1;0.8;1" dur="14s" repeatCount="indefinite"/>
+                </path>
+                
+                {/* Floating Clouds */}
+                <g opacity="0.4">
+                  <ellipse cx="200" cy="150" rx="80" ry="30" fill="rgba(255,255,255,0.3)">
+                    <animate attributeName="cx" values="200;300;200" dur="20s" repeatCount="indefinite"/>
+                    <animate attributeName="opacity" values="0.3;0.6;0.3" dur="15s" repeatCount="indefinite"/>
+                  </ellipse>
+                  <ellipse cx="800" cy="100" rx="100" ry="40" fill="rgba(255,255,255,0.2)">
+                    <animate attributeName="cx" values="800;700;800" dur="25s" repeatCount="indefinite"/>
+                    <animate attributeName="opacity" values="0.2;0.5;0.2" dur="18s" repeatCount="indefinite"/>
+                  </ellipse>
+                  <ellipse cx="500" cy="200" rx="60" ry="25" fill="rgba(255,255,255,0.25)">
+                    <animate attributeName="cx" values="500;600;500" dur="22s" repeatCount="indefinite"/>
+                    <animate attributeName="opacity" values="0.25;0.55;0.25" dur="16s" repeatCount="indefinite"/>
+                  </ellipse>
+                </g>
+              </svg>
+            </div>
             
-            {/* Top White Mist Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-transparent"></div>
+            {/* Animated Water/Ink Flow Effect */}
+            <div className="absolute bottom-0 left-0 right-0 h-1/3">
+              <div className="relative w-full h-full overflow-hidden">
+                {/* Ink Flow Waves */}
+                <div className="absolute bottom-0 left-0 w-full h-full">
+                  <svg className="w-full h-full" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMid slice">
+                    <defs>
+                      <linearGradient id="inkGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#1a1a2e" stopOpacity="0.8"/>
+                        <stop offset="100%" stopColor="#0a0a1a" stopOpacity="1"/>
+                      </linearGradient>
+                    </defs>
+                    
+                    {/* Animated Ink Flow */}
+                    <path d="M0,400 Q300,350 600,380 T1200,400 L1200,400 L0,400 Z" fill="url(#inkGradient)">
+                      <animate attributeName="d" 
+                               values="M0,400 Q300,350 600,380 T1200,400 L1200,400 L0,400 Z;
+                                       M0,400 Q300,320 600,360 T1200,400 L1200,400 L0,400 Z;
+                                       M0,400 Q300,380 600,400 T1200,400 L1200,400 L0,400 Z;
+                                       M0,400 Q300,350 600,380 T1200,400 L1200,400 L0,400 Z" 
+                               dur="8s" repeatCount="indefinite"/>
+                    </path>
+                    
+                    <path d="M0,400 Q200,370 400,390 T800,400 T1200,400 L1200,400 L0,400 Z" fill="url(#inkGradient)" opacity="0.6">
+                      <animate attributeName="d" 
+                               values="M0,400 Q200,370 400,390 T800,400 T1200,400 L1200,400 L0,400 Z;
+                                       M0,400 Q200,350 400,370 T800,400 T1200,400 L1200,400 L0,400 Z;
+                                       M0,400 Q200,390 400,410 T800,400 T1200,400 L1200,400 L0,400 Z;
+                                       M0,400 Q200,370 400,390 T800,400 T1200,400 L1200,400 L0,400 Z" 
+                               dur="6s" repeatCount="indefinite"/>
+                    </path>
+                  </svg>
+                </div>
+                
+                {/* Floating Ink Drops */}
+                <div className="absolute inset-0">
+                  {[...Array(8)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="absolute w-2 h-2 bg-white/20 rounded-full"
+                      style={{
+                        left: `${Math.random() * 100}%`,
+                        animationDelay: `${i * 0.5}s`,
+                        animation: `float 10s ease-in-out infinite`
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
             
-            {/* Additional Atmospheric Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30"></div>
+            {/* Additional Atmospheric Effects */}
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/30"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20"></div>
           </div>
           
           {/* Content */}
