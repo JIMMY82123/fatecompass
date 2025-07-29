@@ -11,6 +11,7 @@ import SEOHead from '@/components/SEOHead'
 export default function Home() {
   const [currentQuote, setCurrentQuote] = useState(0)
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
+  const [animationData, setAnimationData] = useState(null)
 
   const quotes = [
     "When you feel lost, the ancient wisdom becomes your compass.",
@@ -134,6 +135,20 @@ export default function Home() {
       setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
     }, 4000)
 
+    // Load Lottie animation data
+    const loadAnimation = async () => {
+      try {
+        const response = await fetch('/assets/water-ink.json')
+        const data = await response.json()
+        setAnimationData(data)
+      } catch (error) {
+        console.error('Failed to load Lottie animation:', error)
+        // Fallback to a simple gradient background if animation fails
+      }
+    }
+
+    loadAnimation()
+
     return () => {
       clearInterval(quoteInterval)
       clearInterval(testimonialInterval)
@@ -157,17 +172,22 @@ export default function Home() {
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
           {/* Lottie Animation Background */}
           <div className="absolute inset-0 z-0">
-            <Lottie
-              animationData={require('/public/assets/water-ink.json')}
-              loop={true}
-              autoplay={true}
-              style={{
-                width: '100%',
-                height: '100%',
-                opacity: 0.8,
-                objectFit: 'cover'
-              }}
-            />
+            {animationData ? (
+              <Lottie
+                animationData={animationData}
+                loop={true}
+                autoplay={true}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  opacity: 0.8,
+                  objectFit: 'cover'
+                }}
+              />
+            ) : (
+              // Fallback gradient background
+              <div className="w-full h-full bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800" />
+            )}
           </div>
           
           {/* Mist Gradient Overlay */}
