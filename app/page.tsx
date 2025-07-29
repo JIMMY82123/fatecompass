@@ -7,6 +7,7 @@ import { motion } from 'framer-motion'
 import { Star, ArrowRight, Heart, Target, Briefcase, Users, Calendar, Phone, Mail, Send } from 'lucide-react'
 import Navigation from '@/components/Navigation'
 import SEOHead from '@/components/SEOHead'
+import Testimonials from '@/components/Testimonials'
 
 export default function Home() {
   const [currentQuote, setCurrentQuote] = useState(0)
@@ -383,111 +384,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Testimonials Section */}
-        <section className="py-20 bg-slate-800/50 backdrop-blur-sm relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-pink-900/20 to-blue-900/20"></div>
-          <div className="relative z-10 max-w-6xl mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Real People, Real Results
-              </h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                See how ancient Eastern wisdom has transformed lives and brought clarity to confused souls.
-              </p>
-            </div>
-            
-            {/* Testimonials Carousel */}
-            <div className="relative">
-              <div className="flex overflow-hidden">
-                <motion.div 
-                  className="flex transition-transform duration-500 ease-in-out"
-                  animate={{ x: `-${currentTestimonial * 33.333}%` }}
-                >
-                  {testimonials.map((testimonial, index) => (
-                    <div key={index} className="w-full md:w-1/3 flex-shrink-0 px-4">
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: index * 0.1 }}
-                        className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 h-full cursor-pointer"
-                        whileHover={{ 
-                          scale: 1.05,
-                          boxShadow: "0 20px 40px rgba(0,0,0,0.3)"
-                        }}
-                      >
-                        <div className="flex items-center mb-4">
-                          <div className="relative w-12 h-12 mr-4">
-                            <Image 
-                              src={testimonial.avatar} 
-                              alt={testimonial.name}
-                              fill
-                              className="rounded-full object-cover"
-                              sizes="48px"
-                            />
-                          </div>
-                          <div>
-                            <h4 className="text-white font-semibold">{testimonial.name}</h4>
-                            <p className="text-gray-400 text-sm">{testimonial.location}</p>
-                          </div>
-                        </div>
-                        
-                        <div className="flex items-center mb-3">
-                          {[...Array(testimonial.rating)].map((_, i) => (
-                            <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
-                          ))}
-                        </div>
-                        
-                        <p className="text-gray-300 text-sm mb-3">{testimonial.text}</p>
-                        
-                        <div className="flex items-center justify-between text-xs">
-                          <span className="text-gray-400">{testimonial.problem}</span>
-                          <span className="text-green-400 font-semibold">{testimonial.emotion}</span>
-                        </div>
-                      </motion.div>
-                    </div>
-                  ))}
-                </motion.div>
-              </div>
-              
-              {/* Carousel Navigation */}
-              <div className="flex justify-center mt-8 space-x-2">
-                {testimonials.slice(0, 6).map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentTestimonial(index)}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                      currentTestimonial === index 
-                        ? 'bg-white scale-125' 
-                        : 'bg-white/30 hover:bg-white/50'
-                    }`}
-                    aria-label={`Go to testimonial ${index + 1}`}
-                  />
-                ))}
-              </div>
-              
-              {/* Navigation Arrows */}
-              <button
-                onClick={() => setCurrentTestimonial(prev => prev === 0 ? 5 : prev - 1)}
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300"
-                aria-label="Previous testimonial"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-              
-              <button
-                onClick={() => setCurrentTestimonial(prev => prev === 5 ? 0 : prev + 1)}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300"
-                aria-label="Next testimonial"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </section>
+        <Testimonials />
 
         {/* Why Ancient Wisdom Works */}
         <section className="py-20 bg-white/5 backdrop-blur-sm">
