@@ -4,14 +4,12 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Star, ArrowRight, Heart, Target, Briefcase, Users, Calendar, Phone, Mail, Send } from 'lucide-react'
-import Lottie from 'lottie-react'
 import Navigation from '@/components/Navigation'
 import SEOHead from '@/components/SEOHead'
 
 export default function Home() {
   const [currentQuote, setCurrentQuote] = useState(0)
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
-  const [animationData, setAnimationData] = useState(null)
   const [email, setEmail] = useState('')
 
   const quotes = [
@@ -146,20 +144,6 @@ export default function Home() {
       setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
     }, 4000)
 
-    // Load Lottie animation data
-    const loadAnimation = async () => {
-      try {
-        const response = await fetch('/assets/ink-flow.json')
-        const data = await response.json()
-        setAnimationData(data)
-      } catch (error) {
-        console.error('Failed to load Lottie animation:', error)
-        // Fallback to a simple gradient background if animation fails
-      }
-    }
-
-    loadAnimation()
-
     return () => {
       clearInterval(quoteInterval)
       clearInterval(testimonialInterval)
@@ -187,26 +171,52 @@ export default function Home() {
       <div className="min-h-screen">
         <Navigation />
         
-        {/* Hero Section with Lottie Animation Background */}
+        {/* Hero Section with CSS Animated Background */}
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-          {/* Lottie Animation Background */}
+          {/* CSS Animated Background */}
           <div className="absolute inset-0 z-0">
-            {animationData ? (
-              <Lottie
-                animationData={animationData}
-                loop={true}
-                autoplay={true}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  opacity: 0.8,
-                  objectFit: 'cover'
-                }}
-              />
-            ) : (
-              // Fallback gradient background
-              <div className="w-full h-full bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800" />
-            )}
+            {/* Base gradient background */}
+            <div className="w-full h-full bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800" />
+            
+            {/* Animated ink drops */}
+            <div className="absolute inset-0">
+              {/* Ink Drop 1 */}
+              <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-black/20 rounded-full blur-xl animate-pulse" 
+                   style={{
+                     animation: 'inkFlow 8s ease-in-out infinite',
+                     transformOrigin: 'center bottom'
+                   }} />
+              
+              {/* Ink Drop 2 */}
+              <div className="absolute bottom-0 right-1/3 w-80 h-80 bg-blue-900/30 rounded-full blur-xl animate-pulse" 
+                   style={{
+                     animation: 'inkFlow 6s ease-in-out infinite 2s',
+                     transformOrigin: 'center bottom'
+                   }} />
+              
+              {/* Ink Drop 3 */}
+              <div className="absolute bottom-0 left-1/2 w-72 h-72 bg-indigo-900/25 rounded-full blur-xl animate-pulse" 
+                   style={{
+                     animation: 'inkFlow 10s ease-in-out infinite 4s',
+                     transformOrigin: 'center bottom'
+                   }} />
+              
+              {/* Floating particles */}
+              <div className="absolute inset-0">
+                {[...Array(12)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="absolute w-1 h-1 bg-white/20 rounded-full"
+                    style={{
+                      left: `${Math.random() * 100}%`,
+                      top: `${Math.random() * 100}%`,
+                      animationDelay: `${i * 0.5}s`,
+                      animation: 'float 15s ease-in-out infinite'
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
           
           {/* Mist Gradient Overlay */}

@@ -43,6 +43,25 @@
   }
 }
 
+@keyframes inkFlow {
+  0% {
+    transform: scale(0) translateY(0);
+    opacity: 0;
+  }
+  20% {
+    transform: scale(1) translateY(-20px);
+    opacity: 0.8;
+  }
+  60% {
+    transform: scale(1.2) translateY(-40px);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(0) translateY(-100px);
+    opacity: 0;
+  }
+}
+
 @keyframes mist {
   0%, 100% {
     opacity: 0.3;
