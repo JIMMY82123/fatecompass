@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Phone, Menu, X } from 'lucide-react'
+import Search from './Search'
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
@@ -72,6 +73,9 @@ export default function Navigation() {
             >
               Contact
             </Link>
+            
+            {/* Search Button */}
+            <Search />
             
             {/* CTA Button */}
             <a
