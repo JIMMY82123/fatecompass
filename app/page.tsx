@@ -15,9 +15,9 @@ export default function Home() {
   const [currentQuote, setCurrentQuote] = useState(0)
 
   const quotes = [
-    "当迷茫成为常态，古老的智慧就是你的指南针。",
-    "命运写在星辰中，但笔握在你手中。",
-    "在生活的混沌里，东方智慧带来清晰与宁静。"
+    "When confusion becomes the norm, ancient wisdom becomes your compass.",
+    "Destiny is written in the stars, but the pen is in your hands.",
+    "In life's chaos, Eastern wisdom brings clarity and peace."
   ]
 
   // Loading effect
@@ -48,7 +48,7 @@ export default function Home() {
   const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setEmail('')
-    alert('感谢订阅！我们将为您带来古老的智慧洞见。')
+    alert('Thank you for subscribing! We\'ll keep you updated with ancient wisdom insights.')
   }
 
   const scrollToTop = () => {
@@ -58,11 +58,11 @@ export default function Home() {
   return (
     <>
       <SEOHead
-        title="Fate Compass | 玄印命理师 - 用东方智慧指引你的命运"
-        description="感到迷茫？玄印大师用古老的东方占星术帮你发现命运。职业指导、情感匹配、人生目标解读。"
-        keywords="人生目标,职业指导,情感匹配,东方占星,八字解读,命运,迷茫感,指南针,玄印"
-        ogTitle="Fate Compass | 玄印为你解码命运"
-        ogDescription="与玄印大师一起发现你的人生目标。为寻求清晰和方向的现代灵魂提供古老的东方智慧。"
+        title="Fate Compass | 玄印 · Xuan Yin - Your Destiny Decoded by Eastern Wisdom"
+        description="Feeling lost in life? Master 玄印 helps you discover your destiny through ancient Eastern astrology. Career guidance, relationship compatibility, and life purpose readings."
+        keywords="life purpose, career guidance, relationship compatibility, Eastern astrology, BaZi reading, destiny, lost feeling, compass, 玄印, Xuan Yin"
+        ogTitle="Fate Compass | 玄印 · Xuan Yin - Your Destiny Decoded"
+        ogDescription="Discover your life purpose with Master 玄印. Ancient Eastern wisdom for modern souls seeking clarity and direction."
         canonical="https://fatecompass.net"
       />
       
@@ -86,14 +86,14 @@ export default function Home() {
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/95 backdrop-blur-sm">
             <div className="text-center">
               <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-              <p className="text-white text-lg font-medium">正在加载古老的智慧...</p>
+              <p className="text-white text-lg font-medium">Loading ancient wisdom...</p>
             </div>
           </div>
         )}
 
         <Navigation />
 
-        {/* [1] 第一屏：情绪吸引 + 品牌打动（Hero） */}
+        {/* [1] First Screen: Emotional Appeal + Brand Impact (Hero) */}
         <section className="relative z-10 pt-32 pb-20 min-h-screen flex items-center">
           <div className="max-w-6xl mx-auto px-4 text-center">
             <motion.div
@@ -104,11 +104,11 @@ export default function Home() {
             >
               <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
                 <span className="bg-gradient-to-r from-white via-gray-200 to-gray-300 bg-clip-text text-transparent">
-                  玄印命理
+                  玄印 · Xuan Yin
                 </span>
               </h1>
               
-              {/* 诗意句子轮播 */}
+              {/* Poetic quote rotation */}
               <motion.div
                 key={currentQuote}
                 initial={{ opacity: 0, y: 20 }}
@@ -121,9 +121,9 @@ export default function Home() {
               </motion.div>
               
               <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                当生活让你迷失方向，古老的东方智慧为你点亮前路。
+                When life leaves you directionless, ancient Eastern wisdom lights your path.
                 <br />
-                <span className="text-white font-medium">也许，是时候找他聊聊了...</span>
+                <span className="text-white font-medium">Perhaps it's time to talk to him...</span>
               </p>
             </motion.div>
 
@@ -140,21 +140,21 @@ export default function Home() {
                 className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 flex items-center space-x-2 shadow-lg hover:shadow-xl"
               >
                 <Phone className="w-5 h-5" />
-                <span>开始你的命运之旅</span>
+                <span>Start Your Destiny Journey</span>
               </a>
             </motion.div>
           </div>
         </section>
 
-        {/* [2] 第二屏：你能解决什么问题 */}
+        {/* [2] Second Screen: What Problems Can You Solve */}
         <section className="py-20 bg-white/90 backdrop-blur-sm relative">
           <div className="max-w-6xl mx-auto px-4">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                命理能帮你解决什么？
+                What Can Eastern Astrology Help You With?
               </h2>
               <p className="text-xl text-gray-700 max-w-3xl mx-auto mb-8">
-                人生没有标准答案，但你可以找到属于你的方向。
+                Life has no standard answers, but you can find your own direction.
               </p>
             </div>
             
@@ -169,9 +169,9 @@ export default function Home() {
                 <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
                   <Target className="w-8 h-8 text-green-600" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">财运困惑</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Financial Confusion</h3>
                 <p className="text-gray-700">
-                  不知道何时投资、何时创业？八字分析揭示你的财富时机和最佳路径。
+                  Don't know when to invest or start a business? BaZi analysis reveals your wealth timing and optimal path.
                 </p>
               </motion.div>
               
@@ -185,9 +185,9 @@ export default function Home() {
                 <div className="w-16 h-16 bg-pink-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
                   <Heart className="w-8 h-8 text-pink-600" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">爱情迷茫</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Love Confusion</h3>
                 <p className="text-gray-700">
-                  感情不顺、不知道是否该继续？合盘分析告诉你谁才是对的人。
+                  Relationship troubles, not sure if you should continue? Compatibility analysis shows you who's truly meant for you.
                 </p>
               </motion.div>
               
@@ -201,27 +201,27 @@ export default function Home() {
                 <div className="w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
                   <Briefcase className="w-8 h-8 text-blue-600" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">心灵困惑</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Spiritual Confusion</h3>
                 <p className="text-gray-700">
-                  找不到人生意义、内心空虚？八字解读揭示你的生命使命。
+                  Can't find life's meaning, feeling empty inside? BaZi reading reveals your life mission.
                 </p>
               </motion.div>
             </div>
           </div>
         </section>
 
-        {/* [3] 第三屏：真实信任感展示（Testimonials） */}
+        {/* [3] Third Screen: Real Trust Display (Testimonials) */}
         <Testimonials />
 
-        {/* [4] 第四屏：服务介绍 */}
+        {/* [4] Fourth Screen: Service Introduction */}
         <section className="py-20 bg-gray-50 relative">
           <div className="max-w-6xl mx-auto px-4">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                专业服务，精准解读
+                Professional Services, Precise Readings
               </h2>
               <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-                选择最适合你的服务，开启命运探索之旅
+                Choose the service that best fits you and start your destiny exploration journey
               </p>
             </div>
             
@@ -236,19 +236,19 @@ export default function Home() {
                 <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
                   <span className="text-3xl">📊</span>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">八字详批</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">BaZi Analysis</h3>
                 <p className="text-gray-700 mb-6">
-                  深度个人命运解读，揭示人生目标、事业路径和重大决策时机。
+                  Deep personal destiny reading revealing your life purpose, career path, and optimal timing for major decisions.
                 </p>
                 <div className="text-2xl font-bold text-gray-900 mb-4">$49</div>
                 <a
-                  href="https://wa.me/8615914228258?text=我想了解八字详批服务"
+                  href="https://wa.me/8615914228258?text=I want to learn about BaZi Analysis service"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-full font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 inline-flex items-center space-x-2"
                 >
                   <Phone className="w-4 h-4" />
-                  <span>立即咨询</span>
+                  <span>Consult Now</span>
                 </a>
               </motion.div>
               
@@ -262,19 +262,19 @@ export default function Home() {
                 <div className="w-20 h-20 bg-gradient-to-br from-pink-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
                   <span className="text-3xl">💕</span>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">情感合盘</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Relationship Compatibility</h3>
                 <p className="text-gray-700 mb-6">
-                  发现你的真命天子，了解如何经营长久幸福的感情关系。
+                  Discover your soulmate and learn how to build lasting, happy relationships.
                 </p>
                 <div className="text-2xl font-bold text-gray-900 mb-4">$39</div>
                 <a
-                  href="https://wa.me/8615914228258?text=我想了解情感合盘服务"
+                  href="https://wa.me/8615914228258?text=I want to learn about Relationship Compatibility service"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-gradient-to-r from-pink-500 to-red-600 text-white px-6 py-3 rounded-full font-semibold hover:from-pink-600 hover:to-red-700 transition-all duration-300 inline-flex items-center space-x-2"
                 >
                   <Phone className="w-4 h-4" />
-                  <span>立即咨询</span>
+                  <span>Consult Now</span>
                 </a>
               </motion.div>
               
@@ -288,26 +288,26 @@ export default function Home() {
                 <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-teal-600 rounded-full flex items-center justify-center mx-auto mb-6">
                   <span className="text-3xl">🛡️</span>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">护符开运</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Protection & Guidance</h3>
                 <p className="text-gray-700 mb-6">
-                  个性化护符和指导，在困难时期保护你，增强你的运势。
+                  Personalized talismans and guidance to protect you during challenging times and enhance your luck.
                 </p>
                 <div className="text-2xl font-bold text-gray-900 mb-4">$29</div>
                 <a
-                  href="https://wa.me/8615914228258?text=我想了解护符开运服务"
+                  href="https://wa.me/8615914228258?text=I want to learn about Protection & Guidance service"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-gradient-to-r from-green-500 to-teal-600 text-white px-6 py-3 rounded-full font-semibold hover:from-green-600 hover:to-teal-700 transition-all duration-300 inline-flex items-center space-x-2"
                 >
                   <Phone className="w-4 h-4" />
-                  <span>立即咨询</span>
+                  <span>Consult Now</span>
                 </a>
               </motion.div>
             </div>
           </div>
         </section>
 
-        {/* [5] 第五屏：行动引导区 */}
+        {/* [5] Fifth Screen: Call to Action */}
         <section className="py-20 bg-gradient-to-r from-purple-900 to-pink-900 relative">
           <div className="max-w-4xl mx-auto px-4 text-center">
             <motion.div
@@ -317,37 +317,37 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                准备好探索你的命运了吗？
+                Ready to Explore Your Destiny?
               </h2>
               <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
-                现在联系玄印大师，获得免费初回简批机会
+                Contact Master 玄印 now and get a free initial reading
                 <br />
-                <span className="text-yellow-300 font-semibold">限时优惠：前10名咨询者免费获得15分钟命运解读</span>
+                <span className="text-yellow-300 font-semibold">Limited Time: First 10 consultations get 15-minute free destiny reading</span>
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <a
-                  href="https://wa.me/8615914228258?text=我想获得免费初回简批"
+                  href="https://wa.me/8615914228258?text=I want to get a free initial reading"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-white text-purple-900 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 flex items-center space-x-2 shadow-lg hover:shadow-xl"
                 >
                   <Phone className="w-5 h-5" />
-                  <span>立即获得免费解读</span>
+                  <span>Get Free Reading Now</span>
                 </a>
                 <a
-                  href="mailto:chenxiao0801@hotmail.com?subject=我想了解玄印大师的服务"
+                  href="mailto:chenxiao0801@hotmail.com?subject=I want to learn about Master 玄印's services"
                   className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-purple-900 transition-all duration-300 flex items-center space-x-2"
                 >
                   <Mail className="w-5 h-5" />
-                  <span>邮件咨询</span>
+                  <span>Email Consultation</span>
                 </a>
               </div>
             </motion.div>
           </div>
         </section>
 
-        {/* [6] 页脚 */}
+        {/* [6] Footer */}
         <footer className="bg-gray-900 text-white py-16 relative">
           <div className="max-w-6xl mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -362,7 +362,7 @@ export default function Home() {
                   </div>
                 </div>
                 <p className="text-gray-400 mb-6 max-w-md">
-                  愿每个迷茫的灵魂，都被温柔指引。
+                  May every lost soul be gently guided.
                 </p>
                 
                 {/* Contact Buttons */}
@@ -409,13 +409,13 @@ export default function Home() {
                 
                 {/* Email Subscription */}
                 <div className="mb-6">
-                  <h4 className="text-lg font-semibold mb-3">订阅智慧洞见</h4>
+                  <h4 className="text-lg font-semibold mb-3">Subscribe to Wisdom Insights</h4>
                   <form onSubmit={handleEmailSubmit} className="flex space-x-2">
                     <input
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="输入你的邮箱"
+                      placeholder="Enter your email"
                       required
                       className="flex-1 px-4 py-2 rounded-lg text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-gray-500"
                     />
@@ -423,36 +423,36 @@ export default function Home() {
                       type="submit"
                       className="bg-gray-700 text-white px-4 py-2 rounded-lg text-sm hover:bg-gray-600 transition-colors"
                     >
-                      订阅
+                      Subscribe
                     </button>
                   </form>
                 </div>
               </div>
               
               <div>
-                <h4 className="text-lg font-semibold mb-4">服务项目</h4>
+                <h4 className="text-lg font-semibold mb-4">Services</h4>
                 <ul className="space-y-2 text-gray-400">
-                  <li><Link href="/services" className="hover:text-white transition-colors">八字详批</Link></li>
-                  <li><Link href="/services" className="hover:text-white transition-colors">情感合盘</Link></li>
-                  <li><Link href="/services" className="hover:text-white transition-colors">护符开运</Link></li>
-                  <li><Link href="/services" className="hover:text-white transition-colors">事业指导</Link></li>
+                  <li><Link href="/services" className="hover:text-white transition-colors">BaZi Analysis</Link></li>
+                  <li><Link href="/services" className="hover:text-white transition-colors">Relationship Compatibility</Link></li>
+                  <li><Link href="/services" className="hover:text-white transition-colors">Protection & Guidance</Link></li>
+                  <li><Link href="/services" className="hover:text-white transition-colors">Career Guidance</Link></li>
                 </ul>
               </div>
               
               <div>
-                <h4 className="text-lg font-semibold mb-4">快速链接</h4>
+                <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
                 <ul className="space-y-2 text-gray-400">
-                  <li><Link href="/about" className="hover:text-white transition-colors">关于玄印</Link></li>
-                  <li><Link href="/blog" className="hover:text-white transition-colors">命理博客</Link></li>
-                  <li><Link href="/contact" className="hover:text-white transition-colors">联系我们</Link></li>
-                  <li><Link href="/privacy" className="hover:text-white transition-colors">隐私政策</Link></li>
+                  <li><Link href="/about" className="hover:text-white transition-colors">About 玄印</Link></li>
+                  <li><Link href="/blog" className="hover:text-white transition-colors">Astrology Blog</Link></li>
+                  <li><Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
+                  <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
                 </ul>
               </div>
             </div>
             
             <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
               <p>© 2025 Fate Compass · Powered by 玄印命理师 Xuan Yin</p>
-              <p className="text-sm mt-2">愿每个迷茫的灵魂，都被温柔指引。</p>
+              <p className="text-sm mt-2">May every lost soul be gently guided.</p>
             </div>
           </div>
         </footer>
