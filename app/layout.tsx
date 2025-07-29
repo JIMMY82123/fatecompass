@@ -2,6 +2,7 @@ import React from 'react'
 import type { Metadata } from 'next'
 import { Inter, Noto_Serif_SC } from 'next/font/google'
 import './globals.css'
+import MobileOptimizer from '@/components/MobileOptimizer'
 
 const inter = Inter({ subsets: ['latin'] })
 const notoSerif = Noto_Serif_SC({ 
@@ -64,10 +65,12 @@ export default function RootLayout({
         <meta name="geo.placename" content="United States" />
         <meta name="geo.position" content="40.7128;-74.0060" />
         <meta name="ICBM" content="40.7128, -74.0060" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="apple-touch-icon" href="/favicon.svg" />
       </head>
       <body className={inter.className}>
+        <MobileOptimizer />
         {children}
       </body>
     </html>

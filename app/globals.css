@@ -123,4 +123,63 @@
   background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="rgba(255,255,255,0.1)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></radialGradient></defs><circle cx="30" cy="30" r="20" fill="url(%23a)"/><circle cx="70" cy="70" r="15" fill="url(%23a)"/><circle cx="50" cy="20" r="10" fill="url(%23a)"/></svg>');
   opacity: 0.3;
   animation: float 20s ease-in-out infinite;
+}
+
+/* Mobile-specific optimizations */
+.mobile-device {
+  /* Optimize touch interactions */
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.mobile-device * {
+  /* Improve touch targets */
+  touch-action: manipulation;
+}
+
+/* Mobile-specific responsive adjustments */
+@media (max-width: 768px) {
+  /* Reduce animation complexity on mobile */
+  .mobile-device .animate-pulse {
+    animation: none;
+  }
+  
+  /* Optimize text sizes */
+  .mobile-device h1 {
+    font-size: 2.5rem !important;
+  }
+  
+  .mobile-device h2 {
+    font-size: 2rem !important;
+  }
+  
+  /* Improve button sizes for touch */
+  .mobile-device button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Optimize spacing */
+  .mobile-device .py-20 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  
+  .mobile-device .py-16 {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}
+
+/* Tablet-specific adjustments */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .tablet-device h1 {
+    font-size: 3.5rem !important;
+  }
+  
+  .tablet-device h2 {
+    font-size: 2.5rem !important;
+  }
 } 
