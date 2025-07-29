@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Star, ArrowRight, Heart, Target, Briefcase, Users, Calendar, Phone, Mail, Send } from 'lucide-react'
 import Navigation from '@/components/Navigation'
@@ -11,6 +12,8 @@ export default function Home() {
   const [currentQuote, setCurrentQuote] = useState(0)
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
   const [email, setEmail] = useState('')
+  const [isLoading, setIsLoading] = useState(true)
+  const [showScrollTop, setShowScrollTop] = useState(false)
 
   const quotes = [
     "When you feel lost, the ancient wisdom becomes your compass.",
@@ -112,6 +115,11 @@ export default function Home() {
   ]
 
   useEffect(() => {
+    // Simulate loading time
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 1000)
+
     const quoteInterval = setInterval(() => {
       setCurrentQuote((prev) => (prev + 1) % quotes.length)
     }, 5000)
@@ -120,9 +128,18 @@ export default function Home() {
       setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
     }, 4000)
 
+    // Scroll to top button
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 500)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+
     return () => {
+      clearTimeout(timer)
       clearInterval(quoteInterval)
       clearInterval(testimonialInterval)
+      window.removeEventListener('scroll', handleScroll)
     }
   }, [quotes.length, testimonials.length])
 
@@ -133,6 +150,27 @@ export default function Home() {
     alert('Thank you for subscribing! We\'ll keep you updated with ancient wisdom insights.')
   }
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800 flex items-center justify-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="text-center text-white"
+        >
+          <div className="w-16 h-16 border-4 border-white/20 border-t-white rounded-full animate-spin mx-auto mb-4"></div>
+          <h2 className="text-2xl font-bold mb-2">玄印 · Xuan Yin</h2>
+          <p className="text-gray-300">Loading ancient wisdom...</p>
+        </motion.div>
+      </div>
+    )
+  }
+
   return (
     <div className="relative min-h-screen">
       <SEOHead 
@@ -140,14 +178,14 @@ export default function Home() {
         description="Feeling lost? Let Master 玄印 guide you with ancient Eastern wisdom. Bazi readings, love compatibility, and spiritual guidance for confused souls seeking direction."
       />
       
-      {/* Global Dynamic Background */}
+      {/* Optimized Dynamic Background */}
       <div className="fixed inset-0 z-0">
         {/* Base gradient background */}
         <div className="w-full h-full bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800" />
         
-        {/* Animated circles - distributed across the page */}
+        {/* Reduced animated elements for better performance */}
         <div className="absolute inset-0">
-          {/* Large circles in different positions */}
+          {/* Main circles */}
           <div 
             className="absolute top-1/4 left-1/4 w-96 h-96 bg-black/10 rounded-full"
             style={{
@@ -172,42 +210,9 @@ export default function Home() {
             }}
           />
           
-          <div 
-            className="absolute top-1/2 right-1/3 w-64 h-64 bg-purple-900/10 rounded-full"
-            style={{
-              animation: 'customPulse 9s ease-in-out infinite 1s',
-              transformOrigin: 'center'
-            }}
-          />
-          
-          <div 
-            className="absolute bottom-1/3 right-1/4 w-88 h-88 bg-gray-800/15 rounded-full"
-            style={{
-              animation: 'customPulse 11s ease-in-out infinite 3s',
-              transformOrigin: 'center'
-            }}
-          />
-          
-          {/* Additional animated elements */}
-          <div 
-            className="absolute top-1/6 left-1/2 w-48 h-48 bg-gradient-to-br from-yellow-500/5 to-orange-500/5 rounded-full"
-            style={{
-              animation: 'customPulse 15s ease-in-out infinite 5s',
-              transformOrigin: 'center'
-            }}
-          />
-          
-          <div 
-            className="absolute bottom-1/6 left-1/6 w-56 h-56 bg-gradient-to-br from-green-500/8 to-teal-500/8 rounded-full"
-            style={{
-              animation: 'customPulse 13s ease-in-out infinite 6s',
-              transformOrigin: 'center'
-            }}
-          />
-          
-          {/* Floating dots - more distributed */}
+          {/* Floating particles - reduced count */}
           <div className="absolute inset-0">
-            {[...Array(30)].map((_, i) => (
+            {[...Array(15)].map((_, i) => (
               <div
                 key={i}
                 className={`absolute rounded-full ${
@@ -216,39 +221,9 @@ export default function Home() {
                   'w-1 h-1 bg-yellow-400/30'
                 }`}
                 style={{
-                  left: `${5 + (i % 10) * 9}%`,
-                  top: `${10 + Math.floor(i / 10) * 25}%`,
-                  animation: `customBounce ${3 + i * 0.4}s ease-in-out infinite ${i * 0.3}s`
-                }}
-              />
-            ))}
-          </div>
-          
-          {/* Animated lines */}
-          <div className="absolute inset-0">
-            {[...Array(8)].map((_, i) => (
-              <div
-                key={`line-${i}`}
-                className="absolute w-px h-32 bg-gradient-to-b from-transparent via-white/10 to-transparent"
-                style={{
-                  left: `${15 + i * 10}%`,
-                  top: '0',
-                  animation: `customFloat ${8 + i * 2}s ease-in-out infinite ${i * 0.5}s`
-                }}
-              />
-            ))}
-          </div>
-          
-          {/* Animated squares */}
-          <div className="absolute inset-0">
-            {[...Array(6)].map((_, i) => (
-              <div
-                key={`square-${i}`}
-                className="absolute w-8 h-8 border border-white/10 rotate-45"
-                style={{
-                  left: `${20 + i * 12}%`,
-                  top: `${30 + (i % 2) * 30}%`,
-                  animation: `customRotate ${20 + i * 3}s linear infinite ${i * 2}s`
+                  left: `${10 + (i % 5) * 15}%`,
+                  top: `${20 + Math.floor(i / 5) * 20}%`,
+                  animation: `customBounce ${4 + i * 0.5}s ease-in-out infinite ${i * 0.4}s`
                 }}
               />
             ))}
@@ -304,35 +279,55 @@ export default function Home() {
 
               {/* Feature Icons */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 max-w-5xl mx-auto">
-                <div className="flex flex-col items-center space-y-3">
+                <motion.div 
+                  className="flex flex-col items-center space-y-3"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
+                >
                   <span className="text-5xl">🧭</span>
                   <h3 className="text-xl font-semibold">Find Your Compass</h3>
                   <p className="text-sm text-gray-300">Discover your true direction</p>
-                </div>
-                <div className="flex flex-col items-center space-y-3">
+                </motion.div>
+                <motion.div 
+                  className="flex flex-col items-center space-y-3"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
+                >
                   <span className="text-5xl">💼</span>
                   <h3 className="text-xl font-semibold">Career Clarity</h3>
                   <p className="text-sm text-gray-300">Navigate your professional path</p>
-                </div>
-                <div className="flex flex-col items-center space-y-3">
+                </motion.div>
+                <motion.div 
+                  className="flex flex-col items-center space-y-3"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
+                >
                   <span className="text-5xl">❤️</span>
                   <h3 className="text-xl font-semibold">Relationship Harmony</h3>
                   <p className="text-sm text-gray-300">Find lasting love and connection</p>
-                </div>
+                </motion.div>
               </div>
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <Link href="/services">
-                  <button className="bg-gradient-to-r from-primary-500 to-secondary-600 text-white px-10 py-5 rounded-full font-semibold text-xl hover:from-primary-600 hover:to-secondary-700 transition-all duration-300 flex items-center justify-center space-x-3 shadow-2xl">
+                  <motion.button 
+                    className="bg-gradient-to-r from-primary-500 to-secondary-600 text-white px-10 py-5 rounded-full font-semibold text-xl hover:from-primary-600 hover:to-secondary-700 transition-all duration-300 flex items-center justify-center space-x-3 shadow-2xl"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
                     <span>Get Your Free Reading</span>
                     <ArrowRight className="w-6 h-6" />
-                  </button>
+                  </motion.button>
                 </Link>
                 <Link href="/about">
-                  <button className="border-2 border-white text-white px-10 py-5 rounded-full font-semibold text-xl hover:bg-white hover:text-gray-900 transition-all duration-300 shadow-2xl">
+                  <motion.button 
+                    className="border-2 border-white text-white px-10 py-5 rounded-full font-semibold text-xl hover:bg-white hover:text-gray-900 transition-all duration-300 shadow-2xl"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
                     See How It Works
-                  </button>
+                  </motion.button>
                 </Link>
               </div>
             </motion.div>
@@ -404,14 +399,22 @@ export default function Home() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 hover:scale-105 transition-all duration-300"
+                  className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 hover:scale-105 transition-all duration-300 cursor-pointer"
+                  whileHover={{ 
+                    scale: 1.05,
+                    boxShadow: "0 20px 40px rgba(0,0,0,0.3)"
+                  }}
                 >
                   <div className="flex items-center mb-4">
-                    <img 
-                      src={testimonial.avatar} 
-                      alt={testimonial.name}
-                      className="w-12 h-12 rounded-full mr-4"
-                    />
+                    <div className="relative w-12 h-12 mr-4">
+                      <Image 
+                        src={testimonial.avatar} 
+                        alt={testimonial.name}
+                        fill
+                        className="rounded-full object-cover"
+                        sizes="48px"
+                      />
+                    </div>
                     <div>
                       <h4 className="text-white font-semibold">{testimonial.name}</h4>
                       <p className="text-gray-400 text-sm">{testimonial.location}</p>
@@ -687,6 +690,25 @@ export default function Home() {
             </div>
           </div>
         </footer>
+
+        {/* Scroll to top button */}
+        <motion.button
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ 
+            opacity: showScrollTop ? 1 : 0,
+            scale: showScrollTop ? 1 : 0
+          }}
+          transition={{ duration: 0.3 }}
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 z-50 w-12 h-12 bg-gradient-to-r from-primary-500 to-secondary-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center"
+          aria-label="Scroll to top"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+          </svg>
+        </motion.button>
       </div>
     </div>
   )
