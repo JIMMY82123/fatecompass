@@ -30,7 +30,7 @@ export default function Home() {
     },
     {
       name: "Michael Chen",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
+      avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
       rating: 5,
       text: "My relationship was falling apart. The compatibility analysis showed us exactly what we needed to fix. We're stronger than ever now and planning our wedding!",
       location: "Toronto, Canada",
@@ -48,7 +48,7 @@ export default function Home() {
     },
     {
       name: "David Kim",
-      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
       rating: 5,
       text: "After losing my job, I was desperate for guidance. 玄印's career analysis led me to a better opportunity I never considered. I'm making 40% more now!",
       location: "Seoul, Korea",
@@ -84,7 +84,7 @@ export default function Home() {
     },
     {
       name: "Carlos Silva",
-      avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
       rating: 5,
       text: "Financial struggles were overwhelming me. The wealth analysis showed me the right timing and opportunities to turn things around. I'm debt-free now!",
       location: "São Paulo, Brazil",
@@ -188,16 +188,67 @@ export default function Home() {
             }}
           />
           
+          {/* Additional animated elements */}
+          <div 
+            className="absolute top-1/6 left-1/2 w-48 h-48 bg-gradient-to-br from-yellow-500/5 to-orange-500/5 rounded-full"
+            style={{
+              animation: 'customPulse 15s ease-in-out infinite 5s',
+              transformOrigin: 'center'
+            }}
+          />
+          
+          <div 
+            className="absolute bottom-1/6 left-1/6 w-56 h-56 bg-gradient-to-br from-green-500/8 to-teal-500/8 rounded-full"
+            style={{
+              animation: 'customPulse 13s ease-in-out infinite 6s',
+              transformOrigin: 'center'
+            }}
+          />
+          
           {/* Floating dots - more distributed */}
           <div className="absolute inset-0">
-            {[...Array(20)].map((_, i) => (
+            {[...Array(30)].map((_, i) => (
               <div
                 key={i}
-                className="absolute w-2 h-2 bg-white/20 rounded-full"
+                className={`absolute rounded-full ${
+                  i % 3 === 0 ? 'w-3 h-3 bg-white/25' : 
+                  i % 3 === 1 ? 'w-2 h-2 bg-blue-400/20' : 
+                  'w-1 h-1 bg-yellow-400/30'
+                }`}
                 style={{
-                  left: `${10 + (i % 8) * 10}%`,
-                  top: `${15 + Math.floor(i / 8) * 20}%`,
-                  animation: `customBounce ${4 + i * 0.3}s ease-in-out infinite ${i * 0.2}s`
+                  left: `${5 + (i % 10) * 9}%`,
+                  top: `${10 + Math.floor(i / 10) * 25}%`,
+                  animation: `customBounce ${3 + i * 0.4}s ease-in-out infinite ${i * 0.3}s`
+                }}
+              />
+            ))}
+          </div>
+          
+          {/* Animated lines */}
+          <div className="absolute inset-0">
+            {[...Array(8)].map((_, i) => (
+              <div
+                key={`line-${i}`}
+                className="absolute w-px h-32 bg-gradient-to-b from-transparent via-white/10 to-transparent"
+                style={{
+                  left: `${15 + i * 10}%`,
+                  top: '0',
+                  animation: `customFloat ${8 + i * 2}s ease-in-out infinite ${i * 0.5}s`
+                }}
+              />
+            ))}
+          </div>
+          
+          {/* Animated squares */}
+          <div className="absolute inset-0">
+            {[...Array(6)].map((_, i) => (
+              <div
+                key={`square-${i}`}
+                className="absolute w-8 h-8 border border-white/10 rotate-45"
+                style={{
+                  left: `${20 + i * 12}%`,
+                  top: `${30 + (i % 2) * 30}%`,
+                  animation: `customRotate ${20 + i * 3}s linear infinite ${i * 2}s`
                 }}
               />
             ))}
