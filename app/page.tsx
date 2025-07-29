@@ -281,13 +281,13 @@ export default function Home() {
                 <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
                   <span className="text-3xl">📊</span>
                 </div>
-                <h3 className="text-2xl font-bold text-navy-900 mb-4 font-serif">BaZi Analysis</h3>
+                <h3 className="text-2xl font-bold text-navy-900 mb-4 font-serif">Life Destiny Reading</h3>
                 <p className="text-gray-700 mb-6">
-                  Deep personal destiny reading revealing your life purpose, career path, and optimal timing for major decisions.
+                  Deep personal destiny reading based on Four Pillars to understand who you truly are and what path will bring you peace, success, and alignment.
                 </p>
-                <div className="text-2xl font-bold text-navy-900 mb-4">From $49</div>
+                <div className="text-2xl font-bold text-navy-900 mb-4">$79 USD</div>
                 <a
-                  href="https://wa.me/8615914228258?text=I want to learn about BaZi Analysis service"
+                  href="https://wa.me/8615914228258?text=I want to learn about Life Destiny Reading service"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-full font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 inline-flex items-center space-x-2"
@@ -307,13 +307,13 @@ export default function Home() {
                 <div className="w-20 h-20 bg-gradient-to-br from-pink-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
                   <span className="text-3xl">💕</span>
                 </div>
-                <h3 className="text-2xl font-bold text-navy-900 mb-4 font-serif">Relationship Compatibility</h3>
+                <h3 className="text-2xl font-bold text-navy-900 mb-4 font-serif">Relationship Compatibility Reading</h3>
                 <p className="text-gray-700 mb-6">
-                  Discover your soulmate and learn how to build lasting, happy relationships.
+                  A deep love reading that blends Eastern energy wisdom with modern relationship insight.
                 </p>
-                <div className="text-2xl font-bold text-navy-900 mb-4">From $39</div>
+                <div className="text-2xl font-bold text-navy-900 mb-4">$69 USD</div>
                 <a
-                  href="https://wa.me/8615914228258?text=I want to learn about Relationship Compatibility service"
+                  href="https://wa.me/8615914228258?text=I want to learn about Relationship Compatibility Reading service"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-gradient-to-r from-pink-500 to-red-600 text-white px-6 py-3 rounded-full font-semibold hover:from-pink-600 hover:to-red-700 transition-all duration-300 inline-flex items-center space-x-2"
@@ -333,13 +333,13 @@ export default function Home() {
                 <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-teal-600 rounded-full flex items-center justify-center mx-auto mb-6">
                   <span className="text-3xl">🛡️</span>
                 </div>
-                <h3 className="text-2xl font-bold text-navy-900 mb-4 font-serif">Protection & Guidance</h3>
+                <h3 className="text-2xl font-bold text-navy-900 mb-4 font-serif">Personalized Talisman & Energy Guide</h3>
                 <p className="text-gray-700 mb-6">
-                  Personalized talismans and guidance to protect you during challenging times and enhance your luck.
+                  Not just jewelry — a spiritual compass tuned to your destiny with custom-made talismans.
                 </p>
-                <div className="text-2xl font-bold text-navy-900 mb-4">From $29</div>
+                <div className="text-2xl font-bold text-navy-900 mb-4">$129 USD</div>
                 <a
-                  href="https://wa.me/8615914228258?text=I want to learn about Protection & Guidance service"
+                  href="https://wa.me/8615914228258?text=I want to learn about Personalized Talisman & Energy Guide service"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-gradient-to-r from-green-500 to-teal-600 text-white px-6 py-3 rounded-full font-semibold hover:from-green-600 hover:to-teal-700 transition-all duration-300 inline-flex items-center space-x-2"

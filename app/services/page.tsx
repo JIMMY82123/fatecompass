@@ -9,86 +9,86 @@ export default function Services() {
   const services = [
     {
       id: 1,
-      title: "BaZi Analysis",
+      title: "Life Destiny Reading",
       subtitle: "Deep Personal Destiny Reading",
-      description: "Unlock the secrets of your birth chart to understand your life purpose, career path, and optimal timing for major decisions.",
+      description: "A deep reading based on your birth date, time, and place using the ancient East Asian system of 'Four Pillars' to understand who you truly are and what path will bring you peace, success, and alignment.",
       features: [
-        "Complete birth chart analysis",
-        "Life purpose and career guidance",
-        "Optimal timing for major decisions",
-        "Personal strengths and challenges",
-        "10-year destiny forecast",
-        "Detailed written report"
+        "Complete birth chart analysis (Four Pillars)",
+        "Career path, financial strengths and blockages",
+        "Health balance and love timing insights",
+        "10-year destiny forecast (high and low periods)",
+        "Personality strengths, inner patterns, and life purpose",
+        "Practical advice on lucky colors and daily energy routines"
       ],
-      price: "From $49",
-      duration: "3-5 days",
+      price: "$79 USD",
+      duration: "3-5 business days",
       icon: "📊",
       color: "from-blue-500 to-purple-600",
       buttonColor: "from-blue-500 to-purple-600",
-      whatsappText: "I want to learn about BaZi Analysis service"
+      whatsappText: "I want to learn about Life Destiny Reading service"
     },
     {
       id: 2,
-      title: "Relationship Compatibility",
+      title: "Relationship Compatibility Reading",
       subtitle: "Soulmate Discovery & Analysis",
-      description: "Discover your soulmate and learn how to build lasting, happy relationships through ancient compatibility wisdom.",
+      description: "A deep love reading that blends Eastern energy wisdom with modern relationship insight to help you understand your emotional patterns and timing for meaningful connections.",
       features: [
-        "Couple compatibility analysis",
-        "Soulmate identification",
-        "Relationship timing guidance",
-        "Communication improvement tips",
-        "Conflict resolution strategies",
-        "Long-term relationship forecast"
+        "Compatibility reading between you and your partner",
+        "How your energies attract, challenge, or balance each other",
+        "Emotional patterns in the relationship",
+        "Timing insights for reconciliation and love windows",
+        "Prediction of next meaningful love connection (if single)",
+        "Modern relationship insight with Eastern wisdom"
       ],
-      price: "From $39",
-      duration: "2-3 days",
+      price: "$69 USD",
+      duration: "3-5 business days",
       icon: "💕",
       color: "from-pink-500 to-red-600",
       buttonColor: "from-pink-500 to-red-600",
-      whatsappText: "I want to learn about Relationship Compatibility service"
+      whatsappText: "I want to learn about Relationship Compatibility Reading service"
     },
     {
       id: 3,
-      title: "Protection & Guidance",
-      subtitle: "Personalized Talismans & Luck Enhancement",
-      description: "Receive personalized talismans and guidance to protect you during challenging times and enhance your luck.",
+      title: "Personalized Talisman & Energy Guide",
+      subtitle: "Custom Spiritual Compass",
+      description: "Not just jewelry — a spiritual compass tuned to your destiny. A handcrafted talisman designed based on your birth elements to balance your energy and attract luck, protection, and alignment.",
       features: [
-        "Personal protection talisman",
-        "Luck enhancement guidance",
-        "Challenging period support",
-        "Energy clearing techniques",
-        "Personalized rituals",
-        "Ongoing guidance support"
+        "Custom-made physical talisman (925 silver)",
+        "Designed based on your birth elements (wood, fire, earth, metal, water)",
+        "Symbol chosen for your life path (dragon, phoenix, circle of balance)",
+        "Energy alignment guide (PDF)",
+        "Instruction for when and how to wear or place it",
+        "Spiritual blessing message and sacred-style packaging"
       ],
-      price: "From $29",
-      duration: "1-2 days",
+      price: "$129 USD",
+      duration: "7-10 business days",
       icon: "🛡️",
       color: "from-green-500 to-teal-600",
       buttonColor: "from-green-500 to-teal-600",
-      whatsappText: "I want to learn about Protection & Guidance service"
+      whatsappText: "I want to learn about Personalized Talisman & Energy Guide service"
     }
   ]
 
   const faqs = [
     {
-      question: "How do I provide my birth information?",
-      answer: "You'll need to provide your exact birth date, time, and location. The more precise the information, the more accurate your reading will be."
+      question: "Do I need to know my birth time?",
+      answer: "Yes, the time helps make your reading accurate. If you're unsure, we can still offer a basic version."
+    },
+    {
+      question: "Who is the reading from?",
+      answer: "All reports are handcrafted by Master Xuan Yin — not AI-generated."
+    },
+    {
+      question: "What does the talisman do?",
+      answer: "It's like a spiritual amplifier. Based on your unique energy, it helps attract luck, protection, and alignment."
     },
     {
       question: "How long does it take to receive my reading?",
-      answer: "Most readings are completed within 3-5 days. Relationship compatibility takes 2-3 days, and protection guidance takes 1-2 days."
+      answer: "Life Destiny and Relationship readings take 3-5 business days. Talismans take 7-10 business days including tracked global shipping."
     },
     {
-      question: "What if I don't know my exact birth time?",
-      answer: "While exact birth time is ideal, we can work with approximate times. However, the more precise the time, the more detailed and accurate your reading will be."
-    },
-    {
-      question: "Are the readings confidential?",
-      answer: "Absolutely. All personal information and readings are kept completely confidential. Your privacy is our top priority."
-    },
-    {
-      question: "Can I ask follow-up questions?",
-      answer: "Yes! Each service includes follow-up support to help you understand and apply the insights from your reading."
+      question: "What format will I receive my reading in?",
+      answer: "All readings come as personalized written PDF reports in English. Talismans include both the physical item and a digital energy alignment guide."
     },
     {
       question: "What payment methods do you accept?",
