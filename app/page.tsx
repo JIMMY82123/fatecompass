@@ -1,18 +1,20 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import Navigation from '@/components/Navigation'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { ChevronRight, Star, MessageCircle, Target, Heart, Briefcase } from 'lucide-react'
+import { Star, ArrowRight, Heart, Target, Briefcase, Users, Calendar, Phone, Mail } from 'lucide-react'
+import Navigation from '@/components/Navigation'
+import SEOHead from '@/components/SEOHead'
 
-const HomePage = () => {
+export default function Home() {
   const [currentQuote, setCurrentQuote] = useState(0)
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
 
   const quotes = [
-    "Feeling lost? Let 玄印 be your compass",
-    "Your destiny is written in the stars - discover it today",
-    "Find your compass when life feels uncertain"
+    "When you feel lost, the ancient wisdom becomes your compass.",
+    "Your destiny is written in the stars, but you hold the pen.",
+    "In the chaos of life, Eastern wisdom brings clarity and peace."
   ]
 
   const testimonials = [
@@ -98,14 +100,38 @@ const HomePage = () => {
     }
   ]
 
+  const services = [
+    {
+      title: "Life Purpose Reading",
+      icon: "🎯",
+      description: "Discover your true calling and life path through ancient BaZi analysis",
+      features: ["Personal destiny map", "Career guidance", "Life timing insights"],
+      price: "From $99"
+    },
+    {
+      title: "Career & Business Guidance", 
+      icon: "💼",
+      description: "Navigate career transitions and business decisions with confidence",
+      features: ["Career compatibility", "Business timing", "Success strategies"],
+      price: "From $129"
+    },
+    {
+      title: "Relationship Compatibility",
+      icon: "❤️",
+      description: "Understand relationship dynamics and find lasting harmony",
+      features: ["Partner compatibility", "Relationship timing", "Communication insights"],
+      price: "From $89"
+    }
+  ]
+
   useEffect(() => {
     const quoteInterval = setInterval(() => {
       setCurrentQuote((prev) => (prev + 1) % quotes.length)
-    }, 4000)
+    }, 5000)
 
     const testimonialInterval = setInterval(() => {
       setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
-    }, 5000)
+    }, 4000)
 
     return () => {
       clearInterval(quoteInterval)
@@ -114,438 +140,428 @@ const HomePage = () => {
   }, [quotes.length, testimonials.length])
 
   return (
-    <div className="min-h-screen">
-      <Navigation />
+    <>
+      <SEOHead
+        title="玄印 · Xuan Yin - Guided by Eastern Wisdom | Your Destiny. Decoded."
+        description="Feeling lost? I am lost and need direction. Let 玄印 guide you with ancient Eastern wisdom. Find your compass when you feel lost in life. Professional destiny reading for lost souls seeking clarity."
+        ogTitle="玄印 · Xuan Yin - Guided by Eastern Wisdom | Your Destiny. Decoded."
+        ogDescription="Feeling lost? Let 玄印 guide you with ancient Eastern wisdom. Find your compass when you feel lost in life."
+        canonical="https://fatecompass.net"
+      />
       
-      {/* Hero Section with Animated Background */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Animated Background */}
-        <div className="absolute inset-0">
-          {/* Background Image */}
+      <div className="min-h-screen">
+        <Navigation />
+        
+        {/* Hero Section with Background */}
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+          {/* Background Image with Overlay */}
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
               backgroundImage: `url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')`
             }}
-          ></div>
-          
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-primary-900/70 via-primary-800/60 to-secondary-900/70"></div>
-          
-          {/* Animated Elements */}
-          <div className="absolute top-0 left-0 w-full h-full">
-            <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-float"></div>
-            <div className="absolute top-3/4 right-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
-            <div className="absolute bottom-1/4 left-1/3 w-48 h-48 bg-white/8 rounded-full blur-3xl animate-float" style={{animationDelay: '4s'}}></div>
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/70"></div>
           </div>
-        </div>
-
-        {/* Content */}
-        <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-5xl md:text-7xl font-bold mb-6 font-serif"
-          >
-            Your Destiny. Decoded by 玄印
-          </motion.h1>
           
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl md:text-2xl mb-8 font-light"
-          >
-            <div className="min-h-[2rem] flex items-center justify-center">
-              {quotes.map((quote, index) => (
+          {/* Content */}
+          <div className="relative z-10 text-center text-white px-4 max-w-6xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h1 className="text-5xl md:text-7xl font-bold mb-6">
+                Your Destiny. Decoded by 玄印
+              </h1>
+              
+              <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+                Feeling lost, confused, or stuck in life? Let ancient Eastern wisdom be your compass. 
+                Master 玄印 guides lost souls to find their true path through personalized destiny readings.
+              </p>
+
+              {/* Animated Quote */}
+              <div className="mb-8 h-16 flex items-center justify-center">
                 <motion.p
-                  key={index}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: currentQuote === index ? 1 : 0 }}
+                  key={currentQuote}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.5 }}
-                  className="absolute"
+                  className="text-lg md:text-xl italic text-gray-200"
                 >
-                  {quote}
+                  "{quotes[currentQuote]}"
                 </motion.p>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="space-y-6"
-          >
-            <p className="text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-8">
-              Feeling lost, confused, or stuck in life? You're not alone. Millions of people struggle with finding their true path, 
-              making career decisions, or understanding their relationships. When you feel lost, 玄印 becomes your compass, 
-              guiding you through life's biggest challenges with ancient Eastern wisdom that has helped people find direction for over 5,000 years.
-            </p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-8">
-              <div className="text-center">
-                <div className="text-3xl mb-2">🧭</div>
-                <h3 className="text-lg font-semibold mb-2">Find Your Compass</h3>
-                <p className="text-sm text-white/80">Discover your true calling and life direction</p>
               </div>
-              <div className="text-center">
-                <div className="text-3xl mb-2">💼</div>
-                <h3 className="text-lg font-semibold mb-2">Career Clarity</h3>
-                <p className="text-sm text-white/80">Make confident career and business decisions</p>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl mb-2">❤️</div>
-                <h3 className="text-lg font-semibold mb-2">Relationship Harmony</h3>
-                <p className="text-sm text-white/80">Build stronger, more fulfilling relationships</p>
-              </div>
-            </div>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="https://wa.me/8615914228258"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2 group"
-              >
-                Get Your Free Reading
-                <ChevronRight className="group-hover:translate-x-1 transition-transform" />
-              </a>
-              <a
-                href="/services"
-                className="bg-white/20 hover:bg-white/30 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 backdrop-blur-sm"
-              >
-                See How It Works
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
 
-      {/* Problems We Solve Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Are You Feeling Lost With...</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              These are the most common challenges our clients face before finding their compass
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Target,
-                title: "Life Purpose Confusion",
-                description: "Feeling lost and unsure about your direction in life? Not knowing what you're meant to do?",
-                symptoms: ["Feeling stuck", "Lack of motivation", "Questioning everything"]
-              },
-              {
-                icon: Briefcase,
-                title: "Career Uncertainty",
-                description: "Struggling with career decisions, job changes, or finding the right path professionally?",
-                symptoms: ["Job dissatisfaction", "Career confusion", "Fear of change"]
-              },
-              {
-                icon: Heart,
-                title: "Relationship Problems",
-                description: "Having trouble with love, marriage, or understanding your partner better?",
-                symptoms: ["Communication issues", "Trust problems", "Compatibility doubts"]
-              }
-            ].map((problem, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
-                viewport={{ once: true }}
-                className="bg-gradient-to-br from-gray-50 to-white p-8 rounded-xl border border-gray-200 hover:shadow-lg transition-all duration-300"
-              >
-                <div className="text-4xl mb-4 text-primary-600">
-                  <problem.icon className="w-12 h-12" />
+              {/* Feature Icons */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto">
+                <div className="flex flex-col items-center space-y-2">
+                  <span className="text-4xl">🧭</span>
+                  <h3 className="text-lg font-semibold">Find Your Compass</h3>
+                  <p className="text-sm text-gray-300">Discover your true direction</p>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">{problem.title}</h3>
-                <p className="text-gray-600 mb-6 leading-relaxed">{problem.description}</p>
-                <div className="space-y-2">
-                  <p className="text-sm font-semibold text-gray-700">Common symptoms:</p>
-                  <ul className="text-sm text-gray-600 space-y-1">
-                    {problem.symptoms.map((symptom, i) => (
-                      <li key={i} className="flex items-center">
-                        <span className="w-2 h-2 bg-primary-400 rounded-full mr-2"></span>
+                <div className="flex flex-col items-center space-y-2">
+                  <span className="text-4xl">💼</span>
+                  <h3 className="text-lg font-semibold">Career Clarity</h3>
+                  <p className="text-sm text-gray-300">Navigate your professional path</p>
+                </div>
+                <div className="flex flex-col items-center space-y-2">
+                  <span className="text-4xl">❤️</span>
+                  <h3 className="text-lg font-semibold">Relationship Harmony</h3>
+                  <p className="text-sm text-gray-300">Find lasting love and connection</p>
+                </div>
+              </div>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link href="/services">
+                  <button className="bg-gradient-to-r from-primary-500 to-secondary-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-primary-600 hover:to-secondary-700 transition-all duration-300 flex items-center justify-center space-x-2">
+                    <span>Get Your Free Reading</span>
+                    <ArrowRight className="w-5 h-5" />
+                  </button>
+                </Link>
+                <Link href="/about">
+                  <button className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-gray-900 transition-all duration-300">
+                    See How It Works
+                  </button>
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Problems We Solve Section */}
+        <section className="py-20 bg-gray-50">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+                Problems We Solve
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Are you experiencing any of these challenges? Ancient Eastern wisdom has the answers you seek.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[
+                {
+                  icon: "🤔",
+                  title: "Career Confusion",
+                  symptoms: ["Unsure about job changes", "Feeling stuck in current role", "Questioning your path"]
+                },
+                {
+                  icon: "💔",
+                  title: "Relationship Issues", 
+                  symptoms: ["Dating struggles", "Marriage problems", "Communication breakdown"]
+                },
+                {
+                  icon: "🎯",
+                  title: "Life Purpose Crisis",
+                  symptoms: ["Feeling directionless", "Lack of motivation", "Existential questions"]
+                },
+                {
+                  icon: "💰",
+                  title: "Financial Struggles",
+                  symptoms: ["Money timing issues", "Investment decisions", "Career vs passion"]
+                },
+                {
+                  icon: "😰",
+                  title: "Life Transitions",
+                  symptoms: ["Major life changes", "Timing decisions", "Fear of the unknown"]
+                },
+                {
+                  icon: "🧘",
+                  title: "Spiritual Emptiness",
+                  symptoms: ["Material success but inner void", "Seeking deeper meaning", "Spiritual awakening"]
+                }
+              ].map((problem, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
+                >
+                  <div className="text-4xl mb-4">{problem.icon}</div>
+                  <h3 className="text-xl font-semibold mb-3 text-gray-900">{problem.title}</h3>
+                  <ul className="space-y-2">
+                    {problem.symptoms.map((symptom, idx) => (
+                      <li key={idx} className="text-gray-600 flex items-center">
+                        <span className="w-2 h-2 bg-primary-500 rounded-full mr-3"></span>
                         {symptom}
                       </li>
                     ))}
                   </ul>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Testimonials Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Real People, Real Results</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              See how others found their compass and direction when they needed it most
-            </p>
-          </motion.div>
+        {/* Testimonials Section */}
+        <section className="py-20 bg-white">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+                Real People, Real Results
+              </h2>
+              <p className="text-xl text-gray-600">
+                See how 玄印 has helped lost souls find their compass and transform their lives.
+              </p>
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
-              >
-                <div className="flex items-center mb-4">
-                  <img
-                    src={testimonial.avatar}
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full mr-4"
-                  />
-                  <div>
-                    <h3 className="font-semibold text-gray-900">{testimonial.name}</h3>
-                    <p className="text-sm text-gray-500">{testimonial.location}</p>
-                    <span className="inline-block bg-primary-100 text-primary-700 text-xs px-2 py-1 rounded-full mt-1">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {testimonials.map((testimonial, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="bg-gray-50 p-6 rounded-xl hover:shadow-lg transition-shadow"
+                >
+                  <div className="flex items-center mb-4">
+                    <img
+                      src={testimonial.avatar}
+                      alt={testimonial.name}
+                      className="w-12 h-12 rounded-full mr-4"
+                    />
+                    <div>
+                      <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
+                      <p className="text-sm text-gray-500">{testimonial.location}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="mb-3">
+                    <span className="inline-block bg-primary-100 text-primary-800 text-xs px-2 py-1 rounded-full mb-2">
                       {testimonial.problem}
                     </span>
                   </div>
-                </div>
-                
-                <div className="flex items-center mb-3">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                  ))}
-                </div>
-                
-                <p className="text-gray-700 leading-relaxed">"{testimonial.text}"</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Story Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-6xl mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Why Ancient Wisdom Works</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              How 5,000 years of Eastern astrology helps lost souls find their compass
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <h3 className="text-3xl font-bold text-gray-900 mb-6">玄印's Approach</h3>
-              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                Unlike modern life coaches who give generic advice, 玄印 uses ancient Eastern astrology 
-                to provide personalized guidance based on your unique birth chart. This 5,000-year-old system 
-                reveals your natural talents, life purpose, and optimal timing for important decisions.
-              </p>
-              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                After helping over 500 people worldwide find clarity in their darkest moments, 玄印 
-                has developed a proven system that combines ancient wisdom with modern understanding to deliver 
-                life-changing results for lost souls seeking direction.
-              </p>
-              <div className="flex items-center gap-4">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-primary-600">500+</div>
-                  <div className="text-sm text-gray-500">Lives Changed</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-primary-600">20+</div>
-                  <div className="text-sm text-gray-500">Years Experience</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-primary-600">98%</div>
-                  <div className="text-sm text-gray-500">Success Rate</div>
-                </div>
-              </div>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <div className="bg-gradient-to-br from-primary-100 to-secondary-100 rounded-2xl p-8">
-                <div className="text-center">
-                  <div className="text-6xl mb-4">🧭</div>
-                  <h4 className="text-xl font-bold text-gray-900 mb-2">Your Personal Compass</h4>
-                  <p className="text-gray-600">
-                    Your birth chart is as unique as your fingerprint. We analyze your specific 
-                    astrological makeup to provide guidance tailored to your exact situation and needs.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Preview */}
-      <section className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">How We Help You Find Your Compass</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Choose the guidance that matches your current situation and needs
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Life Purpose Reading",
-                description: "Discover your true calling, natural talents, and the path that will bring you the most fulfillment and success",
-                price: "$29",
-                icon: "🧭",
-                benefits: ["Find your passion", "Understand your strengths", "Choose the right direction"]
-              },
-              {
-                title: "Career & Business Guidance",
-                description: "Get clarity on career decisions, timing for changes, and strategies for professional success",
-                price: "$39",
-                icon: "💼",
-                benefits: ["Make confident decisions", "Timing for changes", "Professional strategies"]
-              },
-              {
-                title: "Relationship Compatibility",
-                description: "Understand your relationship patterns, improve communication, and find lasting love",
-                price: "$49",
-                icon: "❤️",
-                benefits: ["Better communication", "Resolve conflicts", "Find true compatibility"]
-              }
-            ].map((service, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
-                viewport={{ once: true }}
-                className="text-center p-8 rounded-xl bg-gradient-to-br from-primary-50 to-secondary-50 hover:shadow-lg transition-all duration-300"
-              >
-                <div className="text-4xl mb-4">{service.icon}</div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">{service.title}</h3>
-                <p className="text-gray-600 mb-6 leading-relaxed">{service.description}</p>
-                <div className="text-3xl font-bold text-primary-600 mb-6">{service.price}</div>
-                <div className="mb-6">
-                  <p className="text-sm font-semibold text-gray-700 mb-3">You'll discover:</p>
-                  <ul className="text-sm text-gray-600 space-y-1">
-                    {service.benefits.map((benefit, i) => (
-                      <li key={i} className="flex items-center justify-center">
-                        <span className="w-2 h-2 bg-primary-400 rounded-full mr-2"></span>
-                        {benefit}
-                      </li>
+                  <div className="flex mb-3">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
                     ))}
-                  </ul>
-                </div>
-                <a
-                  href="https://wa.me/8615914228258"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition-colors duration-200"
-                >
-                  <MessageCircle className="w-5 h-5" />
-                  Get Started Now
-                </a>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+                  </div>
 
-      {/* Newsletter Section */}
-      <section className="py-20 bg-gradient-to-r from-primary-600 to-secondary-600">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl font-bold text-white mb-4">Get Free Life Guidance Tips</h2>
-            <p className="text-xl text-white/90 mb-8">
-              Join thousands of people discovering their true path with weekly insights and guidance
+                  <p className="text-gray-700 italic">"{testimonial.text}"</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Why Ancient Wisdom Works Section */}
+        <section className="py-20 bg-gradient-to-br from-primary-50 to-secondary-50">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+                Why Ancient Wisdom Works
+              </h2>
+              <p className="text-xl text-gray-600">
+                For thousands of years, lost souls have found their compass through Eastern astrology. 
+                The same wisdom that guided emperors now guides you.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <h3 className="text-3xl font-bold text-gray-900 mb-6">
+                  玄印's Approach
+                </h3>
+                <p className="text-lg text-gray-700 mb-8">
+                  Unlike modern astrology, Eastern wisdom doesn't just tell you what will happen - 
+                  it shows you how to navigate life's challenges with grace and purpose. 
+                  Every reading is personalized to your unique energy pattern.
+                </p>
+                
+                <div className="space-y-6">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-primary-500 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span className="text-2xl">🧭</span>
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-semibold text-gray-900 mb-2">Your Personal Compass</h4>
+                      <p className="text-gray-600">
+                        Discover your unique life path and the timing that works best for you.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-secondary-500 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span className="text-2xl">🎯</span>
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-semibold text-gray-900 mb-2">Practical Guidance</h4>
+                      <p className="text-gray-600">
+                        Get actionable advice for career, relationships, and life decisions.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-primary-600 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span className="text-2xl">🌟</span>
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-semibold text-gray-900 mb-2">Life-Changing Results</h4>
+                      <p className="text-gray-600">
+                        Join thousands who have transformed their lives through this ancient wisdom.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-6">
+                {[
+                  { label: "Lives Changed", value: "2,847+" },
+                  { label: "Success Rate", value: "94%" },
+                  { label: "Years Experience", value: "20+" },
+                  { label: "Countries Served", value: "15+" }
+                ].map((stat, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="bg-white p-6 rounded-xl text-center shadow-lg"
+                  >
+                    <div className="text-3xl font-bold text-primary-600 mb-2">{stat.value}</div>
+                    <div className="text-gray-600">{stat.label}</div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Services Preview Section */}
+        <section className="py-20 bg-white">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+                How We Help You Find Your Compass
+              </h2>
+              <p className="text-xl text-gray-600">
+                Choose the guidance that matches your current needs and start your transformation today.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {services.map((service, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="bg-gradient-to-br from-gray-50 to-white p-8 rounded-xl border border-gray-200 hover:shadow-xl transition-all duration-300"
+                >
+                  <div className="text-4xl mb-4">{service.icon}</div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">{service.title}</h3>
+                  <p className="text-gray-600 mb-6">{service.description}</p>
+                  
+                  <div className="mb-6">
+                    <h4 className="font-semibold text-gray-900 mb-3">What's Included:</h4>
+                    <ul className="space-y-2">
+                      {service.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-center text-gray-600">
+                          <span className="w-2 h-2 bg-primary-500 rounded-full mr-3"></span>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="text-2xl font-bold text-primary-600 mb-6">{service.price}</div>
+                  
+                  <Link href="/services">
+                    <button className="w-full bg-gradient-to-r from-primary-500 to-secondary-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-primary-600 hover:to-secondary-700 transition-all duration-300">
+                      Get Started Now
+                    </button>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Newsletter Section */}
+        <section className="py-20 bg-gradient-to-r from-primary-600 to-secondary-700">
+          <div className="max-w-4xl mx-auto px-4 text-center">
+            <h2 className="text-4xl font-bold text-white mb-4">
+              Get Free Life Guidance Tips
+            </h2>
+            <p className="text-xl text-primary-100 mb-8">
+              Join thousands of seekers who receive weekly insights on finding their compass and living their best life.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
               <input
                 type="email"
-                placeholder="Enter your email address"
-                className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white/50"
+                placeholder="Enter your email"
+                className="flex-1 px-6 py-4 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
               />
-              <button className="bg-white text-primary-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200">
+              <button className="bg-white text-primary-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
                 Get Free Tips
               </button>
             </div>
-          </motion.div>
-        </div>
-      </section>
+          </div>
+        </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <div className="mb-8">
-            <div className="flex items-center justify-center space-x-3 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-secondary-600 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-sm">玄</span>
+        {/* Footer */}
+        <footer className="bg-gray-900 text-white py-16">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+              <div className="col-span-1 md:col-span-2">
+                <div className="flex items-center space-x-3 mb-4">
+                  <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-secondary-600 rounded-full flex items-center justify-center">
+                    <span className="text-white font-bold text-sm">玄</span>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold">玄印 · Xuan Yin</h3>
+                    <p className="text-gray-400 text-sm">Guided by Eastern Wisdom</p>
+                  </div>
+                </div>
+                <p className="text-gray-400 mb-6 max-w-md">
+                  Your Destiny. Decoded. Helping lost souls find their compass through ancient Eastern wisdom.
+                </p>
+                <div className="flex space-x-4">
+                  <a href="https://wa.me/8615914228258" className="text-gray-400 hover:text-white transition-colors">
+                    <Phone className="w-5 h-5" />
+                  </a>
+                  <a href="mailto:chenxiao0801@hotmail.com" className="text-gray-400 hover:text-white transition-colors">
+                    <Mail className="w-5 h-5" />
+                  </a>
+                </div>
               </div>
-              <div className="flex flex-col">
-                <span className="text-xl font-bold">玄印 · Xuan Yin</span>
-                <span className="text-sm text-gray-400">Guided by Eastern Wisdom</span>
+              
+              <div>
+                <h4 className="text-lg font-semibold mb-4">Services</h4>
+                <ul className="space-y-2 text-gray-400">
+                  <li><Link href="/services" className="hover:text-white transition-colors">Life Purpose Reading</Link></li>
+                  <li><Link href="/services" className="hover:text-white transition-colors">Career Guidance</Link></li>
+                  <li><Link href="/services" className="hover:text-white transition-colors">Relationship Compatibility</Link></li>
+                </ul>
+              </div>
+              
+              <div>
+                <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+                <ul className="space-y-2 text-gray-400">
+                  <li><Link href="/about" className="hover:text-white transition-colors">About 玄印</Link></li>
+                  <li><Link href="/blog" className="hover:text-white transition-colors">Blog</Link></li>
+                  <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
+                </ul>
               </div>
             </div>
-            <p className="text-gray-400 text-lg">Your Destiny. Decoded.</p>
+            
+            <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+              <p>© 2025 Fate Compass · Powered by 玄印命理师 Xuan Yin</p>
+            </div>
           </div>
-          <div className="border-t border-gray-800 pt-8">
-            <p className="text-gray-400">
-              © 2025 Fate Compass · Powered by 玄印命理师 Xuan Yin
-            </p>
-          </div>
-        </div>
-      </footer>
-    </div>
+        </footer>
+      </div>
+    </>
   )
-}
-
-export default HomePage 
+} 
