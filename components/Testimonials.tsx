@@ -9,8 +9,8 @@ const testimonials = [
   {
     id: 1,
     name: "Anna L.",
-    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
-    review: "I was shocked to see my destiny map unfold. Master 玄印's reading gave me clarity I never had before.",
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
+    review: "This reading gave me clarity and peace. Now I know where I'm going.",
     rating: 5,
     category: "Life Purpose"
   },
@@ -18,15 +18,15 @@ const testimonials = [
     id: 2,
     name: "Michael C.",
     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
-    review: "My relationship was falling apart. The compatibility analysis showed us exactly what needed to be fixed.",
+    review: "The talisman arrived safely. It's beautiful and feels powerful.",
     rating: 5,
-    category: "Relationship"
+    category: "Protection"
   },
   {
     id: 3,
     name: "Emma W.",
     avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
-    review: "I felt stuck and directionless. 玄印's reading revealed my life purpose and gave me confidence.",
+    review: "I was lost in my career. The BaZi reading showed me exactly what I was meant to do.",
     rating: 5,
     category: "Career"
   },
