@@ -1,295 +1,210 @@
 'use client'
 
-import React from 'react'
-import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Check, Star, Clock, Users, Target, Heart, Shield, ArrowRight, Phone } from 'lucide-react'
-import Navigation from '@/components/Navigation'
+import { Phone, Mail, Clock, Shield, Heart, Target, CheckCircle } from 'lucide-react'
+import Link from 'next/link'
 import SEOHead from '@/components/SEOHead'
 
 export default function Services() {
   const services = [
     {
-      id: 'bazi-analysis',
-      title: "Life Purpose Reading",
-      subtitle: "BaZi Destiny Analysis",
-      icon: "🎯",
-      description: "Discover your true calling and life path through ancient BaZi analysis. Understand your natural talents, optimal timing, and the path that will bring you the most fulfillment.",
-      duration: "60-90 minutes",
-      price: "From $99",
+      id: 1,
+      title: "BaZi Analysis",
+      subtitle: "Deep Personal Destiny Reading",
+      description: "Unlock the secrets of your birth chart to understand your life purpose, career path, and optimal timing for major decisions.",
       features: [
-        "Personal destiny map analysis",
-        "Career and life purpose guidance", 
+        "Complete birth chart analysis",
+        "Life purpose and career guidance",
         "Optimal timing for major decisions",
-        "Natural talents and strengths identification",
-        "Life path recommendations",
+        "Personal strengths and challenges",
+        "10-year destiny forecast",
         "Detailed written report"
       ],
-      benefits: [
-        "Find your true calling",
-        "Make confident life decisions",
-        "Understand your unique gifts",
-        "Navigate life transitions"
-      ],
-      process: [
-        "Birth date and time analysis",
-        "Personal consultation session",
-        "Detailed report preparation",
-        "Follow-up guidance"
-      ]
+      price: "From $49",
+      duration: "3-5 days",
+      icon: "📊",
+      color: "from-blue-500 to-purple-600",
+      buttonColor: "from-blue-500 to-purple-600",
+      whatsappText: "I want to learn about BaZi Analysis service"
     },
     {
-      id: 'career-guidance',
-      title: "Career & Business Guidance",
-      subtitle: "Professional Path Analysis", 
-      icon: "💼",
-      description: "Navigate career transitions and business decisions with confidence. Get clarity on when to make moves, which opportunities to pursue, and how to maximize your professional success.",
-      duration: "45-60 minutes",
-      price: "From $129",
-      features: [
-        "Career compatibility analysis",
-        "Business timing recommendations",
-        "Success strategy development",
-        "Industry and role guidance",
-        "Investment and financial timing",
-        "Professional development plan"
-      ],
-      benefits: [
-        "Make confident career moves",
-        "Choose the right opportunities",
-        "Maximize professional success",
-        "Time major decisions perfectly"
-      ],
-      process: [
-        "Career history review",
-        "Current situation analysis", 
-        "Future opportunity mapping",
-        "Action plan development"
-      ]
-    },
-    {
-      id: 'relationship-compatibility',
+      id: 2,
       title: "Relationship Compatibility",
-      subtitle: "Love & Partnership Analysis",
-      icon: "❤️",
-      description: "Understand relationship dynamics and find lasting harmony. Whether you're single, dating, or married, discover how to build stronger, more fulfilling relationships.",
-      duration: "45-75 minutes", 
-      price: "From $89",
+      subtitle: "Soulmate Discovery & Analysis",
+      description: "Discover your soulmate and learn how to build lasting, happy relationships through ancient compatibility wisdom.",
       features: [
-        "Partner compatibility analysis",
-        "Relationship timing insights",
-        "Communication style guidance",
+        "Couple compatibility analysis",
+        "Soulmate identification",
+        "Relationship timing guidance",
+        "Communication improvement tips",
         "Conflict resolution strategies",
-        "Marriage timing recommendations",
-        "Relationship growth plan"
+        "Long-term relationship forecast"
       ],
-      benefits: [
-        "Find true compatibility",
-        "Improve communication",
-        "Resolve relationship conflicts",
-        "Build lasting partnerships"
+      price: "From $39",
+      duration: "2-3 days",
+      icon: "💕",
+      color: "from-pink-500 to-red-600",
+      buttonColor: "from-pink-500 to-red-600",
+      whatsappText: "I want to learn about Relationship Compatibility service"
+    },
+    {
+      id: 3,
+      title: "Protection & Guidance",
+      subtitle: "Personalized Talismans & Luck Enhancement",
+      description: "Receive personalized talismans and guidance to protect you during challenging times and enhance your luck.",
+      features: [
+        "Personal protection talisman",
+        "Luck enhancement guidance",
+        "Challenging period support",
+        "Energy clearing techniques",
+        "Personalized rituals",
+        "Ongoing guidance support"
       ],
-      process: [
-        "Individual personality analysis",
-        "Partner compatibility assessment",
-        "Relationship dynamics review",
-        "Harmony-building strategies"
-      ]
+      price: "From $29",
+      duration: "1-2 days",
+      icon: "🛡️",
+      color: "from-green-500 to-teal-600",
+      buttonColor: "from-green-500 to-teal-600",
+      whatsappText: "I want to learn about Protection & Guidance service"
     }
   ]
 
-  const processSteps = [
+  const faqs = [
     {
-      step: 1,
-      title: "Free Consultation",
-      description: "15-minute discovery call to understand your needs",
-      icon: "📞"
+      question: "How do I provide my birth information?",
+      answer: "You'll need to provide your exact birth date, time, and location. The more precise the information, the more accurate your reading will be."
     },
     {
-      step: 2, 
-      title: "Birth Data Collection",
-      description: "Provide your birth date, time, and location",
-      icon: "📅"
+      question: "How long does it take to receive my reading?",
+      answer: "Most readings are completed within 3-5 days. Relationship compatibility takes 2-3 days, and protection guidance takes 1-2 days."
     },
     {
-      step: 3,
-      title: "Deep Analysis",
-      description: "玄印 performs detailed astrological analysis",
-      icon: "🔮"
+      question: "What if I don't know my exact birth time?",
+      answer: "While exact birth time is ideal, we can work with approximate times. However, the more precise the time, the more detailed and accurate your reading will be."
     },
     {
-      step: 4,
-      title: "Personal Session",
-      description: "60-90 minute consultation with detailed guidance",
-      icon: "💬"
+      question: "Are the readings confidential?",
+      answer: "Absolutely. All personal information and readings are kept completely confidential. Your privacy is our top priority."
     },
     {
-      step: 5,
-      title: "Written Report",
-      description: "Comprehensive report with actionable insights",
-      icon: "📋"
+      question: "Can I ask follow-up questions?",
+      answer: "Yes! Each service includes follow-up support to help you understand and apply the insights from your reading."
     },
     {
-      step: 6,
-      title: "Follow-up Support",
-      description: "30-day email support for questions and guidance",
-      icon: "📧"
+      question: "What payment methods do you accept?",
+      answer: "We accept various payment methods including PayPal, credit cards, and bank transfers. Payment is required before the reading begins."
     }
   ]
 
   return (
     <>
       <SEOHead
-        title="Professional Life Guidance Services | 玄印 · Xuan Yin"
-        description="Feeling lost in your career or relationships? Get professional guidance from Master 玄印. Life purpose readings, career advice, and relationship compatibility analysis. Find your compass today."
-        keywords="career guidance, life purpose reading, relationship compatibility, BaZi analysis, Eastern astrology, professional advice, career change, relationship advice"
-        ogTitle="Professional Life Guidance Services | 玄印 · Xuan Yin"
-        ogDescription="Get professional guidance for career, relationships, and life purpose. Master 玄印 helps you find your true path."
+        title="Services | Fate Compass - BaZi Analysis, Relationship Compatibility & Protection"
+        description="Professional Eastern astrology services: BaZi analysis, relationship compatibility, and protection guidance. Transform your life with ancient wisdom."
+        keywords="BaZi analysis, relationship compatibility, protection talisman, Eastern astrology services, destiny reading, life purpose"
+        ogTitle="Professional Services | Fate Compass"
+        ogDescription="Transform your life with our professional Eastern astrology services. BaZi analysis, relationship compatibility, and protection guidance."
         canonical="https://fatecompass.net/services"
       />
-      
-      <div className="min-h-screen bg-gray-50">
-        <Navigation />
-        
+
+      <div className="min-h-screen bg-cream-50">
         {/* Hero Section */}
-        <section className="pt-24 pb-16 bg-gradient-to-br from-primary-50 to-secondary-50">
-          <div className="max-w-6xl mx-auto px-4">
-            <div className="text-center">
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="text-5xl md:text-6xl font-bold text-gray-900 mb-6"
-              >
-                Professional Life Guidance Services
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-xl text-gray-600 max-w-3xl mx-auto mb-8"
-              >
-                Feeling lost, confused, or stuck? Let ancient Eastern wisdom guide you to clarity, 
-                purpose, and success. Choose the guidance that matches your current needs.
-              </motion.p>
-            </div>
+        <section className="pt-32 pb-20 bg-gradient-to-br from-navy-900 via-purple-900 to-navy-900 relative overflow-hidden">
+          <div className="absolute inset-0 bg-black/40"></div>
+          <div className="relative z-10 max-w-6xl mx-auto px-4 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 font-serif">
+                Professional Services
+              </h1>
+              <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto">
+                Transform your life with ancient Eastern wisdom. Choose the service that resonates with your journey.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4 text-white">
+                <div className="flex items-center space-x-2">
+                  <CheckCircle className="w-5 h-5 text-gold-400" />
+                  <span>100% Confidential</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <CheckCircle className="w-5 h-5 text-gold-400" />
+                  <span>Ancient Wisdom</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <CheckCircle className="w-5 h-5 text-gold-400" />
+                  <span>Proven Results</span>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </section>
 
         {/* Services Section */}
-        <section className="py-20 bg-white">
+        <section className="py-20">
           <div className="max-w-6xl mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">
-                How We Help You Find Clarity
-              </h2>
-              <p className="text-xl text-gray-600">
-                Each service is designed to address specific life challenges and provide actionable guidance.
-              </p>
-            </div>
-
-            <div className="space-y-12">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {services.map((service, index) => (
                 <motion.div
                   key={service.id}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 md:p-12 shadow-lg hover:shadow-xl transition-all duration-300"
+                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-cream-200 overflow-hidden"
                 >
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                    {/* Service Info */}
-                    <div>
-                      <div className="flex items-center mb-6">
-                        <span className="text-5xl mr-4">{service.icon}</span>
-                        <div>
-                          <h3 className="text-3xl font-bold text-gray-900">{service.title}</h3>
-                          <p className="text-lg text-primary-600 font-medium">{service.subtitle}</p>
-                        </div>
-                      </div>
-                      
-                      <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                        {service.description}
-                      </p>
+                  {/* Service Header */}
+                  <div className={`bg-gradient-to-r ${service.color} p-8 text-white text-center`}>
+                    <div className="text-4xl mb-4">{service.icon}</div>
+                    <h3 className="text-2xl font-bold mb-2 font-serif">{service.title}</h3>
+                    <p className="text-white/90">{service.subtitle}</p>
+                  </div>
 
-                      <div className="grid grid-cols-2 gap-4 mb-6">
-                        <div className="flex items-center text-gray-600">
-                          <Clock className="w-5 h-5 mr-2" />
-                          <span>{service.duration}</span>
-                        </div>
-                        <div className="flex items-center text-gray-600">
-                          <Users className="w-5 h-5 mr-2" />
-                          <span>1-on-1 Session</span>
-                        </div>
-                      </div>
+                  {/* Service Content */}
+                  <div className="p-8">
+                    <p className="text-gray-700 mb-6 leading-relaxed">
+                      {service.description}
+                    </p>
 
-                      <div className="mb-6">
-                        <h4 className="text-lg font-semibold text-gray-900 mb-3">What's Included:</h4>
-                        <ul className="space-y-2">
-                          {service.features.map((feature, idx) => (
-                            <li key={idx} className="flex items-center text-gray-600">
-                              <Check className="w-4 h-4 text-primary-500 mr-3 flex-shrink-0" />
-                              {feature}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      <div className="mb-6">
-                        <h4 className="text-lg font-semibold text-gray-900 mb-3">You'll Gain:</h4>
-                        <ul className="space-y-2">
-                          {service.benefits.map((benefit, idx) => (
-                            <li key={idx} className="flex items-center text-gray-600">
-                              <Star className="w-4 h-4 text-yellow-500 mr-3 flex-shrink-0" />
-                              {benefit}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                    {/* Features */}
+                    <div className="mb-6">
+                      <h4 className="font-semibold text-navy-900 mb-3">What's Included:</h4>
+                      <ul className="space-y-2">
+                        {service.features.map((feature, idx) => (
+                          <li key={idx} className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                            <span className="text-gray-700 text-sm">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
 
-                    {/* Pricing & CTA */}
-                    <div className="flex flex-col justify-between">
+                    {/* Price and Duration */}
+                    <div className="flex justify-between items-center mb-6 p-4 bg-cream-50 rounded-lg">
                       <div>
-                        <div className="text-center mb-6">
-                          <div className="text-4xl font-bold text-primary-600 mb-2">
-                            {service.price}
-                          </div>
-                          <p className="text-gray-600">One-time consultation</p>
-                        </div>
-
-                        <div className="mb-6">
-                          <h4 className="text-lg font-semibold text-gray-900 mb-3">Process:</h4>
-                          <ul className="space-y-2">
-                            {service.process.map((step, idx) => (
-                              <li key={idx} className="flex items-center text-gray-600">
-                                <span className="w-6 h-6 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center text-sm font-semibold mr-3 flex-shrink-0">
-                                  {idx + 1}
-                                </span>
-                                {step}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+                        <div className="text-2xl font-bold text-navy-900">{service.price}</div>
+                        <div className="text-sm text-gray-600">Starting price</div>
                       </div>
-
-                      <div className="space-y-3">
-                        <a
-                          href="https://wa.me/8615914228258"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-full bg-gradient-to-r from-primary-500 to-secondary-600 text-white py-4 px-6 rounded-lg font-semibold hover:from-primary-600 hover:to-secondary-700 transition-all duration-300 flex items-center justify-center space-x-2"
-                        >
-                          <Phone className="w-5 h-5" />
-                          <span>Get Started Now</span>
-                        </a>
-                        <Link href="/about">
-                          <button className="w-full border-2 border-primary-500 text-primary-600 py-3 px-6 rounded-lg font-semibold hover:bg-primary-50 transition-colors">
-                            Learn More About 玄印
-                          </button>
-                        </Link>
+                      <div className="text-right">
+                        <div className="flex items-center space-x-1 text-gray-600">
+                          <Clock className="w-4 h-4" />
+                          <span className="text-sm">{service.duration}</span>
+                        </div>
+                        <div className="text-xs text-gray-500">Delivery time</div>
                       </div>
                     </div>
+
+                    {/* CTA Button */}
+                    <a
+                      href={`https://wa.me/8615914228258?text=${encodeURIComponent(service.whatsappText)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`w-full bg-gradient-to-r ${service.buttonColor} text-white py-3 px-6 rounded-full font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-2`}
+                    >
+                      <Phone className="w-4 h-4" />
+                      <span>Consult Now</span>
+                    </a>
                   </div>
                 </motion.div>
               ))}
@@ -297,37 +212,113 @@ export default function Services() {
           </div>
         </section>
 
-        {/* How It Works Section */}
-        <section className="py-20 bg-gray-50">
+        {/* Why Choose Us Section */}
+        <section className="py-20 bg-white">
           <div className="max-w-6xl mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">
-                How It Works
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-navy-900 mb-6 font-serif">
+                Why Choose Master 玄印?
               </h2>
-              <p className="text-xl text-gray-600">
-                Your journey to clarity and purpose in 6 simple steps
+              <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+                Experience the difference that comes from genuine expertise and ancient wisdom
               </p>
-            </div>
+            </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {processSteps.map((step, index) => (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="text-center"
+              >
+                <div className="w-16 h-16 bg-gold-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Target className="w-8 h-8 text-gold-600" />
+                </div>
+                <h3 className="text-xl font-bold text-navy-900 mb-3 font-serif">10+ Years Experience</h3>
+                <p className="text-gray-700">
+                  Master 玄印 has dedicated over a decade to studying and practicing Eastern astrology, 
+                  bringing you authentic, time-tested wisdom.
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="text-center"
+              >
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Shield className="w-8 h-8 text-blue-600" />
+                </div>
+                <h3 className="text-xl font-bold text-navy-900 mb-3 font-serif">100% Confidential</h3>
+                <p className="text-gray-700">
+                  Your privacy is sacred. All personal information and readings are kept completely 
+                  confidential and secure.
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                viewport={{ once: true }}
+                className="text-center"
+              >
+                <div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Heart className="w-8 h-8 text-pink-600" />
+                </div>
+                <h3 className="text-xl font-bold text-navy-900 mb-3 font-serif">Personalized Approach</h3>
+                <p className="text-gray-700">
+                  Every reading is uniquely tailored to your specific situation and needs. 
+                  No generic templates, only personalized insights.
+                </p>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="py-20 bg-cream-100">
+          <div className="max-w-4xl mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-navy-900 mb-6 font-serif">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-xl text-gray-700">
+                Everything you need to know about our services
+              </p>
+            </motion.div>
+
+            <div className="space-y-6">
+              {faqs.map((faq, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-lg p-6 shadow-md border border-cream-200"
                 >
-                  <div className="text-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-secondary-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <span className="text-2xl">{step.icon}</span>
-                    </div>
-                    <div className="text-sm font-semibold text-primary-600 mb-2">
-                      Step {step.step}
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">{step.title}</h3>
-                    <p className="text-gray-600">{step.description}</p>
-                  </div>
+                  <h3 className="text-lg font-semibold text-navy-900 mb-3 font-serif">
+                    {faq.question}
+                  </h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    {faq.answer}
+                  </p>
                 </motion.div>
               ))}
             </div>
@@ -335,89 +326,43 @@ export default function Services() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-primary-600 to-secondary-700">
+        <section className="py-20 bg-gradient-to-r from-navy-900 to-purple-900">
           <div className="max-w-4xl mx-auto px-4 text-center">
-            <h2 className="text-4xl font-bold text-white mb-4">
-              Ready to Find Your Path?
-            </h2>
-            <p className="text-xl text-primary-100 mb-8">
-              Join thousands who have transformed their lives with 玄印's guidance. 
-              Your journey to clarity and purpose starts with a simple conversation.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="https://wa.me/8615914228258"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white text-primary-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors flex items-center justify-center space-x-2"
-              >
-                <Phone className="w-5 h-5" />
-                <span>Start Your Free Consultation</span>
-              </a>
-              <Link href="/about">
-                <button className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-primary-600 transition-colors">
-                  Learn More About Master 玄印
-                </button>
-              </Link>
-            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 font-serif">
+                Ready to Transform Your Life?
+              </h2>
+              <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
+                Take the first step towards clarity, purpose, and success. Contact Master 玄印 today 
+                for your personalized reading.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a
+                  href="https://wa.me/8615914228258?text=I want to learn more about your services"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white text-navy-900 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 flex items-center space-x-2 shadow-lg hover:shadow-xl"
+                >
+                  <Phone className="w-5 h-5" />
+                  <span>Start Your Journey</span>
+                </a>
+                <a
+                  href="mailto:chenxiao0801@hotmail.com?subject=I want to learn about Master 玄印's services"
+                  className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-navy-900 transition-all duration-300 flex items-center space-x-2"
+                >
+                  <Mail className="w-5 h-5" />
+                  <span>Email Consultation</span>
+                </a>
+              </div>
+            </motion.div>
           </div>
         </section>
-
-        {/* Footer */}
-        <footer className="bg-gray-900 text-white py-16">
-          <div className="max-w-6xl mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              <div className="col-span-1 md:col-span-2">
-                <div className="flex items-center space-x-3 mb-4">
-                  <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-secondary-600 rounded-full flex items-center justify-center">
-                    <span className="text-white font-bold text-sm">玄</span>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold">玄印 · Xuan Yin</h3>
-                    <p className="text-gray-400 text-sm">Guided by Eastern Wisdom</p>
-                  </div>
-                </div>
-                <p className="text-gray-400 mb-6 max-w-md">
-                  Your Destiny. Decoded. Helping lost souls find their compass through ancient Eastern wisdom.
-                </p>
-                <div className="flex space-x-4">
-                  <a href="https://wa.me/8615914228258" className="text-gray-400 hover:text-white transition-colors">
-                    <Phone className="w-5 h-5" />
-                  </a>
-                  <a href="mailto:chenxiao0801@hotmail.com" className="text-gray-400 hover:text-white transition-colors">
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                      <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-              
-              <div>
-                <h4 className="text-lg font-semibold mb-4">Services</h4>
-                <ul className="space-y-2 text-gray-400">
-                  <li><Link href="/services" className="hover:text-white transition-colors">Life Purpose Reading</Link></li>
-                  <li><Link href="/services" className="hover:text-white transition-colors">Career Guidance</Link></li>
-                  <li><Link href="/services" className="hover:text-white transition-colors">Relationship Compatibility</Link></li>
-                </ul>
-              </div>
-              
-              <div>
-                <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-                <ul className="space-y-2 text-gray-400">
-                  <li><Link href="/about" className="hover:text-white transition-colors">About 玄印</Link></li>
-                  <li><Link href="/blog" className="hover:text-white transition-colors">Blog</Link></li>
-                  <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
-                </ul>
-              </div>
-            </div>
-            
-            <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-              <p>© 2025 Fate Compass · Powered by 玄印命理师 Xuan Yin</p>
-            </div>
-          </div>
-        </footer>
       </div>
     </>
   )

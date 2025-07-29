@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Star, ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
@@ -8,113 +8,83 @@ import Image from 'next/image'
 const testimonials = [
   {
     id: 1,
-    name: "Sarah Johnson",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
+    name: "Anna L.",
+    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
+    review: "I was shocked to see my destiny map unfold. Master 玄印's reading gave me clarity I never had before.",
     rating: 5,
-    text: "I was completely lost in my career. 玄印's analysis helped me discover my true calling. Now I'm finally doing what I love and making a real difference in people's lives!",
-    location: "New York, USA",
-    problem: "Career Confusion",
-    emotion: "Overwhelmed → Fulfilled",
-    service: "BaZi Analysis"
+    category: "Life Purpose"
   },
   {
     id: 2,
-    name: "Michael Chen",
-    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
+    name: "Michael C.",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
+    review: "My relationship was falling apart. The compatibility analysis showed us exactly what needed to be fixed.",
     rating: 5,
-    text: "My relationship was falling apart. The compatibility analysis showed us exactly what we needed to fix. We're stronger than ever now and planning our wedding!",
-    location: "Toronto, Canada",
-    problem: "Relationship Issues",
-    emotion: "Heartbroken → In Love",
-    service: "Relationship Compatibility"
+    category: "Relationship"
   },
   {
     id: 3,
-    name: "Emma Wilson",
-    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
+    name: "Emma W.",
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
+    review: "I felt stuck and directionless. 玄印's reading revealed my life purpose and gave me confidence.",
     rating: 5,
-    text: "I felt stuck and directionless. 玄印's reading revealed my life purpose and gave me the confidence to make major changes. I've never been happier!",
-    location: "London, UK",
-    problem: "Life Purpose",
-    emotion: "Lost → Purposeful",
-    service: "Life Purpose Reading"
+    category: "Career"
   },
   {
     id: 4,
-    name: "David Kim",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
+    name: "David K.",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
+    review: "The financial timing analysis was spot on. I finally knew when to invest and when to wait.",
     rating: 5,
-    text: "After losing my job, I was desperate for guidance. 玄印's career analysis led me to a better opportunity I never considered. I'm making 40% more now!",
-    location: "Seoul, Korea",
-    problem: "Career Transition",
-    emotion: "Desperate → Thriving",
-    service: "Career Guidance"
+    category: "Finance"
   },
   {
     id: 5,
-    name: "Lisa Rodriguez",
+    name: "Sarah M.",
     avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
+    review: "I finally let go of that toxic relationship. 玄印's analysis helped me see the truth clearly.",
     rating: 5,
-    text: "I was struggling with self-doubt and couldn't decide on my next steps. The reading gave me clarity and renewed confidence. I finally feel like myself again!",
-    location: "Madrid, Spain",
-    problem: "Self-Doubt",
-    emotion: "Confused → Confident",
-    service: "Personal Guidance"
+    category: "Relationship"
   },
   {
     id: 6,
-    name: "James Thompson",
+    name: "James R.",
     avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
+    review: "The protection talisman has been incredible. I feel safer and more confident in my decisions.",
     rating: 5,
-    text: "Divorce left me questioning everything. 玄印 helped me understand my patterns and find hope for the future. I'm dating again and feeling optimistic!",
-    location: "Sydney, Australia",
-    problem: "Life Crisis",
-    emotion: "Hopeless → Hopeful",
-    service: "Life Transition"
+    category: "Protection"
   },
   {
     id: 7,
-    name: "Anna Kowalski",
+    name: "Lisa T.",
     avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
+    review: "I was lost in my career. The BaZi reading showed me exactly what I was meant to do.",
     rating: 5,
-    text: "I was in a toxic relationship but couldn't see it clearly. The compatibility analysis opened my eyes and gave me strength to leave. I'm free and happy now!",
-    location: "Warsaw, Poland",
-    problem: "Toxic Relationship",
-    emotion: "Trapped → Free",
-    service: "Relationship Analysis"
+    category: "Career"
   },
   {
     id: 8,
-    name: "Carlos Silva",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
+    name: "Robert H.",
+    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
+    review: "The timing for my business launch was perfect. Eastern wisdom really works!",
     rating: 5,
-    text: "Financial struggles were overwhelming me. The wealth analysis showed me the right timing and opportunities to turn things around. I'm debt-free now!",
-    location: "São Paulo, Brazil",
-    problem: "Financial Struggles",
-    emotion: "Stressed → Secure",
-    service: "Wealth Guidance"
+    category: "Finance"
   },
   {
     id: 9,
-    name: "Yuki Tanaka",
+    name: "Jennifer L.",
     avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
+    review: "I found my soulmate through the compatibility reading. We're getting married next month!",
     rating: 5,
-    text: "I felt spiritually empty despite material success. 玄印 helped me find deeper meaning and purpose in life. I'm finally at peace with myself!",
-    location: "Tokyo, Japan",
-    problem: "Spiritual Crisis",
-    emotion: "Empty → Fulfilled",
-    service: "Spiritual Guidance"
+    category: "Relationship"
   },
   {
     id: 10,
-    name: "Maria Garcia",
-    avatar: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
+    name: "Thomas B.",
+    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
+    review: "The life purpose reading changed everything. I finally understand why I'm here.",
     rating: 5,
-    text: "I was afraid to make big life changes. The destiny reading gave me the courage to pursue my dreams. I quit my job and started my own business!",
-    location: "Barcelona, Spain",
-    problem: "Fear of Change",
-    emotion: "Afraid → Courageous",
-    service: "Life Purpose Reading"
+    category: "Life Purpose"
   }
 ]
 
@@ -127,31 +97,33 @@ export default function Testimonials() {
     if (!isAutoPlaying) return
 
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % testimonials.length)
+      setCurrentIndex((prevIndex) => 
+        prevIndex === testimonials.length - 3 ? 0 : prevIndex + 1
+      )
     }, 5000)
 
     return () => clearInterval(interval)
   }, [isAutoPlaying])
 
   const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length)
+    setCurrentIndex((prevIndex) => 
+      prevIndex === testimonials.length - 3 ? 0 : prevIndex + 1
+    )
     setIsAutoPlaying(false)
   }
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+    setCurrentIndex((prevIndex) => 
+      prevIndex === 0 ? testimonials.length - 3 : prevIndex - 1
+    )
     setIsAutoPlaying(false)
   }
 
-  const goToSlide = (index: number) => {
-    setCurrentIndex(index)
-    setIsAutoPlaying(false)
-  }
+  const visibleTestimonials = testimonials.slice(currentIndex, currentIndex + 3)
 
   return (
-    <section className="py-20 bg-slate-800/50 backdrop-blur-sm relative">
-      <div className="absolute inset-0 bg-gradient-to-r from-pink-900/20 to-blue-900/20"></div>
-      <div className="relative z-10 max-w-6xl mx-auto px-4">
+    <section className="py-20 bg-cream-100 relative">
+      <div className="max-w-6xl mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -159,127 +131,127 @@ export default function Testimonials() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-navy-900 mb-6 font-serif">
             Real People, Real Results
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            See how ancient Eastern wisdom has transformed lives and brought clarity to confused souls.
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+            See how ancient Eastern wisdom has transformed lives and brought clarity to confused souls
           </p>
         </motion.div>
 
         {/* Testimonials Carousel */}
         <div className="relative">
-          <div className="overflow-hidden">
-            <motion.div 
-              className="flex transition-transform duration-500 ease-in-out"
-              animate={{ x: `-${currentIndex * 100}%` }}
-            >
-              {testimonials.map((testimonial, index) => (
-                <div key={testimonial.id} className="w-full flex-shrink-0 px-4">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 h-full cursor-pointer border border-white/10"
-                    whileHover={{ 
-                      scale: 1.02,
-                      boxShadow: "0 20px 40px rgba(0,0,0,0.3)"
-                    }}
-                  >
-                    <div className="flex items-center mb-6">
-                      <div className="relative w-16 h-16 mr-4">
-                        <Image 
-                          src={testimonial.avatar} 
-                          alt={testimonial.name}
-                          fill
-                          className="rounded-full object-cover"
-                          sizes="64px"
-                        />
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="text-white font-semibold text-lg">{testimonial.name}</h4>
-                        <p className="text-gray-400 text-sm">{testimonial.location}</p>
-                        <p className="text-purple-400 text-sm font-medium">{testimonial.service}</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center mb-4">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                      ))}
-                    </div>
-
-                    <blockquote className="text-gray-300 text-lg mb-6 leading-relaxed italic">
-                      "{testimonial.text}"
-                    </blockquote>
-
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-gray-400 bg-gray-800/50 px-3 py-1 rounded-full">
-                        {testimonial.problem}
-                      </span>
-                      <span className="text-green-400 font-semibold">
-                        {testimonial.emotion}
-                      </span>
-                    </div>
-                  </motion.div>
-                </div>
-              ))}
-            </motion.div>
-          </div>
-
-          {/* Navigation Arrows */}
+          {/* Navigation Buttons */}
           <button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 border border-white/20"
-            aria-label="Previous testimonial"
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 hover:bg-white text-navy-900 p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+            aria-label="Previous testimonials"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
-          
+
           <button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 border border-white/20"
-            aria-label="Next testimonial"
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 hover:bg-white text-navy-900 p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+            aria-label="Next testimonials"
           >
             <ChevronRight className="w-6 h-6" />
           </button>
 
-          {/* Dots Navigation */}
-          <div className="flex justify-center mt-8 space-x-3">
-            {testimonials.map((_, index) => (
+          {/* Testimonials Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-12">
+            {visibleTestimonials.map((testimonial, index) => (
+              <motion.div
+                key={testimonial.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-cream-200"
+              >
+                {/* Avatar */}
+                <div className="w-16 h-16 mx-auto mb-6 relative">
+                  <Image
+                    src={testimonial.avatar}
+                    alt={testimonial.name}
+                    width={64}
+                    height={64}
+                    className="rounded-full object-cover"
+                  />
+                </div>
+
+                {/* Category Badge */}
+                <div className="inline-block bg-gold-100 text-gold-800 text-xs font-semibold px-3 py-1 rounded-full mb-4">
+                  {testimonial.category}
+                </div>
+
+                {/* Review */}
+                <p className="text-gray-700 mb-4 italic leading-relaxed">
+                  "{testimonial.review}"
+                </p>
+
+                {/* Name */}
+                <h3 className="text-lg font-bold text-navy-900 mb-3 font-serif">
+                  {testimonial.name}
+                </h3>
+
+                {/* Rating */}
+                <div className="flex justify-center space-x-1">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 text-gold-500 fill-current" />
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Dots Indicator */}
+          <div className="flex justify-center mt-8 space-x-2">
+            {Array.from({ length: Math.ceil(testimonials.length / 3) }).map((_, index) => (
               <button
                 key={index}
-                onClick={() => goToSlide(index)}
+                onClick={() => {
+                  setCurrentIndex(index * 3)
+                  setIsAutoPlaying(false)
+                }}
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  currentIndex === index 
-                    ? 'bg-purple-400 scale-125' 
-                    : 'bg-white/30 hover:bg-white/50'
+                  index === Math.floor(currentIndex / 3)
+                    ? 'bg-gold-500'
+                    : 'bg-gray-300 hover:bg-gray-400'
                 }`}
-                aria-label={`Go to testimonial ${index + 1}`}
+                aria-label={`Go to slide ${index + 1}`}
               />
             ))}
           </div>
         </div>
 
-        {/* Stats */}
+        {/* Trust Indicators */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16"
+          className="text-center mt-12"
         >
-          <div className="text-center">
-            <div className="text-4xl font-bold text-purple-400 mb-2">2,847+</div>
-            <div className="text-gray-400">Lives Transformed</div>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-purple-400 mb-2">94%</div>
-            <div className="text-gray-400">Success Rate</div>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-purple-400 mb-2">4.9★</div>
-            <div className="text-gray-400">Average Rating</div>
+          <div className="flex flex-wrap justify-center items-center gap-8 text-gray-600">
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                <span className="text-white text-sm font-bold">✓</span>
+              </div>
+              <span className="font-semibold">100% Confidential</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                <span className="text-white text-sm font-bold">✓</span>
+              </div>
+              <span className="font-semibold">Ancient Wisdom</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
+                <span className="text-white text-sm font-bold">✓</span>
+              </div>
+              <span className="font-semibold">Proven Results</span>
+            </div>
           </div>
         </motion.div>
       </div>

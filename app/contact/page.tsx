@@ -1,382 +1,451 @@
 'use client'
 
-import React from 'react'
-import Link from 'next/link'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Phone, Mail, Clock, MapPin, MessageCircle, Star, Check } from 'lucide-react'
-import Navigation from '@/components/Navigation'
+import { Phone, Mail, MapPin, Clock, MessageCircle, Send } from 'lucide-react'
 import SEOHead from '@/components/SEOHead'
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  })
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    // Handle form submission
+    console.log('Form submitted:', formData)
+    // Reset form
+    setFormData({ name: '', email: '', subject: '', message: '' })
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
+  }
+
   const contactMethods = [
     {
-      icon: Phone,
+      icon: <Phone className="w-6 h-6" />,
       title: "WhatsApp",
-      description: "Fastest way to reach me for consultations and questions",
-      action: "+86 15914228258",
+      description: "Fastest way to reach us",
+      value: "+86 15914228258",
       link: "https://wa.me/8615914228258",
-      color: "bg-green-500",
-      textColor: "text-green-500"
+      color: "bg-green-500"
     },
     {
-      icon: Mail,
+      icon: <Mail className="w-6 h-6" />,
       title: "Email",
-      description: "For detailed inquiries and appointment scheduling",
-      action: "chenxiao0801@hotmail.com",
+      description: "For detailed consultations",
+      value: "chenxiao0801@hotmail.com",
       link: "mailto:chenxiao0801@hotmail.com",
-      color: "bg-blue-500",
-      textColor: "text-blue-500"
+      color: "bg-blue-500"
     },
     {
-      icon: MessageCircle,
-      title: "Free Consultation",
-      description: "15-minute discovery call to understand your needs",
-      action: "Book Now",
-      link: "https://wa.me/8615914228258?text=Hi%20玄印,%20I'd%20like%20to%20schedule%20a%20free%20consultation",
-      color: "bg-primary-500",
-      textColor: "text-primary-500"
+      icon: <Clock className="w-6 h-6" />,
+      title: "Response Time",
+      description: "We typically respond within",
+      value: "2-4 hours",
+      color: "bg-purple-500"
     }
   ]
 
-  const businessHours = [
-    { day: "Monday - Friday", hours: "9:00 AM - 8:00 PM (EST)" },
-    { day: "Saturday", hours: "10:00 AM - 6:00 PM (EST)" },
-    { day: "Sunday", hours: "10:00 AM - 4:00 PM (EST)" }
-  ]
-
-  const faqs = [
+  const socialLinks = [
     {
-      question: "How do I schedule a consultation?",
-      answer: "Simply click the WhatsApp button or send me an email. I'll respond within 24 hours to schedule your session."
+      name: "Instagram",
+      icon: (
+        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+      ),
+      link: "#",
+      color: "bg-pink-500"
     },
     {
-      question: "What information do I need to provide?",
-      answer: "You'll need your birth date, time, and location. The more accurate the birth time, the more precise the reading."
-    },
-    {
-      question: "How long does a consultation take?",
-      answer: "Sessions typically last 60-90 minutes, depending on the service you choose and your specific needs."
-    },
-    {
-      question: "Do you offer follow-up support?",
-      answer: "Yes! All consultations include 30 days of email support for questions and clarification."
-    },
-    {
-      question: "What if I'm not satisfied with my reading?",
-      answer: "I'm committed to your satisfaction. If you're not happy with your consultation, I offer a full refund."
-    },
-    {
-      question: "Can you help with urgent life decisions?",
-      answer: "Yes, I offer expedited consultations for urgent matters. Contact me directly to discuss your situation."
+      name: "TikTok",
+      icon: (
+        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+        </svg>
+      ),
+      link: "#",
+      color: "bg-black"
     }
   ]
 
   return (
     <>
       <SEOHead
-        title="Contact 玄印 · Xuan Yin - Get Your Free Consultation | Fate Compass"
-        description="Ready to find your compass? Contact Master 玄印 for a free consultation. WhatsApp: +86 15914228258. Email: chenxiao0801@hotmail.com. Start your transformation today."
-        keywords="contact 玄印, Xuan Yin consultation, free reading, WhatsApp consultation, Eastern astrology consultation, life guidance contact"
-        ogTitle="Contact 玄印 · Xuan Yin - Get Your Free Consultation"
-        ogDescription="Ready to find your compass? Contact Master 玄印 for a free consultation. Start your transformation today."
+        title="Contact Master 玄印 · Xuan Yin | Fate Compass - Get Your Destiny Reading"
+        description="Contact Master 玄印 for your personalized destiny reading. WhatsApp, email, or social media - choose your preferred way to start your journey."
+        keywords="contact Master 玄印, destiny reading consultation, Eastern astrology contact, WhatsApp consultation, email reading"
+        ogTitle="Contact Master 玄印 · Xuan Yin | Fate Compass"
+        ogDescription="Ready to discover your destiny? Contact Master 玄印 today for your personalized Eastern astrology reading."
         canonical="https://fatecompass.net/contact"
       />
-      
-      <div className="min-h-screen bg-gray-50">
-        <Navigation />
-        
+
+      <div className="min-h-screen bg-cream-50">
         {/* Hero Section */}
-        <section className="pt-24 pb-16 bg-gradient-to-br from-primary-50 to-secondary-50">
-          <div className="max-w-6xl mx-auto px-4">
-            <div className="text-center">
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="text-5xl md:text-6xl font-bold text-gray-900 mb-6"
-              >
-                Ready to Find Your Compass?
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-xl text-gray-600 max-w-3xl mx-auto mb-8"
-              >
-                Your journey to clarity and purpose starts with a simple conversation. 
-                I'm here to help you navigate life's biggest challenges with ancient Eastern wisdom.
-              </motion.p>
-            </div>
+        <section className="pt-32 pb-20 bg-gradient-to-br from-navy-900 via-purple-900 to-navy-900 relative overflow-hidden">
+          <div className="absolute inset-0 bg-black/40"></div>
+          <div className="relative z-10 max-w-6xl mx-auto px-4 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 font-serif">
+                Contact Master 玄印
+              </h1>
+              <p className="text-xl text-gray-200 mb-8 max-w-3xl mx-auto">
+                Ready to discover your destiny? Choose your preferred way to connect with Master 玄印 
+                and begin your journey toward clarity and purpose.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4 text-white">
+                <div className="flex items-center space-x-2">
+                  <MessageCircle className="w-5 h-5 text-gold-400" />
+                  <span>Fast Response</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <MessageCircle className="w-5 h-5 text-gold-400" />
+                  <span>100% Confidential</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <MessageCircle className="w-5 h-5 text-gold-400" />
+                  <span>Personalized Service</span>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </section>
 
         {/* Contact Methods Section */}
         <section className="py-20 bg-white">
           <div className="max-w-6xl mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">
-                How to Reach Me
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-navy-900 mb-6 font-serif">
+                Choose Your Preferred Contact Method
               </h2>
-              <p className="text-xl text-gray-600">
-                Choose the method that works best for you. I'm here to help you find your path.
+              <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+                Whether you prefer instant messaging, email, or social media, we're here to help you start your journey.
               </p>
-            </div>
+            </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {contactMethods.map((method, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-gradient-to-br from-gray-50 to-white p-8 rounded-xl border border-gray-200 hover:shadow-xl transition-all duration-300"
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-cream-200"
                 >
-                  <div className="text-center">
-                    <div className={`w-16 h-16 ${method.color} rounded-full flex items-center justify-center mx-auto mb-6`}>
-                      <method.icon className="w-8 h-8 text-white" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-4">{method.title}</h3>
-                    <p className="text-gray-600 mb-6">{method.description}</p>
-                    
+                  <div className={`w-16 h-16 ${method.color} rounded-full flex items-center justify-center mx-auto mb-6 text-white`}>
+                    {method.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-navy-900 mb-3 font-serif">
+                    {method.title}
+                  </h3>
+                  <p className="text-gray-600 mb-4">
+                    {method.description}
+                  </p>
+                  {method.link ? (
                     <a
                       href={method.link}
-                      target={method.title === "Email" ? "_self" : "_blank"}
-                      rel={method.title === "Email" ? "" : "noopener noreferrer"}
-                      className={`inline-flex items-center justify-center w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 ${
-                        method.title === "WhatsApp" 
-                          ? "bg-green-500 text-white hover:bg-green-600" 
-                          : method.title === "Email"
-                          ? "bg-blue-500 text-white hover:bg-blue-600"
-                          : "bg-primary-500 text-white hover:bg-primary-600"
-                      }`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-lg font-semibold text-navy-900 hover:text-gold-600 transition-colors"
                     >
-                      {method.action}
+                      {method.value}
                     </a>
-                  </div>
+                  ) : (
+                    <p className="text-lg font-semibold text-navy-900">
+                      {method.value}
+                    </p>
+                  )}
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Business Hours Section */}
-        <section className="py-20 bg-gray-50">
+        {/* Contact Form Section */}
+        <section className="py-20 bg-cream-100">
           <div className="max-w-4xl mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">
-                When I'm Available
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-navy-900 mb-6 font-serif">
+                Send Us a Message
               </h2>
-              <p className="text-xl text-gray-600">
-                I work with clients worldwide, so I offer flexible hours to accommodate different time zones.
+              <p className="text-xl text-gray-700 max-w-2xl mx-auto">
+                Have a specific question or want to learn more about our services? 
+                Fill out the form below and we'll get back to you promptly.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="bg-white rounded-xl p-8 shadow-lg">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {businessHours.map((schedule, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="text-center p-6 rounded-lg bg-gray-50"
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-2xl p-8 shadow-xl border border-cream-200"
+            >
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-semibold text-navy-900 mb-2">
+                      Your Name *
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent"
+                      placeholder="Enter your full name"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-semibold text-navy-900 mb-2">
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent"
+                      placeholder="Enter your email address"
+                    />
+                  </div>
+                </div>
+                
+                <div>
+                  <label htmlFor="subject" className="block text-sm font-semibold text-navy-900 mb-2">
+                    Subject *
+                  </label>
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent"
+                    placeholder="What would you like to discuss?"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="message" className="block text-sm font-semibold text-navy-900 mb-2">
+                    Message *
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    rows={6}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent resize-none"
+                    placeholder="Tell us about your situation and what you're looking for..."
+                  />
+                </div>
+                
+                <div className="text-center">
+                  <button
+                    type="submit"
+                    className="bg-gradient-to-r from-gold-500 to-gold-600 text-white px-8 py-4 rounded-full font-semibold hover:from-gold-600 hover:to-gold-700 transition-all duration-300 flex items-center space-x-2 mx-auto shadow-lg hover:shadow-xl"
                   >
-                    <div className="text-lg font-semibold text-gray-900 mb-2">{schedule.day}</div>
-                    <div className="text-gray-600">{schedule.hours}</div>
-                  </motion.div>
-                ))}
-              </div>
-              
-              <div className="mt-8 text-center">
-                <p className="text-gray-600 mb-4">
-                  <Clock className="w-5 h-5 inline mr-2" />
-                  All times are in Eastern Standard Time (EST)
-                </p>
-                <p className="text-sm text-gray-500">
-                  Need a consultation outside these hours? Contact me and I'll do my best to accommodate you.
-                </p>
-              </div>
-            </div>
+                    <Send className="w-5 h-5" />
+                    <span>Send Message</span>
+                  </button>
+                </div>
+              </form>
+            </motion.div>
           </div>
         </section>
 
-        {/* Why Choose Me Section */}
+        {/* Social Media Section */}
         <section className="py-20 bg-white">
-          <div className="max-w-6xl mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">
-                Why Choose 玄印?
+          <div className="max-w-4xl mx-auto px-4 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="mb-16"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-navy-900 mb-6 font-serif">
+                Follow Us on Social Media
               </h2>
-              <p className="text-xl text-gray-600">
-                Here's what makes my guidance different and why thousands trust me with their life decisions.
+              <p className="text-xl text-gray-700 max-w-2xl mx-auto">
+                Stay connected with Master 玄印 for daily wisdom, insights, and updates.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[
-                {
-                  icon: "🧭",
-                  title: "Personalized Approach",
-                  description: "Every reading is tailored to your unique energy pattern and life circumstances."
-                },
-                {
-                  icon: "🌟",
-                  title: "20+ Years Experience",
-                  description: "Decades of mastering Eastern astrology and helping people find their path."
-                },
-                {
-                  icon: "💝",
-                  title: "Compassionate Care",
-                  description: "I approach every client with empathy, understanding, and genuine care."
-                },
-                {
-                  icon: "🎯",
-                  title: "Practical Results",
-                  description: "Focus on actionable advice that creates real, positive change in your life."
-                },
-                {
-                  icon: "📞",
-                  title: "Ongoing Support",
-                  description: "30 days of follow-up support to help you implement the guidance effectively."
-                },
-                {
-                  icon: "⭐",
-                  title: "94% Success Rate",
-                  description: "Over 2,800 lives transformed with proven results and client satisfaction."
-                }
-              ].map((feature, index) => (
-                <motion.div
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="flex justify-center space-x-6"
+            >
+              {socialLinks.map((social, index) => (
+                <a
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="text-center p-6 rounded-xl bg-gray-50 hover:shadow-lg transition-shadow"
+                  href={social.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`w-16 h-16 ${social.color} rounded-full flex items-center justify-center text-white hover:scale-110 transition-all duration-300 shadow-lg hover:shadow-xl`}
+                  aria-label={social.name}
                 >
-                  <div className="text-4xl mb-4">{feature.icon}</div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
-                  <p className="text-gray-600">{feature.description}</p>
-                </motion.div>
+                  {social.icon}
+                </a>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
 
         {/* FAQ Section */}
-        <section className="py-20 bg-gray-50">
+        <section className="py-20 bg-cream-100">
           <div className="max-w-4xl mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-navy-900 mb-6 font-serif">
                 Frequently Asked Questions
               </h2>
-              <p className="text-xl text-gray-600">
-                Common questions about consultations and how I can help you.
+              <p className="text-xl text-gray-700">
+                Common questions about contacting and working with Master 玄印
               </p>
-            </div>
+            </motion.div>
 
             <div className="space-y-6">
-              {faqs.map((faq, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white p-6 rounded-xl shadow-lg"
-                >
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
-                  <p className="text-gray-600">{faq.answer}</p>
-                </motion.div>
-              ))}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-lg p-6 shadow-md border border-cream-200"
+              >
+                <h3 className="text-lg font-semibold text-navy-900 mb-3 font-serif">
+                  How quickly will I receive a response?
+                </h3>
+                <p className="text-gray-700 leading-relaxed">
+                  We typically respond within 2-4 hours during business hours. WhatsApp messages usually get the fastest response.
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-lg p-6 shadow-md border border-cream-200"
+              >
+                <h3 className="text-lg font-semibold text-navy-900 mb-3 font-serif">
+                  What information should I provide for a reading?
+                </h3>
+                <p className="text-gray-700 leading-relaxed">
+                  For the most accurate reading, please provide your exact birth date, time, and location. If you don't know your birth time, we can work with approximate times.
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-lg p-6 shadow-md border border-cream-200"
+              >
+                <h3 className="text-lg font-semibold text-navy-900 mb-3 font-serif">
+                  Is my information kept confidential?
+                </h3>
+                <p className="text-gray-700 leading-relaxed">
+                  Absolutely. All personal information and readings are kept completely confidential. Your privacy is our highest priority.
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-lg p-6 shadow-md border border-cream-200"
+              >
+                <h3 className="text-lg font-semibold text-navy-900 mb-3 font-serif">
+                  Can I ask follow-up questions after my reading?
+                </h3>
+                <p className="text-gray-700 leading-relaxed">
+                  Yes! Each service includes follow-up support to help you understand and apply the insights from your reading.
+                </p>
+              </motion.div>
             </div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-primary-600 to-secondary-700">
+        <section className="py-20 bg-gradient-to-r from-navy-900 to-purple-900">
           <div className="max-w-4xl mx-auto px-4 text-center">
-            <h2 className="text-4xl font-bold text-white mb-4">
-              Start Your Transformation Today
-            </h2>
-            <p className="text-xl text-primary-100 mb-8">
-              Don't let confusion and uncertainty hold you back. Take the first step toward clarity and purpose.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="https://wa.me/8615914228258"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white text-primary-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors flex items-center justify-center space-x-2"
-              >
-                <Phone className="w-5 h-5" />
-                <span>Start WhatsApp Chat</span>
-              </a>
-              <a
-                href="mailto:chenxiao0801@hotmail.com"
-                className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-primary-600 transition-colors flex items-center justify-center space-x-2"
-              >
-                <Mail className="w-5 h-5" />
-                <span>Send Email</span>
-              </a>
-            </div>
-            
-            <div className="mt-8 text-primary-100">
-              <p className="text-lg font-semibold mb-2">Free 15-minute consultation included!</p>
-              <p className="text-sm">No obligation, just clarity and guidance.</p>
-            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 font-serif">
+                Ready to Discover Your Destiny?
+              </h2>
+              <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
+                Don't wait to find your true path. Contact Master 玄印 today and take the first step toward clarity and purpose.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a
+                  href="https://wa.me/8615914228258?text=I want to start my destiny journey"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white text-navy-900 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 flex items-center space-x-2 shadow-lg hover:shadow-xl"
+                >
+                  <Phone className="w-5 h-5" />
+                  <span>Start Your Journey</span>
+                </a>
+                <a
+                  href="mailto:chenxiao0801@hotmail.com?subject=I want to learn about Master 玄印's services"
+                  className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-navy-900 transition-all duration-300 flex items-center space-x-2"
+                >
+                  <Mail className="w-5 h-5" />
+                  <span>Email Consultation</span>
+                </a>
+              </div>
+            </motion.div>
           </div>
         </section>
-
-        {/* Footer */}
-        <footer className="bg-gray-900 text-white py-16">
-          <div className="max-w-6xl mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              <div className="col-span-1 md:col-span-2">
-                <div className="flex items-center space-x-3 mb-4">
-                  <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-secondary-600 rounded-full flex items-center justify-center">
-                    <span className="text-white font-bold text-sm">玄</span>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold">玄印 · Xuan Yin</h3>
-                    <p className="text-gray-400 text-sm">Guided by Eastern Wisdom</p>
-                  </div>
-                </div>
-                <p className="text-gray-400 mb-6 max-w-md">
-                  Your Destiny. Decoded. Helping lost souls find their compass through ancient Eastern wisdom.
-                </p>
-                <div className="flex space-x-4">
-                  <a href="https://wa.me/8615914228258" className="text-gray-400 hover:text-white transition-colors">
-                    <Phone className="w-5 h-5" />
-                  </a>
-                  <a href="mailto:chenxiao0801@hotmail.com" className="text-gray-400 hover:text-white transition-colors">
-                    <Mail className="w-5 h-5" />
-                  </a>
-                </div>
-              </div>
-              
-              <div>
-                <h4 className="text-lg font-semibold mb-4">Services</h4>
-                <ul className="space-y-2 text-gray-400">
-                  <li><Link href="/services" className="hover:text-white transition-colors">Life Purpose Reading</Link></li>
-                  <li><Link href="/services" className="hover:text-white transition-colors">Career Guidance</Link></li>
-                  <li><Link href="/services" className="hover:text-white transition-colors">Relationship Compatibility</Link></li>
-                </ul>
-              </div>
-              
-              <div>
-                <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-                <ul className="space-y-2 text-gray-400">
-                  <li><Link href="/about" className="hover:text-white transition-colors">About 玄印</Link></li>
-                  <li><Link href="/blog" className="hover:text-white transition-colors">Blog</Link></li>
-                  <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
-                </ul>
-              </div>
-            </div>
-            
-            <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-              <p>© 2025 Fate Compass · Powered by 玄印命理师 Xuan Yin</p>
-            </div>
-          </div>
-        </footer>
       </div>
     </>
   )
