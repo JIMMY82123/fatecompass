@@ -171,47 +171,52 @@ export default function Home() {
       <div className="min-h-screen">
         <Navigation />
         
-        {/* Hero Section with CSS Animated Background */}
+        {/* Hero Section with Simple Dynamic Background */}
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-          {/* CSS Animated Background */}
+          {/* Dynamic Background */}
           <div className="absolute inset-0 z-0">
             {/* Base gradient background */}
             <div className="w-full h-full bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800" />
             
-            {/* Animated ink drops */}
+            {/* Animated circles */}
             <div className="absolute inset-0">
-              {/* Ink Drop 1 */}
-              <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-black/20 rounded-full blur-xl animate-pulse" 
-                   style={{
-                     animation: 'inkFlow 8s ease-in-out infinite',
-                     transformOrigin: 'center bottom'
-                   }} />
+              {/* Circle 1 */}
+              <div 
+                className="absolute bottom-0 left-1/4 w-96 h-96 bg-black/20 rounded-full"
+                style={{
+                  animation: 'customPulse 4s ease-in-out infinite',
+                  transformOrigin: 'center bottom'
+                }}
+              />
               
-              {/* Ink Drop 2 */}
-              <div className="absolute bottom-0 right-1/3 w-80 h-80 bg-blue-900/30 rounded-full blur-xl animate-pulse" 
-                   style={{
-                     animation: 'inkFlow 6s ease-in-out infinite 2s',
-                     transformOrigin: 'center bottom'
-                   }} />
+              {/* Circle 2 */}
+              <div 
+                className="absolute bottom-0 right-1/3 w-80 h-80 bg-blue-900/30 rounded-full"
+                style={{
+                  animation: 'customPulse 6s ease-in-out infinite 1s',
+                  transformOrigin: 'center bottom'
+                }}
+              />
               
-              {/* Ink Drop 3 */}
-              <div className="absolute bottom-0 left-1/2 w-72 h-72 bg-indigo-900/25 rounded-full blur-xl animate-pulse" 
-                   style={{
-                     animation: 'inkFlow 10s ease-in-out infinite 4s',
-                     transformOrigin: 'center bottom'
-                   }} />
+              {/* Circle 3 */}
+              <div 
+                className="absolute bottom-0 left-1/2 w-72 h-72 bg-indigo-900/25 rounded-full"
+                style={{
+                  animation: 'customPulse 8s ease-in-out infinite 2s',
+                  transformOrigin: 'center bottom'
+                }}
+              />
               
-              {/* Floating particles */}
+              {/* Floating dots */}
               <div className="absolute inset-0">
-                {[...Array(12)].map((_, i) => (
+                {[...Array(8)].map((_, i) => (
                   <div
                     key={i}
-                    className="absolute w-1 h-1 bg-white/20 rounded-full"
+                    className="absolute w-2 h-2 bg-white/30 rounded-full"
                     style={{
-                      left: `${Math.random() * 100}%`,
-                      top: `${Math.random() * 100}%`,
-                      animationDelay: `${i * 0.5}s`,
-                      animation: 'float 15s ease-in-out infinite'
+                      left: `${20 + i * 10}%`,
+                      top: `${30 + (i % 3) * 20}%`,
+                      animation: `customBounce ${3 + i * 0.5}s ease-in-out infinite ${i * 0.3}s`
                     }}
                   />
                 ))}
@@ -219,8 +224,8 @@ export default function Home() {
             </div>
           </div>
           
-          {/* Mist Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent z-10" />
+          {/* Mist overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-white/10 via-transparent to-transparent z-10" />
           
           {/* Content */}
           <div className="relative z-20 text-center text-white px-4 max-w-6xl mx-auto">
