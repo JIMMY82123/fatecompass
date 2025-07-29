@@ -9,7 +9,7 @@ const testimonials = [
   {
     id: 1,
     name: "Sarah Johnson",
-    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
     rating: 5,
     text: "I was completely lost in my career. 玄印's analysis helped me discover my true calling. Now I'm finally doing what I love and making a real difference in people's lives!",
     location: "New York, USA",
@@ -31,7 +31,7 @@ const testimonials = [
   {
     id: 3,
     name: "Emma Wilson",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
+    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
     rating: 5,
     text: "I felt stuck and directionless. 玄印's reading revealed my life purpose and gave me the confidence to make major changes. I've never been happier!",
     location: "London, UK",
@@ -71,6 +71,50 @@ const testimonials = [
     problem: "Life Crisis",
     emotion: "Hopeless → Hopeful",
     service: "Life Transition"
+  },
+  {
+    id: 7,
+    name: "Anna Kowalski",
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
+    rating: 5,
+    text: "I was in a toxic relationship but couldn't see it clearly. The compatibility analysis opened my eyes and gave me strength to leave. I'm free and happy now!",
+    location: "Warsaw, Poland",
+    problem: "Toxic Relationship",
+    emotion: "Trapped → Free",
+    service: "Relationship Analysis"
+  },
+  {
+    id: 8,
+    name: "Carlos Silva",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
+    rating: 5,
+    text: "Financial struggles were overwhelming me. The wealth analysis showed me the right timing and opportunities to turn things around. I'm debt-free now!",
+    location: "São Paulo, Brazil",
+    problem: "Financial Struggles",
+    emotion: "Stressed → Secure",
+    service: "Wealth Guidance"
+  },
+  {
+    id: 9,
+    name: "Yuki Tanaka",
+    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
+    rating: 5,
+    text: "I felt spiritually empty despite material success. 玄印 helped me find deeper meaning and purpose in life. I'm finally at peace with myself!",
+    location: "Tokyo, Japan",
+    problem: "Spiritual Crisis",
+    emotion: "Empty → Fulfilled",
+    service: "Spiritual Guidance"
+  },
+  {
+    id: 10,
+    name: "Maria Garcia",
+    avatar: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
+    rating: 5,
+    text: "I was afraid to make big life changes. The destiny reading gave me the courage to pursue my dreams. I quit my job and started my own business!",
+    location: "Barcelona, Spain",
+    problem: "Fear of Change",
+    emotion: "Afraid → Courageous",
+    service: "Life Purpose Reading"
   }
 ]
 
