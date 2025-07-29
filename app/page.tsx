@@ -22,131 +22,33 @@ export default function Home() {
     "In the chaos of life, Eastern wisdom brings clarity and peace."
   ]
 
-  const testimonials = [
-    {
-      name: "Sarah Johnson",
-      avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
-      rating: 5,
-      text: "I was completely lost in my career. 玄印's analysis helped me discover my true calling. Now I'm finally doing what I love and making a real difference in people's lives!",
-      location: "New York, USA",
-      problem: "Career Confusion",
-      emotion: "Overwhelmed → Fulfilled"
-    },
-    {
-      name: "Michael Chen",
-      avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
-      rating: 5,
-      text: "My relationship was falling apart. The compatibility analysis showed us exactly what we needed to fix. We're stronger than ever now and planning our wedding!",
-      location: "Toronto, Canada",
-      problem: "Relationship Issues",
-      emotion: "Heartbroken → In Love"
-    },
-    {
-      name: "Emma Wilson",
-      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
-      rating: 5,
-      text: "I felt stuck and directionless. 玄印's reading revealed my life purpose and gave me the confidence to make major changes. I've never been happier!",
-      location: "London, UK",
-      problem: "Life Purpose",
-      emotion: "Lost → Purposeful"
-    },
-    {
-      name: "David Kim",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
-      rating: 5,
-      text: "After losing my job, I was desperate for guidance. 玄印's career analysis led me to a better opportunity I never considered. I'm making 40% more now!",
-      location: "Seoul, Korea",
-      problem: "Career Transition",
-      emotion: "Desperate → Thriving"
-    },
-    {
-      name: "Lisa Rodriguez",
-      avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
-      rating: 5,
-      text: "I was struggling with self-doubt and couldn't decide on my next steps. The reading gave me clarity and renewed confidence. I finally feel like myself again!",
-      location: "Madrid, Spain",
-      problem: "Self-Doubt",
-      emotion: "Confused → Confident"
-    },
-    {
-      name: "James Thompson",
-      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
-      rating: 5,
-      text: "Divorce left me questioning everything. 玄印 helped me understand my patterns and find hope for the future. I'm dating again and feeling optimistic!",
-      location: "Sydney, Australia",
-      problem: "Life Crisis",
-      emotion: "Hopeless → Hopeful"
-    },
-    {
-      name: "Anna Kowalski",
-      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
-      rating: 5,
-      text: "I was in a toxic relationship but couldn't see it clearly. The compatibility analysis opened my eyes and gave me strength to leave. I'm free and happy now!",
-      location: "Warsaw, Poland",
-      problem: "Toxic Relationship",
-      emotion: "Trapped → Free"
-    },
-    {
-      name: "Carlos Silva",
-      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
-      rating: 5,
-      text: "Financial struggles were overwhelming me. The wealth analysis showed me the right timing and opportunities to turn things around. I'm debt-free now!",
-      location: "São Paulo, Brazil",
-      problem: "Financial Struggles",
-      emotion: "Stressed → Secure"
-    },
-    {
-      name: "Yuki Tanaka",
-      avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
-      rating: 5,
-      text: "I felt spiritually empty despite material success. 玄印 helped me find deeper meaning and purpose in life. I'm finally at peace with myself!",
-      location: "Tokyo, Japan",
-      problem: "Spiritual Crisis",
-      emotion: "Empty → Fulfilled"
-    },
-    {
-      name: "Maria Garcia",
-      avatar: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
-      rating: 5,
-      text: "I was afraid to make big life changes. The destiny reading gave me the courage to pursue my dreams. I quit my job and started my own business!",
-      location: "Barcelona, Spain",
-      problem: "Fear of Change",
-      emotion: "Afraid → Courageous"
-    }
-  ]
-
+  // Loading effect
   useEffect(() => {
-    // Simulate loading time
     const timer = setTimeout(() => {
       setIsLoading(false)
-    }, 1000)
+    }, 2000)
+    return () => clearTimeout(timer)
+  }, [])
 
-    const quoteInterval = setInterval(() => {
+  // Quote rotation
+  useEffect(() => {
+    const interval = setInterval(() => {
       setCurrentQuote((prev) => (prev + 1) % quotes.length)
-    }, 5000)
-
-    const testimonialInterval = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
     }, 4000)
+    return () => clearInterval(interval)
+  }, [quotes.length])
 
-    // Scroll to top button
+  // Scroll effect
+  useEffect(() => {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 500)
     }
-
     window.addEventListener('scroll', handleScroll)
-
-    return () => {
-      clearTimeout(timer)
-      clearInterval(quoteInterval)
-      clearInterval(testimonialInterval)
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [quotes.length, testimonials.length])
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Email submitted:', email)
     setEmail('')
     alert('Thank you for subscribing! We\'ll keep you updated with ancient wisdom insights.')
   }
@@ -166,109 +68,27 @@ export default function Home() {
         canonical="https://fatecompass.net"
       />
       
-      {/* Traditional Chinese Ink Painting Background */}
-      <div className="fixed inset-0 z-0">
-        {/* Ink wash base */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300"></div>
-        
-        {/* Ink painting elements */}
-        <div className="absolute inset-0">
-          {/* Distant mountains with mist */}
+      <div className="min-h-screen relative overflow-hidden">
+        {/* Image Background with Dynamic Effects */}
+        <div className="fixed inset-0 z-0">
+          {/* Base image background */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `url('https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080&q=80')`,
+            }}
+          ></div>
+          
+          {/* Overlay for better text readability */}
+          <div className="absolute inset-0 bg-black/30"></div>
+          
+          {/* Dynamic floating elements */}
           <div className="absolute inset-0">
-            {/* Far mountains - light and misty */}
-            <div className="absolute top-20 left-0 right-0 h-64 opacity-30">
-              <div className="w-full h-full bg-gradient-to-b from-gray-400/40 to-transparent transform -skew-x-12"></div>
-              <div className="absolute top-8 left-1/4 w-32 h-32 bg-gradient-to-b from-gray-400/30 to-transparent transform -skew-x-6"></div>
-              <div className="absolute top-12 right-1/3 w-24 h-24 bg-gradient-to-b from-gray-400/25 to-transparent transform -skew-x-8"></div>
-            </div>
-            
-            {/* Mid mountains - medium opacity */}
-            <div className="absolute top-32 left-0 right-0 h-80 opacity-50">
-              <div className="w-full h-full bg-gradient-to-b from-gray-600/50 to-transparent transform -skew-x-8"></div>
-              <div className="absolute top-16 left-1/3 w-40 h-40 bg-gradient-to-b from-gray-600/40 to-transparent transform -skew-x-10"></div>
-              <div className="absolute top-24 right-1/4 w-36 h-36 bg-gradient-to-b from-gray-600/35 to-transparent transform -skew-x-12"></div>
-            </div>
-            
-            {/* Near mountains - dark and prominent */}
-            <div className="absolute top-48 left-0 right-0 h-96 opacity-70">
-              <div className="w-full h-full bg-gradient-to-b from-gray-800/60 to-transparent transform -skew-x-6"></div>
-              <div className="absolute top-20 left-1/5 w-48 h-48 bg-gradient-to-b from-gray-800/50 to-transparent transform -skew-x-8"></div>
-              <div className="absolute top-32 right-1/5 w-44 h-44 bg-gradient-to-b from-gray-800/45 to-transparent transform -skew-x-10"></div>
-            </div>
-          </div>
-          
-          {/* Flowing river */}
-          <div className="absolute bottom-0 left-0 right-0 h-1/2">
-            {/* River surface with gentle ripples */}
-            <div className="w-full h-full bg-gradient-to-t from-gray-400/30 via-gray-300/20 to-transparent relative">
-              {/* River ripples animation */}
-              <div className="absolute inset-0 overflow-hidden">
-                {[...Array(8)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="absolute w-full h-1 bg-gradient-to-r from-transparent via-gray-400/20 to-transparent"
-                    style={{
-                      top: `${20 + i * 8}%`,
-                      animation: `riverFlow ${4 + i * 0.5}s ease-in-out infinite ${i * 0.3}s`,
-                    }}
-                  ></div>
-                ))}
-              </div>
-              
-              {/* River banks */}
-              <div className="absolute bottom-0 left-0 w-1/3 h-32 bg-gradient-to-t from-gray-600/40 to-transparent transform -skew-x-6"></div>
-              <div className="absolute bottom-0 right-0 w-1/3 h-28 bg-gradient-to-t from-gray-600/40 to-transparent transform skew-x-6"></div>
-            </div>
-          </div>
-          
-          {/* Ancient tree in foreground */}
-          <div className="absolute bottom-20 right-16 w-32 h-48 opacity-80">
-            {/* Tree trunk */}
-            <div className="absolute bottom-0 w-8 h-32 bg-gradient-to-t from-gray-800 via-gray-700 to-gray-600 transform -skew-x-3"></div>
-            {/* Tree branches */}
-            <div className="absolute top-8 right-4 w-16 h-2 bg-gray-800 transform rotate-12"></div>
-            <div className="absolute top-16 right-8 w-12 h-2 bg-gray-800 transform rotate-6"></div>
-            <div className="absolute top-24 right-6 w-14 h-2 bg-gray-800 transform -rotate-6"></div>
-            {/* Tree foliage */}
-            <div className="absolute top-4 right-2 w-20 h-16 bg-gradient-to-b from-gray-700/60 to-transparent rounded-full"></div>
-            <div className="absolute top-12 right-6 w-16 h-12 bg-gradient-to-b from-gray-700/50 to-transparent rounded-full"></div>
-          </div>
-          
-          {/* Floating boats */}
-          <div className="absolute bottom-32 left-1/4 w-16 h-8 opacity-90">
-            {/* Boat 1 */}
-            <div className="absolute bottom-0 w-full h-4 bg-gradient-to-t from-gray-800 to-gray-600 rounded-t-full transform -skew-x-6"></div>
-            <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-1 h-3 bg-gray-800"></div>
-            {/* Boat figure */}
-            <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gray-900 rounded-full"></div>
-          </div>
-          
-          <div className="absolute bottom-40 left-1/3 w-14 h-7 opacity-85">
-            {/* Boat 2 */}
-            <div className="absolute bottom-0 w-full h-3 bg-gradient-to-t from-gray-800 to-gray-600 rounded-t-full transform -skew-x-4"></div>
-            <div className="absolute bottom-1.5 left-1/2 transform -translate-x-1/2 w-0.5 h-2 bg-gray-800"></div>
-            {/* Boat figure */}
-            <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 bg-gray-900 rounded-full"></div>
-          </div>
-          
-          {/* Mist and atmosphere */}
-          <div className="absolute inset-0">
-            {/* Horizontal mist layers */}
-            <div className="absolute top-1/3 left-0 right-0 h-16 bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-            <div className="absolute top-1/2 left-0 right-0 h-12 bg-gradient-to-r from-transparent via-white/8 to-transparent"></div>
-            <div className="absolute top-2/3 left-0 right-0 h-20 bg-gradient-to-r from-transparent via-white/12 to-transparent"></div>
-            
-            {/* Vertical mist */}
-            <div className="absolute top-0 bottom-0 left-1/4 w-32 bg-gradient-to-r from-transparent via-white/5 to-transparent"></div>
-            <div className="absolute top-0 bottom-0 right-1/3 w-24 bg-gradient-to-l from-transparent via-white/6 to-transparent"></div>
-          </div>
-          
-          {/* Floating ink drops */}
-          <div className="absolute inset-0">
-            {[...Array(12)].map((_, i) => (
+            {/* Floating ink drops */}
+            {[...Array(15)].map((_, i) => (
               <div
                 key={i}
-                className="absolute w-2 h-2 bg-gray-800/30 rounded-full"
+                className="absolute w-3 h-3 bg-black/20 rounded-full"
                 style={{
                   left: `${Math.random() * 100}%`,
                   top: `${Math.random() * 100}%`,
@@ -276,30 +96,49 @@ export default function Home() {
                 }}
               ></div>
             ))}
-          </div>
-          
-          {/* Subtle calligraphy strokes */}
-          <div className="absolute inset-0 opacity-20">
-            <div className="absolute top-1/4 left-1/6 w-16 h-1 bg-gray-800 transform rotate-12"></div>
-            <div className="absolute top-1/3 right-1/5 w-12 h-1 bg-gray-800 transform -rotate-8"></div>
-            <div className="absolute top-1/2 left-1/4 w-20 h-1 bg-gray-800 transform rotate-6"></div>
-            <div className="absolute bottom-1/3 right-1/6 w-14 h-1 bg-gray-800 transform -rotate-10"></div>
-          </div>
-          
-          {/* Gentle water reflections */}
-          <div className="absolute bottom-0 left-0 right-0 h-32">
-            <div className="w-full h-full bg-gradient-to-t from-gray-400/20 via-gray-300/10 to-transparent"></div>
-            {/* Reflection ripples */}
-            <div className="absolute bottom-4 left-1/4 w-32 h-0.5 bg-gray-400/30 transform -skew-x-12"></div>
-            <div className="absolute bottom-8 right-1/3 w-24 h-0.5 bg-gray-400/25 transform skew-x-8"></div>
-            <div className="absolute bottom-12 left-1/2 w-28 h-0.5 bg-gray-400/20 transform -skew-x-6"></div>
+            
+            {/* Floating mist layers */}
+            <div className="absolute top-1/3 left-0 right-0 h-20 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse"></div>
+            <div className="absolute top-1/2 left-0 right-0 h-16 bg-gradient-to-r from-transparent via-white/8 to-transparent animate-pulse" style={{animationDelay: '2s'}}></div>
+            <div className="absolute top-2/3 left-0 right-0 h-24 bg-gradient-to-r from-transparent via-white/12 to-transparent animate-pulse" style={{animationDelay: '4s'}}></div>
+            
+            {/* Subtle energy lines */}
+            <div className="absolute top-1/4 left-1/6 w-32 h-0.5 bg-white/10 transform rotate-12 animate-pulse"></div>
+            <div className="absolute top-1/3 right-1/5 w-24 h-0.5 bg-white/10 transform -rotate-8 animate-pulse" style={{animationDelay: '1s'}}></div>
+            <div className="absolute top-1/2 left-1/4 w-40 h-0.5 bg-white/10 transform rotate-6 animate-pulse" style={{animationDelay: '3s'}}></div>
+            
+            {/* Floating particles */}
+            {[...Array(20)].map((_, i) => (
+              <div
+                key={`particle-${i}`}
+                className="absolute w-1 h-1 bg-white/30 rounded-full"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  animation: `customFloat ${6 + Math.random() * 4}s ease-in-out infinite ${Math.random() * 3}s`,
+                }}
+              ></div>
+            ))}
+            
+            {/* Gentle water ripples at bottom */}
+            <div className="absolute bottom-0 left-0 right-0 h-32">
+              {[...Array(5)].map((_, i) => (
+                <div
+                  key={`ripple-${i}`}
+                  className="absolute w-full h-0.5 bg-white/20"
+                  style={{
+                    bottom: `${i * 8}%`,
+                    animation: `riverFlow ${3 + i * 0.5}s ease-in-out infinite ${i * 0.2}s`,
+                  }}
+                ></div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
 
         {/* Loading State */}
         {isLoading && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/95 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/95 backdrop-blur-sm">
             <div className="text-center">
               <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
               <p className="text-white text-lg font-medium">Loading ancient wisdom...</p>
@@ -319,14 +158,14 @@ export default function Home() {
               className="mb-8"
             >
               <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-                <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-white via-gray-200 to-gray-300 bg-clip-text text-transparent">
                   玄印 · Xuan Yin
                 </span>
               </h1>
-              <p className="text-2xl md:text-3xl text-gray-300 mb-8 font-light">
+              <p className="text-2xl md:text-3xl text-white mb-8 font-light">
                 Your Destiny. Decoded by Eastern Wisdom
               </p>
-              <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
                 Feeling lost in life? Let ancient Eastern astrology guide you to clarity, 
                 purpose, and success. Discover your true path with Master 玄印.
               </p>
@@ -342,13 +181,13 @@ export default function Home() {
                 href="https://wa.me/8615914228258"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 flex items-center space-x-2 shadow-lg hover:shadow-xl"
+                className="bg-gradient-to-r from-gray-800 to-gray-700 text-white px-8 py-4 rounded-full font-semibold hover:from-gray-900 hover:to-gray-800 transition-all duration-300 flex items-center space-x-2 shadow-lg hover:shadow-xl"
               >
                 <Phone className="w-5 h-5" />
                 <span>Start Your Journey</span>
               </a>
               <Link href="/services">
-                <button className="border-2 border-purple-400 text-purple-400 px-8 py-4 rounded-full font-semibold hover:bg-purple-400 hover:text-white transition-all duration-300">
+                <button className="border-2 border-gray-700 text-gray-700 px-8 py-4 rounded-full font-semibold hover:bg-gray-700 hover:text-white transition-all duration-300">
                   Explore Services
                 </button>
               </Link>
@@ -361,62 +200,62 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto"
             >
-              <div className="text-center">
-                <div className="text-3xl font-bold text-purple-400 mb-2">20+</div>
-                <div className="text-gray-400">Years of Wisdom</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-purple-400 mb-2">2,847+</div>
-                <div className="text-gray-400">Lives Transformed</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-purple-400 mb-2">94%</div>
-                <div className="text-gray-400">Success Rate</div>
-              </div>
+                              <div className="text-center">
+                  <div className="text-3xl font-bold text-white mb-2">20+</div>
+                  <div className="text-gray-200">Years of Wisdom</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-white mb-2">2,847+</div>
+                  <div className="text-gray-200">Lives Transformed</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-white mb-2">94%</div>
+                  <div className="text-gray-200">Success Rate</div>
+                </div>
             </motion.div>
           </div>
         </section>
 
         {/* Problems We Solve Section */}
-        <section className="py-20 bg-slate-900/50 backdrop-blur-sm relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-900/20 to-pink-900/20"></div>
+        <section className="py-20 bg-white/80 backdrop-blur-sm relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-100/50 to-gray-200/50"></div>
           <div className="relative z-10 max-w-6xl mx-auto px-4">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
                 Problems We Solve
               </h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              <p className="text-xl text-gray-700 max-w-3xl mx-auto">
                 When you feel lost, confused, or stuck, ancient Eastern wisdom provides the answers you've been seeking.
               </p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center hover:bg-white/15 transition-all duration-300">
+              <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 text-center hover:bg-white/80 transition-all duration-300 shadow-lg">
                 <div className="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Target className="w-8 h-8 text-red-400" />
+                  <Target className="w-8 h-8 text-red-600" />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">Career Confusion</h3>
-                <p className="text-gray-300">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Career Confusion</h3>
+                <p className="text-gray-700">
                   Don't know which path to take? Our destiny readings reveal your true calling and optimal career timing.
                 </p>
               </div>
               
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center hover:bg-white/15 transition-all duration-300">
+              <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 text-center hover:bg-white/80 transition-all duration-300 shadow-lg">
                 <div className="w-16 h-16 bg-pink-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Heart className="w-8 h-8 text-pink-400" />
+                  <Heart className="w-8 h-8 text-pink-600" />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">Relationship Struggles</h3>
-                <p className="text-gray-300">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Relationship Struggles</h3>
+                <p className="text-gray-700">
                   Love life in chaos? Compatibility analysis shows you who's truly meant for you and when.
                 </p>
               </div>
               
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center hover:bg-white/15 transition-all duration-300">
+              <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 text-center hover:bg-white/80 transition-all duration-300 shadow-lg">
                 <div className="w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Briefcase className="w-8 h-8 text-blue-400" />
+                  <Briefcase className="w-8 h-8 text-blue-600" />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">Life Purpose Crisis</h3>
-                <p className="text-gray-300">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Life Purpose Crisis</h3>
+                <p className="text-gray-700">
                   Feeling directionless? Discover your life mission and the timing for major decisions.
                 </p>
               </div>
@@ -427,69 +266,70 @@ export default function Home() {
         <Testimonials />
 
         {/* Why Ancient Wisdom Works */}
-        <section className="py-20 bg-white/5 backdrop-blur-sm">
-          <div className="max-w-6xl mx-auto px-4">
+        <section className="py-20 bg-white/80 backdrop-blur-sm relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-200/50 to-gray-100/50"></div>
+          <div className="relative z-10 max-w-6xl mx-auto px-4">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
                 Why Ancient Wisdom Works
               </h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              <p className="text-xl text-gray-700 max-w-3xl mx-auto">
                 For thousands of years, Eastern astrology has guided emperors, warriors, and ordinary people through life's most difficult decisions.
               </p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div>
-                <h3 className="text-3xl font-bold text-white mb-6">
+                <h3 className="text-3xl font-bold text-gray-900 mb-6">
                   The Science of Destiny
                 </h3>
-                <p className="text-gray-300 mb-6">
+                <p className="text-gray-700 mb-6">
                   BaZi (八字) analysis is based on the precise calculation of your birth time, date, and location. This creates a unique cosmic fingerprint that reveals your personality, strengths, challenges, and optimal timing for life decisions.
                 </p>
-                <p className="text-gray-300 mb-6">
+                <p className="text-gray-700 mb-6">
                   Unlike Western astrology, Eastern wisdom provides specific, actionable guidance for career choices, relationship timing, and major life transitions.
                 </p>
                 <div className="flex items-center space-x-4">
                   <div className="flex items-center space-x-2">
                     <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                    <span className="text-gray-300">Personalized Analysis</span>
+                    <span className="text-gray-700">Personalized Analysis</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                    <span className="text-gray-300">Timing Guidance</span>
+                    <span className="text-gray-700">Timing Guidance</span>
                   </div>
                 </div>
               </div>
               
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
-                <h4 className="text-2xl font-bold text-white mb-6">What You'll Discover</h4>
+              <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
+                <h4 className="text-2xl font-bold text-gray-900 mb-6">What You'll Discover</h4>
                 <ul className="space-y-4">
                   <li className="flex items-start space-x-3">
                     <span className="text-2xl">🎯</span>
                     <div>
-                      <h5 className="text-white font-semibold">Your Life Purpose</h5>
-                      <p className="text-gray-300 text-sm">The career path that aligns with your destiny</p>
+                      <h5 className="text-gray-900 font-semibold">Your Life Purpose</h5>
+                      <p className="text-gray-700 text-sm">The career path that aligns with your destiny</p>
                     </div>
                   </li>
                   <li className="flex items-start space-x-3">
                     <span className="text-2xl">💕</span>
                     <div>
-                      <h5 className="text-white font-semibold">Relationship Compatibility</h5>
-                      <p className="text-gray-300 text-sm">Who you're truly meant to be with</p>
+                      <h5 className="text-gray-900 font-semibold">Relationship Compatibility</h5>
+                      <p className="text-gray-700 text-sm">Who you're truly meant to be with</p>
                     </div>
                   </li>
                   <li className="flex items-start space-x-3">
                     <span className="text-2xl">⏰</span>
                     <div>
-                      <h5 className="text-white font-semibold">Optimal Timing</h5>
-                      <p className="text-gray-300 text-sm">When to make major life changes</p>
+                      <h5 className="text-gray-900 font-semibold">Optimal Timing</h5>
+                      <p className="text-gray-700 text-sm">When to make major life changes</p>
                     </div>
                   </li>
                   <li className="flex items-start space-x-3">
                     <span className="text-2xl">🛡️</span>
                     <div>
-                      <h5 className="text-white font-semibold">Protection & Guidance</h5>
-                      <p className="text-gray-300 text-sm">How to navigate challenges successfully</p>
+                      <h5 className="text-gray-900 font-semibold">Protection & Guidance</h5>
+                      <p className="text-gray-700 text-sm">How to navigate challenges successfully</p>
                     </div>
                   </li>
                 </ul>
@@ -499,28 +339,28 @@ export default function Home() {
         </section>
 
         {/* How We Help You Find Your Compass */}
-        <section className="py-20 bg-slate-900/50 backdrop-blur-sm relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-purple-900/20"></div>
+        <section className="py-20 bg-white/80 backdrop-blur-sm relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-100/50 to-gray-200/50"></div>
           <div className="relative z-10 max-w-6xl mx-auto px-4">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
                 How We Help You Find Your Compass
               </h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              <p className="text-xl text-gray-700 max-w-3xl mx-auto">
                 Three powerful services designed to guide you through life's most important decisions.
               </p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center hover:bg-white/15 transition-all duration-300">
+              <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 text-center hover:bg-white/80 transition-all duration-300 shadow-lg">
                 <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
                   <span className="text-3xl">📊</span>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">BaZi Analysis</h3>
-                <p className="text-gray-300 mb-6">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">BaZi Analysis</h3>
+                <p className="text-gray-700 mb-6">
                   Deep personal destiny reading revealing your life purpose, career path, and optimal timing for major decisions.
                 </p>
-                <div className="text-2xl font-bold text-white mb-4">$49</div>
+                <div className="text-2xl font-bold text-gray-900 mb-4">$49</div>
                 <Link href="/services">
                   <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-full font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300">
                     Learn More
@@ -528,15 +368,15 @@ export default function Home() {
                 </Link>
               </div>
               
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center hover:bg-white/15 transition-all duration-300">
+              <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 text-center hover:bg-white/80 transition-all duration-300 shadow-lg">
                 <div className="w-20 h-20 bg-gradient-to-br from-pink-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
                   <span className="text-3xl">💕</span>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">Relationship Compatibility</h3>
-                <p className="text-gray-300 mb-6">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Relationship Compatibility</h3>
+                <p className="text-gray-700 mb-6">
                   Discover if your partner is truly meant for you and learn how to strengthen your relationship.
                 </p>
-                <div className="text-2xl font-bold text-white mb-4">$39</div>
+                <div className="text-2xl font-bold text-gray-900 mb-4">$39</div>
                 <Link href="/services">
                   <button className="bg-gradient-to-r from-pink-500 to-red-600 text-white px-6 py-3 rounded-full font-semibold hover:from-pink-600 hover:to-red-700 transition-all duration-300">
                     Learn More
@@ -544,15 +384,15 @@ export default function Home() {
                 </Link>
               </div>
               
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center hover:bg-white/15 transition-all duration-300">
+              <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 text-center hover:bg-white/80 transition-all duration-300 shadow-lg">
                 <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-teal-600 rounded-full flex items-center justify-center mx-auto mb-6">
                   <span className="text-3xl">🛡️</span>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">Talismans & Protection</h3>
-                <p className="text-gray-300 mb-6">
-                  Custom spiritual protection and guidance for challenging times and important decisions.
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Protection & Guidance</h3>
+                <p className="text-gray-700 mb-6">
+                  Personalized talismans and guidance to protect you during challenging times and enhance your luck.
                 </p>
-                <div className="text-2xl font-bold text-white mb-4">$29</div>
+                <div className="text-2xl font-bold text-gray-900 mb-4">$29</div>
                 <Link href="/services">
                   <button className="bg-gradient-to-r from-green-500 to-teal-600 text-white px-6 py-3 rounded-full font-semibold hover:from-green-600 hover:to-teal-700 transition-all duration-300">
                     Learn More
@@ -564,43 +404,51 @@ export default function Home() {
         </section>
 
         {/* Newsletter Section */}
-        <section className="py-20 bg-white/5 backdrop-blur-sm">
-          <div className="max-w-4xl mx-auto px-4 text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Stay Connected to Ancient Wisdom
-            </h2>
-            <p className="text-xl text-gray-300 mb-8">
-              Get weekly insights, spiritual guidance, and exclusive tips for navigating life's challenges.
-            </p>
-            
-            <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Your email address"
-                required
-                className="flex-1 px-6 py-4 rounded-full text-gray-900 text-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-              />
-              <button 
-                type="submit"
-                className="bg-white text-primary-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-colors flex items-center justify-center space-x-2"
-              >
-                <span>Get Free Tips</span>
-                <Send className="w-4 h-4" />
-              </button>
-            </form>
+        <section className="py-20 bg-white/80 backdrop-blur-sm relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-200/50 to-gray-100/50"></div>
+          <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                Get Weekly Wisdom
+              </h2>
+              <p className="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
+                Receive ancient insights, practical guidance, and exclusive tips to help you navigate life's challenges.
+              </p>
+              
+              <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  required
+                  className="flex-1 px-6 py-4 rounded-full border-2 border-gray-300 focus:border-gray-600 focus:outline-none text-gray-900"
+                />
+                <button 
+                  type="submit"
+                  className="bg-gradient-to-r from-gray-800 to-gray-700 text-white px-8 py-4 rounded-full font-semibold hover:from-gray-900 hover:to-gray-800 transition-all duration-300 flex items-center justify-center space-x-2"
+                >
+                  <span>Get Free Tips</span>
+                  <Send className="w-4 h-4" />
+                </button>
+              </form>
+            </motion.div>
           </div>
         </section>
 
         {/* Enhanced Footer */}
-        <footer className="bg-slate-900 text-white py-16 relative">
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-purple-900/20 to-slate-900"></div>
+        <footer className="bg-gray-900 text-white py-16 relative">
+          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-800/20 to-gray-900"></div>
           <div className="relative z-10 max-w-6xl mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div className="col-span-1 md:col-span-2">
                 <div className="flex items-center space-x-3 mb-4">
-                  <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-secondary-600 rounded-full flex items-center justify-center">
+                  <div className="w-10 h-10 bg-gradient-to-br from-gray-700 to-gray-600 rounded-full flex items-center justify-center">
                     <span className="text-white font-bold text-sm">玄</span>
                   </div>
                   <div>
@@ -673,11 +521,11 @@ export default function Home() {
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Your email"
                       required
-                      className="flex-1 px-4 py-2 rounded-lg text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+                      className="flex-1 px-4 py-2 rounded-lg text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-gray-500"
                     />
                     <button 
                       type="submit"
-                      className="bg-primary-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-primary-600 transition-colors"
+                      className="bg-gray-700 text-white px-4 py-2 rounded-lg text-sm hover:bg-gray-600 transition-colors"
                     >
                       Subscribe
                     </button>
@@ -722,7 +570,7 @@ export default function Home() {
           }}
           transition={{ duration: 0.3 }}
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-50 w-12 h-12 bg-gradient-to-r from-primary-500 to-secondary-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center"
+          className="fixed bottom-8 right-8 z-50 w-12 h-12 bg-gradient-to-r from-gray-700 to-gray-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center"
           aria-label="Scroll to top"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
