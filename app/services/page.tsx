@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Phone, Mail, Clock, Shield, Heart, Target, CheckCircle } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 import SEOHead from '@/components/SEOHead'
 import Navigation from '@/components/Navigation'
 import Breadcrumb from '@/components/Breadcrumb'
@@ -14,7 +15,7 @@ export default function Services() {
       id: 1,
       title: "Life Destiny Reading",
       subtitle: "Deep Personal Destiny Reading",
-      description: "A deep reading based on your birth date, time, and place using the ancient East Asian system of 'Four Pillars' to understand who you truly are and what path will bring you peace, success, and alignment.",
+      description: "A deep reading based on your birth date, time, and place using the ancient East Asian system of 'Four Pillars' (think of it as your life blueprint) to understand who you truly are and what path will bring you peace, success, and alignment.",
       features: [
         "Complete birth chart analysis (Four Pillars)",
         "Career path, financial strengths and blockages",
@@ -34,7 +35,7 @@ export default function Services() {
       id: 2,
       title: "Relationship Compatibility Reading",
       subtitle: "Soulmate Discovery & Analysis",
-      description: "A deep love reading that blends Eastern energy wisdom with modern relationship insight to help you understand your emotional patterns and timing for meaningful connections.",
+      description: "A deep love reading that blends Eastern energy wisdom with modern relationship insight (think Myers-Briggs meets cosmic compatibility) to help you understand your emotional patterns and timing for meaningful connections.",
       features: [
         "Compatibility reading between you and your partner",
         "How your energies attract, challenge, or balance each other",
@@ -54,7 +55,7 @@ export default function Services() {
       id: 3,
       title: "Personalized Talisman & Energy Guide",
       subtitle: "Custom Spiritual Compass",
-      description: "Not just jewelry — a spiritual compass tuned to your destiny. A handcrafted talisman designed based on your birth elements to balance your energy and attract luck, protection, and alignment.",
+      description: "Not just jewelry — a spiritual compass tuned to your destiny. A handcrafted talisman designed based on your birth elements (like a personalized energy amplifier) to balance your energy and attract luck, protection, and alignment.",
       features: [
         "Custom-made physical talisman (925 silver)",
         "Designed based on your birth elements (wood, fire, earth, metal, water)",
@@ -75,7 +76,7 @@ export default function Services() {
   const faqs = [
     {
       question: "Do I need to know my birth time?",
-      answer: "Yes, the time helps make your reading accurate. If you're unsure, we can still offer a basic version."
+      answer: "Yes, the time helps make your reading accurate (like having GPS coordinates vs. just a city name). If you're unsure, we can still offer a basic version based on your birth date."
     },
     {
       question: "Who is the reading from?",
@@ -83,7 +84,7 @@ export default function Services() {
     },
     {
       question: "What does the talisman do?",
-      answer: "It's like a spiritual amplifier. Based on your unique energy, it helps attract luck, protection, and alignment."
+      answer: "Think of it as a personalized energy amplifier. Based on your unique energy signature, it helps attract luck, protection, and alignment - like having a constant reminder of your best self."
     },
     {
       question: "How long does it take to receive my reading?",
@@ -114,21 +115,32 @@ export default function Services() {
       
       <div className="min-h-screen bg-cream-50">
         {/* Hero Section */}
-        <section className="pt-32 pb-20 bg-gradient-to-br from-navy-900 via-purple-900 to-navy-900 relative overflow-hidden">
-          <div className="absolute inset-0 bg-black/40"></div>
+        <section className="pt-32 pb-20 relative overflow-hidden">
+          {/* Background Image */}
+          <div className="absolute inset-0">
+            <Image
+              src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1920&h=1080&q=80"
+              alt="Traditional Chinese Temple - Ancient Wisdom Background"
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-navy-900/80 via-purple-900/70 to-navy-900/80"></div>
+          </div>
+          
           <div className="relative z-10 max-w-6xl mx-auto px-4 text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 font-serif">
+                              <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 font-serif">
                 Professional Services
               </h1>
               <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto">
                 Transform your life with ancient Eastern wisdom. Choose the service that resonates with your journey.
               </p>
-              <div className="flex flex-wrap justify-center gap-4 text-white">
+              <div className="flex flex-wrap justify-center gap-4 text-white mb-8">
                 <div className="flex items-center space-x-2">
                   <CheckCircle className="w-5 h-5 text-gold-400" />
                   <span>100% Confidential</span>
@@ -140,6 +152,27 @@ export default function Services() {
                 <div className="flex items-center space-x-2">
                   <CheckCircle className="w-5 h-5 text-gold-400" />
                   <span>Proven Results</span>
+                </div>
+              </div>
+              
+              {/* Master 玄印 Photo */}
+              <div className="flex justify-center">
+                <div className="relative w-24 h-24">
+                  <div className="absolute inset-0 bg-gradient-to-br from-gold-400 to-gold-600 rounded-full opacity-20 animate-pulse"></div>
+                  <div className="relative w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 rounded-full flex items-center justify-center overflow-hidden">
+                    <div className="w-20 h-20 bg-gradient-to-br from-cream-100 to-cream-200 rounded-full flex items-center justify-center overflow-hidden">
+                      <div className="w-16 h-16 bg-gradient-to-br from-navy-800 to-navy-900 rounded-full flex items-center justify-center overflow-hidden relative">
+                        <Image
+                          src="/images/master-xuan-yin.jpg"
+                          alt="Master 玄印 - Traditional Eastern Wisdom Practitioner"
+                          fill
+                          className="object-cover rounded-full"
+                          priority
+                        />
+                        <div className="absolute inset-0 bg-black/20 rounded-full"></div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -158,7 +191,7 @@ export default function Services() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.2 }}
                   viewport={{ once: true }}
-                  className="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-cream-200 overflow-hidden"
+                  className="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-cream-200 overflow-hidden glass-card float-card"
                 >
                   {/* Service Header */}
                   <div className={`bg-gradient-to-r ${service.color} p-8 text-white text-center`}>
@@ -244,8 +277,15 @@ export default function Services() {
                 viewport={{ once: true }}
                 className="text-center"
               >
-                <div className="w-16 h-16 bg-gold-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Target className="w-8 h-8 text-gold-600" />
+                <div className="w-16 h-16 bg-gradient-to-br from-gold-400 to-amber-600 rounded-lg flex items-center justify-center mx-auto mb-4 shadow-lg transform rotate-12">
+                  <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                    <div className="w-5 h-5 bg-gradient-to-br from-gold-600 to-amber-700 rounded-lg relative">
+                      <div className="absolute top-0.5 left-0.5 w-1 h-1 bg-white rounded-sm"></div>
+                      <div className="absolute top-0.5 right-0.5 w-1 h-1 bg-white rounded-sm"></div>
+                      <div className="absolute bottom-0.5 left-0.5 w-1 h-1 bg-white rounded-sm"></div>
+                      <div className="absolute bottom-0.5 right-0.5 w-1 h-1 bg-white rounded-sm"></div>
+                    </div>
+                  </div>
                 </div>
                 <h3 className="text-xl font-bold text-navy-900 mb-3 font-serif">10+ Years Experience</h3>
                 <p className="text-gray-700">
@@ -261,8 +301,18 @@ export default function Services() {
                 viewport={{ once: true }}
                 className="text-center"
               >
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Shield className="w-8 h-8 text-blue-600" />
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-lg flex items-center justify-center mx-auto mb-4 shadow-lg transform -rotate-6">
+                  <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                    <div className="w-5 h-5 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-lg relative">
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-3 h-3 bg-white rounded-sm"></div>
+                      </div>
+                      <div className="absolute top-0 left-0 w-1 h-1 bg-blue-800 rounded-sm"></div>
+                      <div className="absolute top-0 right-0 w-1 h-1 bg-blue-800 rounded-sm"></div>
+                      <div className="absolute bottom-0 left-0 w-1 h-1 bg-blue-800 rounded-sm"></div>
+                      <div className="absolute bottom-0 right-0 w-1 h-1 bg-blue-800 rounded-sm"></div>
+                    </div>
+                  </div>
                 </div>
                 <h3 className="text-xl font-bold text-navy-900 mb-3 font-serif">100% Confidential</h3>
                 <p className="text-gray-700">
@@ -278,8 +328,15 @@ export default function Services() {
                 viewport={{ once: true }}
                 className="text-center"
               >
-                <div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Heart className="w-8 h-8 text-pink-600" />
+                <div className="w-16 h-16 bg-gradient-to-br from-pink-400 to-rose-600 rounded-lg flex items-center justify-center mx-auto mb-4 shadow-lg transform rotate-6">
+                  <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                    <div className="w-5 h-5 bg-gradient-to-br from-pink-600 to-rose-700 rounded-lg relative">
+                      <div className="absolute top-0.5 left-0.5 w-1.5 h-1.5 bg-white rounded-sm"></div>
+                      <div className="absolute top-0.5 right-0.5 w-1.5 h-1.5 bg-white rounded-sm"></div>
+                      <div className="absolute bottom-0.5 left-0.5 w-1.5 h-1.5 bg-white rounded-sm"></div>
+                      <div className="absolute bottom-0.5 right-0.5 w-1.5 h-1.5 bg-white rounded-sm"></div>
+                    </div>
+                  </div>
                 </div>
                 <h3 className="text-xl font-bold text-navy-900 mb-3 font-serif">Personalized Approach</h3>
                 <p className="text-gray-700">
@@ -363,7 +420,7 @@ export default function Services() {
                 </a>
                 <a
                   href="mailto:chenxiao0801@hotmail.com?subject=I want to learn about Master 玄印's services"
-                  className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-navy-900 transition-all duration-300 flex items-center space-x-2"
+                  className="bg-navy-800 text-white px-8 py-4 rounded-full font-semibold hover:bg-navy-700 transition-all duration-300 flex items-center space-x-2 shadow-lg hover:shadow-xl border border-navy-600"
                 >
                   <Mail className="w-5 h-5" />
                   <span>Email Consultation</span>

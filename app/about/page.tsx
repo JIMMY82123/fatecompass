@@ -91,7 +91,7 @@ export default function About() {
                   </a>
                   <a
                     href="mailto:chenxiao0801@hotmail.com?subject=I want to learn about Master 玄印"
-                    className="border-2 border-white text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-navy-900 transition-all duration-300 flex items-center space-x-2"
+                    className="bg-navy-800 text-white px-6 py-3 rounded-full font-semibold hover:bg-navy-700 transition-all duration-300 flex items-center space-x-2 shadow-lg hover:shadow-xl border border-navy-600"
                   >
                     <Mail className="w-5 h-5" />
                     <span>Email Consultation</span>
@@ -107,10 +107,17 @@ export default function About() {
               >
                 <div className="relative w-80 h-80 mx-auto">
                   <div className="absolute inset-0 bg-gradient-to-br from-gold-400 to-gold-600 rounded-full opacity-20 animate-pulse"></div>
-                  <div className="relative w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 rounded-full flex items-center justify-center">
-                    <div className="w-72 h-72 bg-gradient-to-br from-cream-100 to-cream-200 rounded-full flex items-center justify-center">
-                      <div className="w-64 h-64 bg-gradient-to-br from-navy-800 to-navy-900 rounded-full flex items-center justify-center">
-                        <span className="text-8xl font-bold text-gold-400">玄</span>
+                  <div className="relative w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 rounded-full flex items-center justify-center overflow-hidden">
+                    <div className="w-72 h-72 bg-gradient-to-br from-cream-100 to-cream-200 rounded-full flex items-center justify-center overflow-hidden">
+                      <div className="w-64 h-64 bg-gradient-to-br from-navy-800 to-navy-900 rounded-full flex items-center justify-center overflow-hidden relative">
+                        <Image
+                          src="/images/master-xuan-yin.jpg"
+                          alt="Master 玄印 - Traditional Eastern Wisdom Practitioner"
+                          fill
+                          className="object-cover rounded-full"
+                          priority
+                        />
+                        <div className="absolute inset-0 bg-black/20 rounded-full"></div>
                       </div>
                     </div>
                   </div>
@@ -228,9 +235,16 @@ export default function About() {
                   viewport={{ once: true }}
                   className="bg-white rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-cream-200"
                 >
-                  <div className="w-16 h-16 bg-gold-100 rounded-full flex items-center justify-center mx-auto mb-4 text-gold-600">
-                    {achievement.icon}
-                  </div>
+                                     <div className="w-16 h-16 bg-gradient-to-br from-gold-400 to-amber-600 rounded-lg flex items-center justify-center mx-auto mb-4 shadow-lg transform rotate-12">
+                     <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                       <div className="w-5 h-5 bg-gradient-to-br from-gold-600 to-amber-700 rounded-lg relative">
+                         <div className="absolute top-0.5 left-0.5 w-1 h-1 bg-white rounded-sm"></div>
+                         <div className="absolute top-0.5 right-0.5 w-1 h-1 bg-white rounded-sm"></div>
+                         <div className="absolute bottom-0.5 left-0.5 w-1 h-1 bg-white rounded-sm"></div>
+                         <div className="absolute bottom-0.5 right-0.5 w-1 h-1 bg-white rounded-sm"></div>
+                       </div>
+                     </div>
+                   </div>
                   <h3 className="text-xl font-bold text-navy-900 mb-3 font-serif">
                     {achievement.title}
                   </h3>
@@ -336,7 +350,7 @@ export default function About() {
                 </a>
                 <a
                   href="mailto:chenxiao0801@hotmail.com?subject=I want to learn about Master 玄印's services"
-                  className="border-2 border-navy-900 text-navy-900 px-8 py-4 rounded-full font-semibold hover:bg-navy-900 hover:text-white transition-all duration-300 flex items-center space-x-2"
+                  className="bg-navy-800 text-white px-8 py-4 rounded-full font-semibold hover:bg-navy-700 transition-all duration-300 flex items-center space-x-2 shadow-lg hover:shadow-xl border border-navy-600"
                 >
                   <Mail className="w-5 h-5" />
                   <span>Email Consultation</span>

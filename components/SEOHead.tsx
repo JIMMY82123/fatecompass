@@ -17,7 +17,7 @@ export default function SEOHead({
   keywords = "feeling lost, i am lost, feel lost, lost feeling, compass, destiny, life purpose, career guidance, relationship advice, personal growth, Eastern astrology, BaZi reading, life direction, spiritual guidance, fortune telling, Chinese astrology, life path, self-discovery, career change, relationship compatibility, personal development, spiritual awakening, life coaching, astrological reading, life purpose finder, lost soul, direction, guidance",
   ogTitle,
   ogDescription,
-  ogImage = "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+  ogImage = "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80",
   ogUrl,
   canonical
 }: SEOHeadProps) {

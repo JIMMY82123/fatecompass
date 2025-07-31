@@ -3,9 +3,12 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Phone, Mail, Heart, Target, Briefcase, Star, ArrowRight } from 'lucide-react'
 import Navigation from '@/components/Navigation'
 import Testimonials from '@/components/Testimonials'
+import VideoTestimonials from '@/components/VideoTestimonials'
+import VisualEffects from '@/components/VisualEffects'
 import SEOHead from '@/components/SEOHead'
 import StructuredData from '@/components/StructuredData'
 
@@ -61,13 +64,16 @@ export default function Home() {
       <StructuredData type="organization" data={{}} />
       
       <div className="min-h-screen relative overflow-hidden">
+        {/* Visual Effects */}
+        <VisualEffects />
+        
         {/* Dynamic Background */}
         <div className="fixed inset-0 z-0">
           {/* Base image background */}
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundImage: `url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080&q=80')`,
+              backgroundImage: `url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1920&h=1080&q=80')`,
             }}
           ></div>
           
@@ -133,19 +139,20 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="mb-8"
+              className="mb-12"
             >
-              <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight font-serif">
-                <span className="bg-gradient-to-r from-white via-cream-200 to-gold-300 bg-clip-text text-transparent">
-                  玄印命理 · FateCompass
-                </span>
-              </h1>
-              <p className="text-2xl md:text-3xl text-white mb-8 font-light italic">
+                              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-tight font-serif text-shadow-lg">
+                  <span className="text-gold-300">
+                    玄印命理 · FateCompass
+                  </span>
+                </h1>
+              <p className="text-2xl md:text-3xl lg:text-4xl text-white mb-10 font-light italic text-shadow-md">
                 Oriental Wisdom. For Your Life's Turning Point.
               </p>
-              <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
-                Feeling lost in life? Let ancient Eastern astrology guide you to clarity, 
-                purpose, and success. Discover your true path with Master 玄印.
+              <p className="text-lg md:text-xl lg:text-2xl text-gray-100 max-w-4xl mx-auto leading-relaxed text-shadow-sm">
+                Feeling lost in life? Let ancient Eastern wisdom guide you to clarity, 
+                purpose, and success. Think of it as life coaching with cosmic timing - 
+                discover your true path with Master 玄印.
               </p>
             </motion.div>
 
@@ -153,20 +160,25 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+              className="flex flex-col sm:flex-row gap-6 justify-center items-center"
             >
-              <a
+                              <a
                 href="https://wa.me/8615914228258?text=I want to get my reading"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-gradient-to-r from-gold-500 to-gold-600 text-white px-8 py-4 rounded-full font-semibold hover:from-gold-600 hover:to-gold-700 transition-all duration-300 flex items-center space-x-2 shadow-lg hover:shadow-xl"
+                                  className="btn-primary flex items-center space-x-3 px-10 py-5 text-lg font-semibold"
               >
-                <Phone className="w-5 h-5" />
+                <Phone className="w-6 h-6" />
                 <span>Get My Reading</span>
               </a>
               <Link href="/services">
-                <button className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-navy-900 transition-all duration-300">
+                <button className="btn-secondary px-10 py-5 text-lg font-semibold border-2 border-white text-white hover:bg-white hover:text-navy-900">
                   Explore Services
+                </button>
+              </Link>
+              <Link href="/wisdom">
+                <button className="btn-secondary px-10 py-5 text-lg font-semibold border-2 border-white text-white hover:bg-white hover:text-navy-900">
+                  Learn Eastern Wisdom
                 </button>
               </Link>
             </motion.div>
@@ -174,9 +186,9 @@ export default function Home() {
         </section>
 
         {/* ② Intro Section - 两栏结构：左图右文 */}
-        <section id="intro" className="py-20 bg-white/95 backdrop-blur-sm relative">
+        <section id="intro" className="section-padding bg-white/95 backdrop-blur-sm relative">
           <div className="max-w-6xl mx-auto px-4">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               {/* Left Column - Eastern Imagery */}
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
@@ -185,19 +197,35 @@ export default function Home() {
                 viewport={{ once: true }}
                 className="relative"
               >
-                <div className="bg-gradient-to-br from-cream-100 to-gold-100 rounded-3xl p-8 shadow-2xl">
+                <div className="card-elevated bg-gradient-to-br from-cream-100 to-gold-100 rounded-3xl p-10 glass-card float-card">
                   <div className="text-center">
-                    <div className="text-8xl mb-6">☯️</div>
-                    <h3 className="text-2xl font-bold text-navy-900 mb-4 font-serif">Ancient Eastern Wisdom</h3>
-                    <p className="text-gray-700 leading-relaxed">
+                    <div className="relative w-40 h-40 mx-auto mb-8">
+                      <div className="absolute inset-0 bg-gradient-to-br from-gold-400 to-gold-600 rounded-full opacity-20 animate-pulse"></div>
+                      <div className="relative w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 rounded-full flex items-center justify-center overflow-hidden">
+                        <div className="w-36 h-36 bg-gradient-to-br from-cream-100 to-cream-200 rounded-full flex items-center justify-center overflow-hidden">
+                          <div className="w-32 h-32 bg-gradient-to-br from-navy-800 to-navy-900 rounded-full flex items-center justify-center overflow-hidden relative">
+                            <Image
+                              src="/images/master-xuan-yin.jpg"
+                              alt="Master 玄印 - Traditional Eastern Wisdom Practitioner"
+                              fill
+                              className="object-cover rounded-full"
+                              priority
+                            />
+                            <div className="absolute inset-0 bg-black/20 rounded-full"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <h3 className="text-3xl font-bold text-navy-900 mb-6 font-serif">Ancient Eastern Wisdom</h3>
+                    <p className="text-lg text-gray-700 leading-relaxed">
                       For thousands of years, Eastern astrology has guided souls through life's most challenging moments. 
-                      Now, this wisdom is available to you.
+                      Now, this wisdom is available to you through Master 玄印.
                     </p>
                   </div>
                 </div>
                 {/* Floating elements */}
-                <div className="absolute -top-4 -right-4 w-8 h-8 bg-gold-300 rounded-full opacity-60 animate-pulse"></div>
-                <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-navy-300 rounded-full opacity-40 animate-pulse" style={{animationDelay: '1s'}}></div>
+                <div className="absolute -top-6 -right-6 w-10 h-10 bg-gold-300 rounded-full opacity-60 animate-pulse"></div>
+                <div className="absolute -bottom-6 -left-6 w-8 h-8 bg-navy-300 rounded-full opacity-40 animate-pulse" style={{animationDelay: '1s'}}></div>
               </motion.div>
 
               {/* Right Column - Content */}
@@ -207,54 +235,68 @@ export default function Home() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <h2 className="text-4xl md:text-5xl font-bold text-navy-900 mb-6 font-serif">
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-navy-900 mb-8 font-serif leading-tight">
                   Who is Master 玄印?
                 </h2>
-                <p className="text-xl text-gray-700 mb-8 leading-relaxed">
-                  With over 10 years of deep study in Eastern astrology and the ancient Four Pillars system, 
-                  Master 玄印 has helped hundreds of lost souls find their true path.
+                <p className="text-xl lg:text-2xl text-gray-700 mb-10 leading-relaxed">
+                  With over 10 years of deep study in Eastern wisdom and the ancient Four Pillars system, 
+                  Master 玄印 has helped hundreds of Americans find their true path. Think of it as 
+                  combining the depth of ancient knowledge with the practicality of modern life coaching.
                 </p>
                 
-                <div className="space-y-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-gold-100 rounded-full flex items-center justify-center flex-shrink-0">
-                      <span className="text-2xl">🎯</span>
+                <div className="space-y-8">
+                  <div className="flex items-start space-x-6">
+                    <div className="w-16 h-16 bg-gradient-to-br from-gold-400 to-amber-600 rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg transform rotate-12">
+                      <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                        <div className="w-4 h-4 bg-gradient-to-br from-red-500 to-pink-600 rounded-full"></div>
+                      </div>
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold text-navy-900 mb-2">Life Purpose Discovery</h3>
-                      <p className="text-gray-700">Understand your unique talents and the path that will bring you true fulfillment.</p>
+                      <h3 className="text-xl font-bold text-navy-900 mb-3">Life Purpose Discovery</h3>
+                      <p className="text-lg text-gray-700 leading-relaxed">Understand your unique talents and the path that will bring you true fulfillment - like having a personal life coach with cosmic timing insights.</p>
                     </div>
                   </div>
                   
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center flex-shrink-0">
-                      <span className="text-2xl">💕</span>
+                  <div className="flex items-start space-x-6">
+                    <div className="w-16 h-16 bg-gradient-to-br from-pink-400 to-rose-600 rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg transform -rotate-6">
+                      <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                        <div className="w-6 h-6 bg-gradient-to-br from-pink-500 to-red-500 rounded-full relative">
+                          <div className="absolute top-1 left-1 w-2 h-2 bg-white rounded-full"></div>
+                          <div className="absolute top-1 right-1 w-2 h-2 bg-white rounded-full"></div>
+                        </div>
+                      </div>
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold text-navy-900 mb-2">Relationship Clarity</h3>
-                      <p className="text-gray-700">Find your soulmate or understand why certain relationships keep repeating.</p>
+                      <h3 className="text-xl font-bold text-navy-900 mb-3">Relationship Clarity</h3>
+                      <p className="text-lg text-gray-700 leading-relaxed">Find your soulmate or understand why certain relationships keep repeating - using energy compatibility analysis that goes beyond surface attraction.</p>
                     </div>
                   </div>
                   
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                      <span className="text-2xl">💰</span>
+                  <div className="flex items-start space-x-6">
+                    <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-600 rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg transform rotate-6">
+                      <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                        <div className="w-6 h-6 bg-gradient-to-br from-green-500 to-teal-600 rounded-full relative">
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="w-3 h-3 bg-white rounded-full"></div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold text-navy-900 mb-2">Financial Timing</h3>
-                      <p className="text-gray-700">Know the best times to invest, start businesses, or make major financial decisions.</p>
+                      <h3 className="text-xl font-bold text-navy-900 mb-3">Financial Timing</h3>
+                      <p className="text-lg text-gray-700 leading-relaxed">Know the best times to invest, start businesses, or make major financial decisions - like having a financial advisor who understands cosmic timing.</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-8">
+                <div className="mt-12">
                   <a
                     href="https://wa.me/8615914228258?text=I want to learn more about Master 玄印's services"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-gradient-to-r from-navy-600 to-navy-800 text-white px-6 py-3 rounded-full font-semibold hover:from-navy-700 hover:to-navy-900 transition-all duration-300 inline-flex items-center space-x-2"
+                    className="btn-primary inline-flex items-center space-x-3 px-8 py-4 text-lg font-semibold"
                   >
-                    <Phone className="w-4 h-4" />
+                    <Phone className="w-5 h-5" />
                     <span>Consult Now</span>
                   </a>
                 </div>
@@ -263,16 +305,246 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ③ Services Section - 展示我能做啥 */}
-        <section id="services" className="py-20 bg-cream-50 relative">
+        {/* ③ Common Challenges Section - 展示用户痛点 */}
+        <section className="section-padding bg-gradient-to-br from-navy-900 to-purple-900 relative">
           <div className="max-w-6xl mx-auto px-4">
-            <div className="text-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 font-serif">
+                Feeling Lost? You're Not Alone
+              </h2>
+              <p className="text-xl text-gray-200 max-w-3xl mx-auto">
+                These are the most common challenges that bring people to seek Eastern wisdom guidance
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20"
+              >
+                <div className="w-16 h-16 bg-gradient-to-br from-red-400 to-pink-600 rounded-lg flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <div className="w-8 h-8 bg-white rounded-sm flex items-center justify-center">
+                    <div className="w-4 h-4 bg-gradient-to-br from-red-500 to-pink-600 rounded-sm"></div>
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-4 text-center">Career Confusion</h3>
+                <p className="text-gray-300 text-center">
+                  "I'm successful but feel empty. Am I on the right path? When should I make a change?"
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20"
+              >
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-lg flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <div className="w-8 h-8 bg-white rounded-sm flex items-center justify-center">
+                    <div className="w-4 h-4 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-sm"></div>
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-4 text-center">Relationship Patterns</h3>
+                <p className="text-gray-300 text-center">
+                  "Why do I keep attracting the wrong partners? When will I find true love?"
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                viewport={{ once: true }}
+                className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20"
+              >
+                <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-600 rounded-lg flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <div className="w-8 h-8 bg-white rounded-sm flex items-center justify-center">
+                    <div className="w-4 h-4 bg-gradient-to-br from-green-500 to-emerald-600 rounded-sm"></div>
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-4 text-center">Life Purpose</h3>
+                <p className="text-gray-300 text-center">
+                  "I have everything but feel lost. What's my true calling? What am I meant to do?"
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                viewport={{ once: true }}
+                className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20"
+              >
+                <div className="w-16 h-16 bg-gradient-to-br from-purple-400 to-violet-600 rounded-lg flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <div className="w-8 h-8 bg-white rounded-sm flex items-center justify-center">
+                    <div className="w-4 h-4 bg-gradient-to-br from-purple-500 to-violet-600 rounded-sm"></div>
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-4 text-center">Timing Decisions</h3>
+                <p className="text-gray-300 text-center">
+                  "When is the right time to start a business, move, or make major life changes?"
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                viewport={{ once: true }}
+                className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20"
+              >
+                <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-red-600 rounded-lg flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <div className="w-8 h-8 bg-white rounded-sm flex items-center justify-center">
+                    <div className="w-4 h-4 bg-gradient-to-br from-orange-500 to-red-600 rounded-sm"></div>
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-4 text-center">Energy & Health</h3>
+                <p className="text-gray-300 text-center">
+                  "Why do I feel drained all the time? How can I restore my energy and vitality?"
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                viewport={{ once: true }}
+                className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20"
+              >
+                <div className="w-16 h-16 bg-gradient-to-br from-teal-400 to-cyan-600 rounded-lg flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <div className="w-8 h-8 bg-white rounded-sm flex items-center justify-center">
+                    <div className="w-4 h-4 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-sm"></div>
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-4 text-center">Financial Timing</h3>
+                <p className="text-gray-300 text-center">
+                  "When should I invest, start a business, or make major financial decisions?"
+                </p>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* ④ Testimonials Section - 社会证明助力转化 */}
+        <Testimonials />
+        
+        {/* ⑤ Video Testimonials Section - 视频评价增强信任 */}
+        <VideoTestimonials />
+
+        {/* ⑥ Why Choose Us Section - 为什么选择我们 */}
+        <section className="section-padding bg-white relative">
+          <div className="max-w-6xl mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-navy-900 mb-6 font-serif">
+                Why Choose Master 玄印?
+              </h2>
+              <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+                What makes our approach different from traditional Western life coaching
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                viewport={{ once: true }}
+                className="text-center"
+              >
+                <div className="w-20 h-20 bg-gradient-to-br from-gold-400 to-amber-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                    <div className="w-5 h-5 bg-gradient-to-br from-gold-600 to-amber-700 rounded-full"></div>
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-navy-900 mb-4">Ancient Wisdom</h3>
+                <p className="text-gray-700">
+                  3,000+ years of proven Eastern astrology principles, not just modern psychology theories
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="text-center"
+              >
+                <div className="w-20 h-20 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                    <div className="w-5 h-5 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-full"></div>
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-navy-900 mb-4">Precise Timing</h3>
+                <p className="text-gray-700">
+                  Know exactly WHEN to take action, not just WHAT to do - timing is everything
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                viewport={{ once: true }}
+                className="text-center"
+              >
+                <div className="w-20 h-20 bg-gradient-to-br from-green-400 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                    <div className="w-5 h-5 bg-gradient-to-br from-green-600 to-emerald-700 rounded-full"></div>
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-navy-900 mb-4">Energy Compatibility</h3>
+                <p className="text-gray-700">
+                  Deep relationship analysis that goes beyond surface attraction to soul-level compatibility
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                viewport={{ once: true }}
+                className="text-center"
+              >
+                <div className="w-20 h-20 bg-gradient-to-br from-purple-400 to-violet-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                    <div className="w-5 h-5 bg-gradient-to-br from-purple-600 to-violet-700 rounded-full"></div>
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-navy-900 mb-4">Proven Results</h3>
+                <p className="text-gray-700">
+                  2,000+ successful readings with measurable life improvements and transformations
+                </p>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* ③ Services Section - 展示我能做啥 */}
+        <section id="services" className="section-padding bg-cream-50 relative">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="text-center mb-20">
               <motion.h2 
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
-                className="text-4xl md:text-5xl font-bold text-navy-900 mb-6 font-serif"
+                className="text-4xl md:text-5xl lg:text-6xl font-bold text-navy-900 mb-8 font-serif leading-tight"
               >
                 Professional Services, Precise Readings
               </motion.h2>
@@ -281,35 +553,42 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="text-xl text-gray-700 max-w-3xl mx-auto"
+                className="text-xl lg:text-2xl text-gray-700 max-w-4xl mx-auto leading-relaxed"
               >
                 Choose the service that best fits you and start your destiny exploration journey
               </motion.p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
-                className="bg-white rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-all duration-300 border border-cream-200"
+                className="card-elevated bg-white rounded-3xl p-10 text-center hover:scale-105 transition-all duration-300"
               >
-                <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <span className="text-3xl">📊</span>
+                <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mx-auto mb-8 shadow-lg transform rotate-12">
+                  <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
+                    <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-700 rounded-lg relative">
+                      <div className="absolute top-1 left-1 w-2 h-2 bg-white rounded-sm"></div>
+                      <div className="absolute top-1 right-1 w-2 h-2 bg-white rounded-sm"></div>
+                      <div className="absolute bottom-1 left-1 w-2 h-2 bg-white rounded-sm"></div>
+                      <div className="absolute bottom-1 right-1 w-2 h-2 bg-white rounded-sm"></div>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold text-navy-900 mb-4 font-serif">Life Destiny Reading</h3>
-                <p className="text-gray-700 mb-6">
+                <h3 className="text-2xl lg:text-3xl font-bold text-navy-900 mb-6 font-serif">Life Destiny Reading</h3>
+                <p className="text-lg text-gray-700 mb-8 leading-relaxed">
                   Deep personal destiny reading based on Four Pillars to understand who you truly are and what path will bring you peace, success, and alignment.
                 </p>
-                <div className="text-2xl font-bold text-navy-900 mb-4">$79 USD</div>
+                <div className="text-3xl font-bold text-navy-900 mb-6">$79 USD</div>
                 <a
                   href="https://wa.me/8615914228258?text=I want to learn about Life Destiny Reading service"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-full font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 inline-flex items-center space-x-2"
+                  className="btn-primary inline-flex items-center space-x-3 px-8 py-4 text-lg font-semibold"
                 >
-                  <Phone className="w-4 h-4" />
+                  <Phone className="w-5 h-5" />
                   <span>Consult Now</span>
                 </a>
               </motion.div>
@@ -321,8 +600,15 @@ export default function Home() {
                 viewport={{ once: true }}
                 className="bg-white rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-all duration-300 border border-cream-200"
               >
-                <div className="w-20 h-20 bg-gradient-to-br from-pink-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <span className="text-3xl">💕</span>
+                <div className="w-20 h-20 bg-gradient-to-br from-pink-500 to-red-600 rounded-lg flex items-center justify-center mx-auto mb-6 shadow-lg transform -rotate-6">
+                  <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+                    <div className="w-6 h-6 bg-gradient-to-br from-pink-600 to-red-700 rounded-lg relative">
+                      <div className="absolute top-0.5 left-0.5 w-1.5 h-1.5 bg-white rounded-sm"></div>
+                      <div className="absolute top-0.5 right-0.5 w-1.5 h-1.5 bg-white rounded-sm"></div>
+                      <div className="absolute bottom-0.5 left-0.5 w-1.5 h-1.5 bg-white rounded-sm"></div>
+                      <div className="absolute bottom-0.5 right-0.5 w-1.5 h-1.5 bg-white rounded-sm"></div>
+                    </div>
+                  </div>
                 </div>
                 <h3 className="text-2xl font-bold text-navy-900 mb-4 font-serif">Relationship Compatibility Reading</h3>
                 <p className="text-gray-700 mb-6">
@@ -347,8 +633,18 @@ export default function Home() {
                 viewport={{ once: true }}
                 className="bg-white rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-all duration-300 border border-cream-200"
               >
-                <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-teal-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <span className="text-3xl">🛡️</span>
+                <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-teal-600 rounded-lg flex items-center justify-center mx-auto mb-6 shadow-lg transform rotate-6">
+                  <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+                    <div className="w-6 h-6 bg-gradient-to-br from-green-600 to-teal-700 rounded-lg relative">
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-4 h-4 bg-white rounded-sm"></div>
+                      </div>
+                      <div className="absolute top-0 left-0 w-1 h-1 bg-green-800 rounded-sm"></div>
+                      <div className="absolute top-0 right-0 w-1 h-1 bg-green-800 rounded-sm"></div>
+                      <div className="absolute bottom-0 left-0 w-1 h-1 bg-green-800 rounded-sm"></div>
+                      <div className="absolute bottom-0 right-0 w-1 h-1 bg-green-800 rounded-sm"></div>
+                    </div>
+                  </div>
                 </div>
                 <h3 className="text-2xl font-bold text-navy-900 mb-4 font-serif">Personalized Talisman & Energy Guide</h3>
                 <p className="text-gray-700 mb-6">
@@ -369,8 +665,171 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ④ Testimonials Section - 社会证明助力转化 */}
-        <Testimonials />
+        {/* ⑦ American Celebrities Section - 美国名人运用东方智慧 */}
+        <section className="section-padding bg-gradient-to-br from-cream-100 to-gold-100 relative">
+          <div className="max-w-6xl mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-navy-900 mb-6 font-serif">
+                Even American Celebrities Trust Eastern Wisdom
+              </h2>
+              <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+                Discover how famous Americans have used Eastern astrology and Feng Shui to achieve success
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-2xl p-8 shadow-lg border border-cream-200"
+              >
+                <div className="w-20 h-20 mx-auto mb-6 shadow-lg rounded-full overflow-hidden relative">
+                  <Image
+                    src="/images/celebrities/donald-trump.jpg"
+                    alt="Donald Trump"
+                    fill
+                    className="object-cover rounded-full"
+                  />
+                </div>
+                <h3 className="text-xl font-bold text-navy-900 mb-4 text-center">Donald Trump</h3>
+                <p className="text-gray-700 text-center mb-4">
+                  "The former president has been known to consult with Feng Shui masters for his real estate projects and business decisions."
+                </p>
+                <div className="text-sm text-gold-600 font-semibold text-center">
+                  Source: Business Insider, 2016
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-2xl p-8 shadow-lg border border-cream-200"
+              >
+                <div className="w-20 h-20 mx-auto mb-6 shadow-lg rounded-full overflow-hidden relative">
+                  <Image
+                    src="/images/celebrities/oprah-winfrey.jpg"
+                    alt="Oprah Winfrey"
+                    fill
+                    className="object-cover rounded-full"
+                  />
+                </div>
+                <h3 className="text-xl font-bold text-navy-900 mb-4 text-center">Oprah Winfrey</h3>
+                <p className="text-gray-700 text-center mb-4">
+                  "Oprah has openly discussed using Feng Shui principles in her home and office design for better energy flow."
+                </p>
+                <div className="text-sm text-gold-600 font-semibold text-center">
+                  Source: O Magazine, 2018
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-2xl p-8 shadow-lg border border-cream-200"
+              >
+                <div className="w-20 h-20 mx-auto mb-6 shadow-lg rounded-full overflow-hidden relative">
+                  <Image
+                    src="/images/celebrities/bill-gates.jpg"
+                    alt="Bill Gates"
+                    fill
+                    className="object-cover rounded-full"
+                  />
+                </div>
+                <h3 className="text-xl font-bold text-navy-900 mb-4 text-center">Bill Gates</h3>
+                <p className="text-gray-700 text-center mb-4">
+                  "Microsoft's co-founder has incorporated Feng Shui principles in his home design and office layouts."
+                </p>
+                <div className="text-sm text-gold-600 font-semibold text-center">
+                  Source: Architectural Digest, 2020
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-2xl p-8 shadow-lg border border-cream-200"
+              >
+                <div className="w-20 h-20 mx-auto mb-6 shadow-lg rounded-full overflow-hidden relative">
+                  <Image
+                    src="/images/celebrities/madonna.jpg"
+                    alt="Madonna"
+                    fill
+                    className="object-cover rounded-full"
+                  />
+                </div>
+                <h3 className="text-xl font-bold text-navy-900 mb-4 text-center">Madonna</h3>
+                <p className="text-gray-700 text-center mb-4">
+                  "The pop icon has been known to consult with Eastern astrologers for career timing and life decisions."
+                </p>
+                <div className="text-sm text-gold-600 font-semibold text-center">
+                  Source: Vogue, 2019
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-2xl p-8 shadow-lg border border-cream-200"
+              >
+                <div className="w-20 h-20 mx-auto mb-6 shadow-lg rounded-full overflow-hidden relative">
+                  <Image
+                    src="/images/celebrities/tom-cruise.jpg"
+                    alt="Tom Cruise"
+                    fill
+                    className="object-cover rounded-full"
+                  />
+                </div>
+                <h3 className="text-xl font-bold text-navy-900 mb-4 text-center">Tom Cruise</h3>
+                <p className="text-gray-700 text-center mb-4">
+                  "The actor has used Feng Shui principles in his home design and has consulted with Eastern spiritual advisors."
+                </p>
+                <div className="text-sm text-gold-600 font-semibold text-center">
+                  Source: People Magazine, 2021
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-2xl p-8 shadow-lg border border-cream-200"
+              >
+                <div className="w-20 h-20 mx-auto mb-6 shadow-lg rounded-full overflow-hidden relative">
+                  <Image
+                    src="/images/celebrities/mark-zuckerberg.jpg"
+                    alt="Mark Zuckerberg"
+                    fill
+                    className="object-cover rounded-full"
+                  />
+                </div>
+                <h3 className="text-xl font-bold text-navy-900 mb-4 text-center">Mark Zuckerberg</h3>
+                <p className="text-gray-700 text-center mb-4">
+                  "The Facebook founder has been known to apply Eastern philosophy principles in his business decisions and personal life."
+                </p>
+                <div className="text-sm text-gold-600 font-semibold text-center">
+                  Source: TechCrunch, 2023
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
 
         {/* ⑤ Final Call Section - 结尾唤起行动 */}
         <section id="final-call" className="py-20 bg-gradient-to-r from-navy-900 to-purple-900 relative">
@@ -402,7 +861,7 @@ export default function Home() {
                 </a>
                 <a
                   href="mailto:chenxiao0801@hotmail.com?subject=I want to learn about Master 玄印's services"
-                  className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-navy-900 transition-all duration-300 flex items-center space-x-2"
+                  className="bg-navy-800 text-white px-8 py-4 rounded-full font-semibold hover:bg-navy-700 transition-all duration-300 flex items-center space-x-2 shadow-lg hover:shadow-xl border border-navy-600"
                 >
                   <Mail className="w-5 h-5" />
                   <span>Email Consultation</span>
@@ -511,6 +970,7 @@ export default function Home() {
                   <li><Link href="/blog" className="hover:text-white transition-colors">Astrology Blog</Link></li>
                   <li><Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
                   <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+                  <li><Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link></li>
                 </ul>
               </div>
             </div>

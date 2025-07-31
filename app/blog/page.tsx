@@ -10,74 +10,86 @@ export default function Blog() {
   const blogPosts = [
     {
       id: 1,
+      title: "Eastern Wisdom 101: Ancient Knowledge for Modern Americans",
+      excerpt: "Learn how ancient Eastern concepts like BaZi, Five Elements, and Qi translate to modern American life. Practical wisdom for personal growth and success.",
+      author: "Master 玄印",
+      date: "December 20, 2024",
+      readTime: "10 min read",
+      category: "Education",
+      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&h=400&q=80",
+      slug: "eastern-wisdom-101"
+    },
+    {
+      id: 2,
       title: "Understanding BaZi: The Four Pillars of Destiny",
       excerpt: "Discover how your birth date and time create a unique destiny map that reveals your life purpose, career path, and optimal timing for major decisions.",
       author: "Master 玄印",
       date: "January 15, 2025",
       readTime: "8 min read",
       category: "BaZi Basics",
-      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400&q=80",
+      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&h=400&q=80",
       slug: "understanding-bazi-four-pillars-destiny"
     },
     {
-      id: 2,
+      id: 3,
       title: "Finding Your Soulmate: The Art of Relationship Compatibility",
       excerpt: "Learn how Eastern astrology can help you identify true compatibility and build lasting, harmonious relationships that stand the test of time.",
       author: "Master 玄印",
       date: "January 12, 2025",
       readTime: "6 min read",
       category: "Relationships",
-      image: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400&q=80",
+      image: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=800&h=400&q=80",
       slug: "finding-soulmate-relationship-compatibility"
     },
     {
-      id: 3,
+      id: 4,
       title: "Career Timing: When to Make Your Next Big Move",
       excerpt: "Timing is everything in career success. Discover how to identify the optimal periods for job changes, business launches, and professional growth.",
       author: "Master 玄印",
       date: "January 10, 2025",
       readTime: "7 min read",
       category: "Career",
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400&q=80",
+      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&h=400&q=80",
       slug: "career-timing-next-big-move"
     },
     {
-      id: 4,
+      id: 5,
       title: "The Power of Protection: Ancient Talismans and Modern Life",
       excerpt: "Explore how traditional protection methods can enhance your luck, protect you during challenging times, and create positive energy in your life.",
       author: "Master 玄印",
       date: "January 8, 2025",
       readTime: "5 min read",
       category: "Protection",
-      image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400&q=80",
+      image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?auto=format&fit=crop&w=800&h=400&q=80",
       slug: "power-protection-ancient-talismans"
     },
     {
-      id: 5,
+      id: 6,
       title: "Life Purpose Discovery: What Your Birth Chart Reveals",
       excerpt: "Your birth chart is like a cosmic blueprint. Learn how to read the signs that point to your unique life mission and true calling.",
       author: "Master 玄印",
       date: "January 5, 2025",
       readTime: "9 min read",
       category: "Life Purpose",
-      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400&q=80",
+      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&h=400&q=80",
       slug: "life-purpose-discovery-birth-chart"
     },
     {
-      id: 6,
+      id: 7,
       title: "Financial Timing: When to Invest and When to Wait",
       excerpt: "Money flows follow cosmic patterns. Discover the best times to invest, start businesses, or make major financial decisions.",
       author: "Master 玄印",
       date: "January 3, 2025",
       readTime: "6 min read",
       category: "Finance",
-      image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400&q=80",
+      image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&h=400&q=80",
       slug: "financial-timing-invest-wait"
     }
   ]
 
   const categories = [
-    { name: "All", count: 6 },
+    { name: "All", count: 7 },
+    { name: "Education", count: 1 },
     { name: "BaZi Basics", count: 1 },
     { name: "Relationships", count: 1 },
     { name: "Career", count: 1 },

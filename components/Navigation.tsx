@@ -24,54 +24,73 @@ export default function Navigation() {
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled 
-          ? 'bg-navy-900/95 backdrop-blur-md shadow-lg' 
+          ? 'bg-navy-900/95 backdrop-blur-md shadow-xl border-b border-white/10' 
           : 'bg-transparent'
       }`}
     >
       <div className="max-w-6xl mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3">
-            <div className="w-10 h-10 gold-gradient rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-sm">玄</span>
+          <Link href="/" className="flex items-center space-x-4 group">
+            <div className="w-12 h-12 gold-gradient rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+              <span className="text-white font-bold text-lg">玄</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-xl font-display text-white">玄印命理</span>
-              <span className="text-xs text-cream-300 font-medium">FateCompass</span>
+              <span className="text-2xl font-display text-white font-bold">玄印命理</span>
+              <span className="text-sm text-cream-300 font-medium tracking-wide">FateCompass</span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-10">
             <Link 
               href="/" 
-              className="text-cream-200 hover:text-white transition-colors font-medium"
+              className="text-cream-200 hover:text-white transition-colors font-semibold text-lg relative group magnetic-hover"
             >
-              Home
+              <span>Home</span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold-400 group-hover:w-full transition-all duration-300"></span>
             </Link>
             <Link 
               href="/services" 
-              className="text-cream-200 hover:text-white transition-colors font-medium"
+              className="text-cream-200 hover:text-white transition-colors font-semibold text-lg relative group magnetic-hover"
             >
-              Services
+              <span>Services</span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold-400 group-hover:w-full transition-all duration-300"></span>
             </Link>
             <Link 
               href="/blog" 
-              className="text-cream-200 hover:text-white transition-colors font-medium"
+              className="text-cream-200 hover:text-white transition-colors font-semibold text-lg relative group"
             >
-              Blog
+              <span>Blog</span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold-400 group-hover:w-full transition-all duration-300"></span>
             </Link>
             <Link 
               href="/about" 
-              className="text-cream-200 hover:text-white transition-colors font-medium"
+              className="text-cream-200 hover:text-white transition-colors font-semibold text-lg relative group"
             >
-              About
+              <span>About</span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold-400 group-hover:w-full transition-all duration-300"></span>
+            </Link>
+            <Link 
+              href="/wisdom" 
+              className="text-cream-200 hover:text-white transition-colors font-semibold text-lg relative group"
+            >
+              <span>Wisdom</span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold-400 group-hover:w-full transition-all duration-300"></span>
             </Link>
             <Link 
               href="/contact" 
-              className="text-cream-200 hover:text-white transition-colors font-medium"
+              className="text-cream-200 hover:text-white transition-colors font-semibold text-lg relative group"
             >
-              Contact
+              <span>Contact</span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold-400 group-hover:w-full transition-all duration-300"></span>
+            </Link>
+            <Link 
+              href="/privacy" 
+              className="text-cream-200 hover:text-white transition-colors font-semibold text-lg relative group"
+            >
+              <span>Privacy</span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold-400 group-hover:w-full transition-all duration-300"></span>
             </Link>
             
             {/* Search Button */}
@@ -82,9 +101,9 @@ export default function Navigation() {
               href="https://wa.me/8615914228258"
               target="_blank"
               rel="noopener noreferrer"
-              className="gold-gradient text-white px-6 py-2 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center space-x-2"
+              className="btn-primary px-8 py-3 text-lg font-semibold flex items-center space-x-3 hover:scale-105 transition-all duration-300"
             >
-              <Phone className="w-4 h-4" />
+              <Phone className="w-5 h-5" />
               <span>Consult Now</span>
             </a>
           </div>
@@ -135,6 +154,13 @@ export default function Navigation() {
                 onClick={() => setIsOpen(false)}
               >
                 About
+              </Link>
+              <Link 
+                href="/wisdom" 
+                className="block text-cream-200 hover:text-white transition-colors font-medium py-3 touch-manipulation"
+                onClick={() => setIsOpen(false)}
+              >
+                Wisdom
               </Link>
               <Link 
                 href="/contact" 

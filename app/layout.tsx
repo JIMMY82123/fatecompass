@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+        url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80',
         width: 1200,
         height: 630,
         alt: '玄印 · Xuan Yin - Eastern Wisdom for Lost Souls',
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: '玄印 · Xuan Yin - Guided by Eastern Wisdom | Your Destiny. Decoded.',
     description: 'Feeling lost? Let 玄印 guide you with ancient Eastern wisdom.',
-    images: ['https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'],
+    images: ['https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80'],
   },
   robots: {
     index: true,
