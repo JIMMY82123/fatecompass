@@ -65,6 +65,15 @@ const nextConfig = {
             key: 'X-XSS-Protection',
             value: '1; mode=block',
           },
+          // 美国CDN优化
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=3600, s-maxage=86400',
+          },
+          {
+            key: 'CDN-Cache-Control',
+            value: 'public, max-age=86400',
+          },
         ],
       },
       {
@@ -75,6 +84,10 @@ const nextConfig = {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable',
           },
+          {
+            key: 'CDN-Cache-Control',
+            value: 'public, max-age=31536000',
+          },
         ],
       },
       {
@@ -84,6 +97,10 @@ const nextConfig = {
           {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable',
+          },
+          {
+            key: 'CDN-Cache-Control',
+            value: 'public, max-age=31536000',
           },
         ],
       },
@@ -98,6 +115,15 @@ const nextConfig = {
           {
             key: 'Content-Type',
             value: 'video/mp4',
+          },
+          {
+            key: 'CDN-Cache-Control',
+            value: 'public, max-age=31536000',
+          },
+          // 视频流优化
+          {
+            key: 'Accept-Ranges',
+            value: 'bytes',
           },
         ],
       },
