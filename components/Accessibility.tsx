@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
 import { Eye, EyeOff, Volume2, VolumeX, ZoomIn, ZoomOut } from 'lucide-react'
 
 export default function Accessibility() {
@@ -9,8 +8,11 @@ export default function Accessibility() {
   const [highContrast, setHighContrast] = useState(false)
   const [largeText, setLargeText] = useState(false)
   const [reducedMotion, setReducedMotion] = useState(false)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
+    
     // Load saved preferences
     const savedHighContrast = localStorage.getItem('highContrast') === 'true'
     const savedLargeText = localStorage.getItem('largeText') === 'true'
@@ -62,6 +64,10 @@ export default function Accessibility() {
     }
   }
 
+  if (!mounted) {
+    return null
+  }
+
   return (
     <>
       {/* Accessibility Toggle Button */}
@@ -76,12 +82,11 @@ export default function Accessibility() {
       </button>
 
       {/* Accessibility Panel */}
-      <motion.div
-        initial={{ opacity: 0, x: -100 }}
-        animate={{ opacity: isOpen ? 1 : 0, x: isOpen ? 0 : -100 }}
-        transition={{ duration: 0.3 }}
-        className={`fixed bottom-20 left-4 z-50 bg-white rounded-lg shadow-xl border border-gray-200 p-4 min-w-[250px] ${
-          isOpen ? 'pointer-events-auto' : 'pointer-events-none'
+      <div
+        className={`fixed bottom-20 left-4 z-50 bg-white rounded-lg shadow-xl border border-gray-200 p-4 min-w-[250px] transition-all duration-300 transform ${
+          isOpen 
+            ? 'opacity-100 translate-x-0 pointer-events-auto' 
+            : 'opacity-0 -translate-x-full pointer-events-none'
         }`}
       >
         <h3 className="font-bold text-navy-900 mb-4 text-lg">Accessibility</h3>
@@ -153,7 +158,7 @@ export default function Accessibility() {
             These settings help make our website more accessible for all users.
           </p>
         </div>
-      </motion.div>
+      </div>
     </>
   )
 } 

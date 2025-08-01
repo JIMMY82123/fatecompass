@@ -16,6 +16,9 @@ export default function SimpleTest() {
         >
           点击我
         </button>
+        <p className="text-sm text-gray-500 mt-4">
+          如果这个按钮工作，说明React基本功能正常
+        </p>
       </div>
     </div>
   )

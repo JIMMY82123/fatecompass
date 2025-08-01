@@ -183,7 +183,7 @@ export function useSafeArea() {
 
 // 移动端性能监控Hook
 export function usePerformanceMonitor() {
-  const [performance, setPerformance] = useState({
+  const [perfMetrics, setPerfMetrics] = useState({
     loadTime: 0,
     memoryUsage: 0,
     frameRate: 0
@@ -192,15 +192,15 @@ export function usePerformanceMonitor() {
   useEffect(() => {
     // 监控页面加载时间
     const measureLoadTime = () => {
-      const loadTime = performance.now()
-      setPerformance(prev => ({ ...prev, loadTime }))
+      const loadTime = window.performance.now()
+      setPerfMetrics(prev => ({ ...prev, loadTime }))
     }
 
     // 监控内存使用
     const measureMemory = () => {
-      if ('memory' in performance) {
-        const memory = (performance as any).memory
-        setPerformance(prev => ({ 
+      if ('memory' in window.performance) {
+        const memory = (window.performance as any).memory
+        setPerfMetrics(prev => ({ 
           ...prev, 
           memoryUsage: memory.usedJSHeapSize / 1024 / 1024 // MB
         }))
@@ -209,15 +209,15 @@ export function usePerformanceMonitor() {
 
     // 监控帧率
     let frameCount = 0
-    let lastTime = performance.now()
+    let lastTime = window.performance.now()
     
     const measureFrameRate = () => {
       frameCount++
-      const currentTime = performance.now()
+      const currentTime = window.performance.now()
       
       if (currentTime - lastTime >= 1000) {
         const fps = Math.round((frameCount * 1000) / (currentTime - lastTime))
-        setPerformance(prev => ({ ...prev, frameRate: fps }))
+        setPerfMetrics(prev => ({ ...prev, frameRate: fps }))
         frameCount = 0
         lastTime = currentTime
       }
@@ -237,5 +237,5 @@ export function usePerformanceMonitor() {
     }
   }, [])
 
-  return performance
+  return perfMetrics
 } 

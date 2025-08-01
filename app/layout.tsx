@@ -90,23 +90,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <head>
-        {/* Preload critical resources */}
-        <link rel="preload" href="/images/master-xuan-yin.jpg" as="image" />
-        <link rel="preload" href="/images/celebrities/donald-trump.jpg" as="image" />
-        <link rel="preload" href="/images/celebrities/oprah-winfrey.jpg" as="image" />
-        
         {/* DNS prefetch for external domains */}
         <link rel="dns-prefetch" href="//images.unsplash.com" />
-        <link rel="dns-prefetch" href="//ui-avatars.com" />
-        <link rel="dns-prefetch" href="//upload.wikimedia.org" />
         
         {/* Preconnect to external domains */}
         <link rel="preconnect" href="https://images.unsplash.com" />
-        <link rel="preconnect" href="https://ui-avatars.com" />
-        <link rel="preconnect" href="https://upload.wikimedia.org" />
-        
-        {/* Manifest for PWA */}
-        <link rel="manifest" href="/manifest.json" />
         
         {/* Theme color */}
         <meta name="theme-color" content="#1e3a8a" />

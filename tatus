@@ -1,0 +1,5 @@
+[33m28f772e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m 重新创建MobileOptimizer组件，修复编译错误
+[33md533cdc[m 修复MobileOptimizer重复minHeight属性错误
+[33m926b0f7[m 修复MobileOptimizer children属性错误
+[33mc2dfa37[m 实现自动轮播横向滑动卡片：3秒自动滚动，鼠标悬停暂停，箭头控制
+[33m2f69f76[m 重新设计为静态横向多卡片布局，类似参考图片效果

@@ -90,7 +90,7 @@ export default function PerformanceMonitor() {
         layoutShiftObserverRef.current = new PerformanceObserver((list) => {
           let layoutShiftScore = 0
           for (const entry of list.getEntries()) {
-            if (entry.hadRecentInput) continue
+            if ((entry as any).hadRecentInput) continue
             layoutShiftScore += (entry as any).value
           }
           setMetrics(prev => ({ ...prev, layoutShifts: layoutShiftScore }))
