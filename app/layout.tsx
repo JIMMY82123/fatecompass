@@ -116,10 +116,11 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       </head>
       <body className={`${inter.className} antialiased`}>
-        <MobileOptimizer />
-        <PerformanceMonitor />
-        <Accessibility />
-        {children}
+        <MobileOptimizer>
+          <PerformanceMonitor />
+          <Accessibility />
+          {children}
+        </MobileOptimizer>
       </body>
     </html>
   )

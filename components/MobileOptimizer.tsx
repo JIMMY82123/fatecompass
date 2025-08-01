@@ -88,8 +88,8 @@ export default function MobileOptimizer({ children }: MobileOptimizerProps) {
 
       // 优化滚动性能
       const optimizeScroll = () => {
-        document.body.style.webkitOverflowScrolling = 'touch'
-        document.body.style.overflowScrolling = 'touch'
+        ;(document.body.style as any).webkitOverflowScrolling = 'touch'
+        ;(document.body.style as any).overflowScrolling = 'touch'
       }
 
       reduceAnimations()

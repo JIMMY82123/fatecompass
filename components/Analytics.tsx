@@ -131,7 +131,7 @@ class Analytics {
             name: entry.name,
             duration: entry.duration,
             size: (entry as any).transferSize,
-            type: entry.initiatorType
+            type: (entry as any).initiatorType
           })
         }
       })
