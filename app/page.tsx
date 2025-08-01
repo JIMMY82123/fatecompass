@@ -393,11 +393,14 @@ export default function Home() {
         </section>
 
         {/* ④ Testimonials Section */}
+        <Testimonials />
+
+        {/* ④b Custom Testimonials Carousel */}
         <section className="py-20 bg-gradient-to-br from-navy-900 to-purple-900 relative">
           <div className="max-w-6xl mx-auto px-4">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 font-serif">
-                See what our clients say about their BaZi AI analysis journey
+                More Client Stories
               </h2>
             </div>
 
