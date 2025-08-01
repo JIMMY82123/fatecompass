@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { Star, ChevronLeft, ChevronRight } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Star, ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react'
 import Image from 'next/image'
 
 const testimonials = [
@@ -91,45 +91,65 @@ const testimonials = [
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+  const [isPaused, setIsPaused] = useState(false)
+  const carouselRef = useRef<HTMLDivElement>(null)
+  const autoPlayRef = useRef<NodeJS.Timeout>()
 
   // Auto-play functionality
   useEffect(() => {
-    if (!isAutoPlaying) return
+    if (!isAutoPlaying || isPaused) return
 
-    const interval = setInterval(() => {
+    autoPlayRef.current = setInterval(() => {
       setCurrentIndex((prevIndex) => 
-        prevIndex === testimonials.length - 3 ? 0 : prevIndex + 1
+        prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
       )
-    }, 5000)
+    }, 4000)
 
-    return () => clearInterval(interval)
-  }, [isAutoPlaying])
+    return () => {
+      if (autoPlayRef.current) {
+        clearInterval(autoPlayRef.current)
+      }
+    }
+  }, [isAutoPlaying, isPaused])
+
+  // Pause auto-play on hover
+  const handleMouseEnter = () => {
+    setIsPaused(true)
+  }
+
+  const handleMouseLeave = () => {
+    setIsPaused(false)
+  }
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => 
-      prevIndex === testimonials.length - 3 ? 0 : prevIndex + 1
+      prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
     )
-    setIsAutoPlaying(false)
   }
 
   const prevSlide = () => {
     setCurrentIndex((prevIndex) => 
-      prevIndex === 0 ? testimonials.length - 3 : prevIndex - 1
+      prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
     )
-    setIsAutoPlaying(false)
   }
 
-  const visibleTestimonials = testimonials.slice(currentIndex, currentIndex + 3)
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index)
+  }
+
+  const toggleAutoPlay = () => {
+    setIsAutoPlaying(!isAutoPlaying)
+  }
 
   return (
-    <section className="section-padding bg-cream-100 relative">
+    <section className="section-padding bg-gradient-to-br from-cream-50 to-gold-50 relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-navy-900 mb-8 font-serif leading-tight">
             Real People, Real Results
@@ -139,87 +159,146 @@ export default function Testimonials() {
           </p>
         </motion.div>
 
-        {/* Testimonials Carousel */}
-        <div className="relative">
-          {/* Navigation Buttons */}
-          <button
-            onClick={prevSlide}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-navy-900 p-4 rounded-full shadow-xl transition-all duration-300 hover:scale-110 border border-cream-200 glow-effect magnetic-hover"
-            aria-label="Previous testimonials"
-          >
-            <ChevronLeft className="w-7 h-7" />
-          </button>
+        {/* Horizontal Auto-scrolling Carousel */}
+        <div 
+          className="relative testimonial-carousel carousel-touch-optimized"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          {/* Carousel Container */}
+          <div className="relative overflow-hidden rounded-3xl carousel-performance-optimized">
+            <div 
+              ref={carouselRef}
+              className="flex carousel-slide-transition carousel-memory-optimized"
+              style={{
+                transform: `translateX(-${currentIndex * 100}%)`,
+                width: `${testimonials.length * 100}%`
+              }}
+            >
+              {testimonials.map((testimonial, index) => (
+                <div
+                  key={testimonial.id}
+                  className="w-full flex-shrink-0 px-4"
+                  style={{ width: `${100 / testimonials.length}%` }}
+                >
+                                     <motion.div
+                     initial={{ opacity: 0, scale: 0.9 }}
+                     animate={{ opacity: 1, scale: 1 }}
+                     transition={{ duration: 0.5, delay: 0.1 }}
+                     className="card-elevated bg-white/95 backdrop-blur-sm rounded-3xl p-8 md:p-12 text-center hover:scale-105 transition-all duration-300 glass-card float-card h-full flex flex-col justify-center testimonial-card"
+                   >
+                    {/* Avatar */}
+                    <div className="w-16 h-16 md:w-20 md:h-20 mx-auto mb-6 relative testimonial-avatar">
+                      <Image
+                        src={testimonial.avatar}
+                        alt={testimonial.name}
+                        width={80}
+                        height={80}
+                        className="rounded-full object-cover shadow-lg border-4 border-gold-100"
+                      />
+                      <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-gold-500 rounded-full flex items-center justify-center">
+                        <span className="text-white text-xs">✓</span>
+                      </div>
+                    </div>
 
-          <button
-            onClick={nextSlide}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-navy-900 p-4 rounded-full shadow-xl transition-all duration-300 hover:scale-110 border border-cream-200 glow-effect magnetic-hover"
-            aria-label="Next testimonials"
-          >
-            <ChevronRight className="w-7 h-7" />
-          </button>
+                    {/* Category Badge */}
+                    <div className="inline-block bg-gradient-to-r from-gold-100 to-gold-200 text-gold-800 text-sm font-semibold px-4 py-2 rounded-full mb-6 shadow-sm testimonial-category">
+                      {testimonial.category}
+                    </div>
 
-          {/* Testimonials Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 px-16">
-            {visibleTestimonials.map((testimonial, index) => (
+                    {/* Review */}
+                    <div className="relative mb-6">
+                      <div className="absolute -top-2 -left-2 text-4xl text-gold-200">"</div>
+                      <p className="text-base md:text-lg text-gray-700 italic leading-relaxed px-4 testimonial-text">
+                        {testimonial.review}
+                      </p>
+                      <div className="absolute -bottom-2 -right-2 text-4xl text-gold-200">"</div>
+                    </div>
+
+                    {/* Name */}
+                    <h3 className="text-lg md:text-xl font-bold text-navy-900 mb-3 font-serif testimonial-name">
+                      {testimonial.name}
+                    </h3>
+
+                    {/* Rating */}
+                    <div className="flex justify-center space-x-1 mb-4">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 text-gold-500 fill-current" />
+                      ))}
+                    </div>
+
+                    {/* Verified Badge */}
+                    <div className="inline-flex items-center space-x-1 text-xs text-green-600 bg-green-50 px-2 py-1 rounded-full">
+                      <span>✓</span>
+                      <span>Verified</span>
+                    </div>
+                  </motion.div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Navigation Controls */}
+          <div className="flex justify-center items-center mt-8 space-x-4 carousel-controls">
+            {/* Previous Button */}
+            <button
+              onClick={prevSlide}
+              className="bg-white/90 hover:bg-white text-navy-900 p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 border border-cream-200 glow-effect carousel-nav-button carousel-accessible"
+              aria-label="Previous testimonial"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+
+            {/* Auto-play Toggle */}
+            <button
+              onClick={toggleAutoPlay}
+              className="bg-white/90 hover:bg-white text-navy-900 p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 border border-cream-200 carousel-control-button carousel-accessible"
+              aria-label={isAutoPlaying ? "Pause auto-play" : "Start auto-play"}
+            >
+              {isAutoPlaying ? (
+                <Pause className="w-5 h-5" />
+              ) : (
+                <Play className="w-5 h-5" />
+              )}
+            </button>
+
+            {/* Next Button */}
+            <button
+              onClick={nextSlide}
+              className="bg-white/90 hover:bg-white text-navy-900 p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 border border-cream-200 glow-effect carousel-nav-button carousel-accessible"
+              aria-label="Next testimonial"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* Progress Bar */}
+          <div className="mt-6">
+            <div className="w-full bg-gray-200 rounded-full h-2 carousel-progress">
               <motion.div
-                key={testimonial.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="card-elevated bg-white rounded-3xl p-10 text-center hover:scale-105 transition-all duration-300 glass-card float-card"
-              >
-                {/* Avatar */}
-                <div className="w-20 h-20 mx-auto mb-8 relative">
-                  <Image
-                    src={testimonial.avatar}
-                    alt={testimonial.name}
-                    width={80}
-                    height={80}
-                    className="rounded-full object-cover shadow-lg"
-                  />
-                </div>
-
-                {/* Category Badge */}
-                <div className="inline-block bg-gold-100 text-gold-800 text-sm font-semibold px-4 py-2 rounded-full mb-6">
-                  {testimonial.category}
-                </div>
-
-                {/* Review */}
-                <p className="text-lg text-gray-700 mb-6 italic leading-relaxed">
-                  "{testimonial.review}"
-                </p>
-
-                {/* Name */}
-                <h3 className="text-xl font-bold text-navy-900 mb-4 font-serif">
-                  {testimonial.name}
-                </h3>
-
-                {/* Rating */}
-                <div className="flex justify-center space-x-1">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 text-gold-500 fill-current" />
-                  ))}
-                </div>
-              </motion.div>
-            ))}
+                className="bg-gradient-to-r from-gold-400 to-gold-600 h-2 rounded-full"
+                initial={{ width: 0 }}
+                animate={{ width: `${((currentIndex + 1) / testimonials.length) * 100}%` }}
+                transition={{ duration: 0.3 }}
+              />
+            </div>
+            <div className="text-center mt-2 text-sm text-gray-600 carousel-progress-text">
+              {currentIndex + 1} / {testimonials.length}
+            </div>
           </div>
 
           {/* Dots Indicator */}
-          <div className="flex justify-center mt-8 space-x-2">
-            {Array.from({ length: Math.ceil(testimonials.length / 3) }).map((_, index) => (
+          <div className="flex justify-center mt-6 space-x-2 carousel-dots">
+            {testimonials.map((_, index) => (
               <button
                 key={index}
-                onClick={() => {
-                  setCurrentIndex(index * 3)
-                  setIsAutoPlaying(false)
-                }}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === Math.floor(currentIndex / 3)
-                    ? 'bg-gold-500'
+                onClick={() => goToSlide(index)}
+                className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all duration-300 carousel-dot carousel-accessible ${
+                  index === currentIndex
+                    ? 'bg-gold-500 scale-125 active'
                     : 'bg-gray-300 hover:bg-gray-400'
                 }`}
-                aria-label={`Go to slide ${index + 1}`}
+                aria-label={`Go to testimonial ${index + 1}`}
               />
             ))}
           </div>
@@ -231,26 +310,28 @@ export default function Testimonials() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
-          className="text-center mt-12"
+          className="text-center mt-16"
         >
-          <div className="flex flex-wrap justify-center items-center gap-8 text-gray-600">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                <span className="text-white text-sm font-bold">✓</span>
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+            <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8 text-gray-700">
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                  <span className="text-white text-sm font-bold">✓</span>
+                </div>
+                <span className="font-semibold text-sm md:text-base">100% Confidential</span>
               </div>
-              <span className="font-semibold">100% Confidential</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-                <span className="text-white text-sm font-bold">✓</span>
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                  <span className="text-white text-sm font-bold">✓</span>
+                </div>
+                <span className="font-semibold text-sm md:text-base">Ancient Wisdom</span>
               </div>
-              <span className="font-semibold">Ancient Wisdom</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
-                <span className="text-white text-sm font-bold">✓</span>
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
+                  <span className="text-white text-sm font-bold">✓</span>
+                </div>
+                <span className="font-semibold text-sm md:text-base">Proven Results</span>
               </div>
-              <span className="font-semibold">Proven Results</span>
             </div>
           </div>
         </motion.div>

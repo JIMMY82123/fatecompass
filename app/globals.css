@@ -1432,3 +1432,208 @@ button:active {
 .non-critical-styles.loaded {
   display: block;
 }
+
+/* 横向轮播移动端优化 */
+
+/* 轮播容器优化 */
+.testimonial-carousel {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* 移动端轮播卡片优化 */
+@media (max-width: 768px) {
+  .testimonial-card {
+    min-height: 300px;
+    padding: 1.5rem;
+  }
+  
+  .testimonial-avatar {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .testimonial-text {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+  
+  .testimonial-name {
+    font-size: 1rem;
+  }
+  
+  .testimonial-category {
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* 轮播导航按钮移动端优化 */
+@media (max-width: 768px) {
+  .carousel-nav-button {
+    width: 40px;
+    height: 40px;
+    padding: 0.5rem;
+  }
+  
+  .carousel-nav-button svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+/* 轮播进度条移动端优化 */
+@media (max-width: 768px) {
+  .carousel-progress {
+    height: 3px;
+  }
+  
+  .carousel-progress-text {
+    font-size: 0.75rem;
+  }
+}
+
+/* 轮播指示点移动端优化 */
+@media (max-width: 768px) {
+  .carousel-dots {
+    gap: 0.25rem;
+  }
+  
+  .carousel-dot {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .carousel-dot.active {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+/* 轮播自动播放控制移动端优化 */
+@media (max-width: 768px) {
+  .carousel-controls {
+    gap: 0.75rem;
+  }
+  
+  .carousel-control-button {
+    width: 36px;
+    height: 36px;
+    padding: 0.5rem;
+  }
+}
+
+/* 轮播触摸优化 */
+.carousel-touch-optimized {
+  touch-action: pan-y pinch-zoom;
+}
+
+/* 轮播滑动动画优化 */
+.carousel-slide-transition {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 轮播卡片悬停效果移动端优化 */
+@media (hover: none) and (pointer: coarse) {
+  .testimonial-card:hover {
+    transform: none;
+  }
+  
+  .testimonial-card:active {
+    transform: scale(0.98);
+  }
+}
+
+/* 轮播加载状态 */
+.carousel-loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-loading::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: carousel-shimmer 1.5s infinite;
+}
+
+@keyframes carousel-shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* 轮播响应式布局 */
+@media (max-width: 640px) {
+  .testimonial-section {
+    padding: 2rem 1rem;
+  }
+  
+  .testimonial-title {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+  
+  .testimonial-subtitle {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .testimonial-section {
+    padding: 3rem 2rem;
+  }
+  
+  .testimonial-title {
+    font-size: 3rem;
+  }
+  
+  .testimonial-subtitle {
+    font-size: 1.25rem;
+  }
+}
+
+/* 轮播无障碍优化 */
+.carousel-accessible {
+  outline: none;
+}
+
+.carousel-accessible:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* 轮播键盘导航优化 */
+.carousel-keyboard-nav {
+  scroll-behavior: smooth;
+}
+
+/* 轮播性能优化 */
+.carousel-performance-optimized {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* 轮播内存优化 */
+.carousel-memory-optimized {
+  contain: layout style paint;
+}
+
+/* 轮播动画优化 */
+@media (prefers-reduced-motion: reduce) {
+  .carousel-slide-transition {
+    transition: none;
+  }
+  
+  .testimonial-card {
+    transition: none;
+  }
+  
+  .carousel-nav-button {
+    transition: none;
+  }
+}
