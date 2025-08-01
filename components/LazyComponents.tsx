@@ -9,7 +9,7 @@ export const LazyTestimonials = dynamic(() => import('./Testimonials'), {
   ssr: false,
 })
 
-export const LazyVideoTestimonials = dynamic(() => import('./VideoTestimonials'), {
+export const LazyVideoTestimonials = dynamic(() => import('./VideoTestimonialsSimple'), {
   loading: () => <VideoTestimonialsSkeleton />,
   ssr: false,
 })
