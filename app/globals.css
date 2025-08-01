@@ -1171,3 +1171,264 @@ button:active {
 .performance-indicator.show {
   display: block;
 }
+
+/* CLS布局偏移修复 */
+
+/* 1. 图片占位符和预加载 */
+.banner-image {
+  aspect-ratio: 16/9;
+  background: #f5f5f5;
+  position: relative;
+  overflow: hidden;
+}
+
+.banner-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* 2. 内容区域预占位 */
+.content-placeholder {
+  min-height: 200px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+}
+
+/* 3. 字体预加载占位符 */
+.font-placeholder {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  visibility: hidden;
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+
+/* 4. 图片容器固定尺寸 */
+.image-container {
+  position: relative;
+  overflow: hidden;
+  background: #f3f4f6;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+.image-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-error {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fef2f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #dc2626;
+  font-size: 14px;
+}
+
+/* 5. 加载动画 */
+.loading-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #e5e7eb;
+  border-top: 2px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 6. 防止布局偏移的通用样式 */
+.prevent-cls {
+  contain: layout;
+  will-change: auto;
+}
+
+/* 7. 视频容器固定尺寸 */
+.video-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #000;
+  overflow: hidden;
+}
+
+.video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 8. 卡片容器固定高度 */
+.card-container {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 9. 按钮容器固定尺寸 */
+.button-container {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 10. 文本容器预占位 */
+.text-container {
+  min-height: 1.2em;
+  line-height: 1.2;
+}
+
+/* 11. 列表容器预占位 */
+.list-container {
+  min-height: 100px;
+}
+
+.list-item {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+/* 12. 模态框容器固定尺寸 */
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.modal-content {
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: auto;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+/* 13. 导航栏固定高度 */
+.navbar-container {
+  height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* 14. 页脚固定高度 */
+.footer-container {
+  min-height: 200px;
+  background: #1f2937;
+  color: white;
+  padding: 40px 0;
+}
+
+/* 15. 侧边栏固定宽度 */
+.sidebar-container {
+  width: 280px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  background: white;
+  border-right: 1px solid #e5e7eb;
+  overflow-y: auto;
+}
+
+/* 16. 主内容区域自适应 */
+.main-content {
+  margin-left: 280px;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* 17. 响应式布局修复 */
+@media (max-width: 768px) {
+  .sidebar-container {
+    width: 100%;
+    position: relative;
+    height: auto;
+  }
+  
+  .main-content {
+    margin-left: 0;
+  }
+  
+  .modal-content {
+    max-width: 95vw;
+    max-height: 95vh;
+  }
+}
+
+/* 18. 字体加载优化 */
+.font-loading {
+  font-display: swap;
+}
+
+/* 19. 关键CSS内联 */
+.critical-styles {
+  /* 这些样式会在HTML中内联，确保首屏渲染 */
+  display: block;
+  visibility: visible;
+}
+
+/* 20. 非关键CSS延迟加载 */
+.non-critical-styles {
+  /* 这些样式会在页面加载后异步加载 */
+  display: none;
+}
+
+.non-critical-styles.loaded {
+  display: block;
+}

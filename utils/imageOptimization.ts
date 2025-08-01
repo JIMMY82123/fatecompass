@@ -1,149 +1,226 @@
-// 图片优化工具函数
-
-export interface ImageOptimizationOptions {
-  quality?: number
-  format?: 'webp' | 'avif' | 'jpeg' | 'png'
+// 图片优化工具
+export interface ImageOptimizationConfig {
+  src: string
+  alt: string
   width?: number
   height?: number
-  fit?: 'cover' | 'contain' | 'fill' | 'inside' | 'outside'
+  quality?: number
+  format?: 'webp' | 'avif' | 'jpeg'
+  lazy?: boolean
+  placeholder?: string
 }
 
-// 生成优化的图片URL
-export function getOptimizedImageUrl(
-  src: string,
-  options: ImageOptimizationOptions = {}
-): string {
-  const {
-    quality = 80,
-    format = 'webp',
-    width,
-    height,
-    fit = 'cover'
-  } = options
+export class ImageOptimizer {
+  private static instance: ImageOptimizer
+  private imageCache: Map<string, string> = new Map()
 
-  // 如果是本地图片，使用Next.js Image优化
-  if (src.startsWith('/')) {
-    const params = new URLSearchParams()
-    if (quality) params.set('q', quality.toString())
-    if (format) params.set('f', format)
-    if (width) params.set('w', width.toString())
-    if (height) params.set('h', height.toString())
-    if (fit) params.set('fit', fit)
-    
-    return `${src}?${params.toString()}`
-  }
-
-  // 如果是外部图片，返回原URL
-  return src
-}
-
-// 预加载图片
-export function preloadImage(src: string): Promise<void> {
-  return new Promise((resolve, reject) => {
-    const img = new Image()
-    img.onload = () => resolve()
-    img.onerror = reject
-    img.src = src
-  })
-}
-
-// 批量预加载图片
-export function preloadImages(sources: string[]): Promise<void[]> {
-  return Promise.all(sources.map(preloadImage))
-}
-
-// 获取图片尺寸
-export function getImageDimensions(src: string): Promise<{ width: number; height: number }> {
-  return new Promise((resolve, reject) => {
-    const img = new Image()
-    img.onload = () => {
-      resolve({ width: img.naturalWidth, height: img.naturalHeight })
+  static getInstance(): ImageOptimizer {
+    if (!ImageOptimizer.instance) {
+      ImageOptimizer.instance = new ImageOptimizer()
     }
-    img.onerror = reject
-    img.src = src
-  })
-}
-
-// 生成响应式图片srcset
-export function generateSrcSet(
-  src: string,
-  widths: number[] = [640, 750, 828, 1080, 1200, 1920],
-  format: 'webp' | 'avif' = 'webp'
-): string {
-  return widths
-    .map(width => `${getOptimizedImageUrl(src, { width, format })} ${width}w`)
-    .join(', ')
-}
-
-// 生成图片的sizes属性
-export function generateSizes(
-  breakpoints: { [key: string]: string } = {
-    '(max-width: 640px)': '100vw',
-    '(max-width: 768px)': '50vw',
-    '(max-width: 1024px)': '33vw',
-    '(max-width: 1280px)': '25vw',
-    '(min-width: 1281px)': '20vw'
+    return ImageOptimizer.instance
   }
-): string {
-  return Object.entries(breakpoints)
-    .map(([query, size]) => `${query} ${size}`)
-    .join(', ')
-}
 
-// 检查图片是否已缓存
-export function isImageCached(src: string): boolean {
-  const img = new Image()
-  img.src = src
-  return img.complete
-}
+  // 生成WebP格式的图片URL
+  generateWebPUrl(src: string, quality: number = 80): string {
+    if (this.imageCache.has(src)) {
+      return this.imageCache.get(src)!
+    }
 
-// 图片懒加载Intersection Observer
-export function createImageLazyLoader(
-  callback: (entry: IntersectionObserverEntry) => void,
-  options: IntersectionObserverInit = {
-    rootMargin: '50px 0px',
-    threshold: 0.1
+    // 如果是外部图片，直接返回
+    if (src.startsWith('http')) {
+      return src
+    }
+
+    // 为本地图片添加WebP支持
+    const webpUrl = src.replace(/\.(jpg|jpeg|png)$/i, '.webp')
+    this.imageCache.set(src, webpUrl)
+    return webpUrl
   }
-): IntersectionObserver {
-  return new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        callback(entry)
-      }
+
+  // 生成响应式图片srcset
+  generateSrcSet(src: string, sizes: number[] = [320, 640, 960, 1280]): string {
+    return sizes
+      .map(size => `${this.generateWebPUrl(src)} ${size}w`)
+      .join(', ')
+  }
+
+  // 生成图片占位符
+  generatePlaceholder(width: number, height: number, color: string = '#f3f4f6'): string {
+    return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='${width}' height='${height}' viewBox='0 0 ${width} ${height}'%3E%3Crect width='${width}' height='${height}' fill='${color}'/%3E%3C/svg%3E`
+  }
+
+  // 预加载关键图片
+  preloadImage(src: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const img = new Image()
+      img.onload = () => resolve()
+      img.onerror = reject
+      img.src = src
     })
-  }, options)
+  }
+
+  // 批量预加载图片
+  async preloadImages(sources: string[]): Promise<void> {
+    const promises = sources.map(src => this.preloadImage(src))
+    await Promise.allSettled(promises)
+  }
 }
 
-// 压缩图片数据URL
-export function compressImageDataUrl(
-  dataUrl: string,
-  quality: number = 0.8,
-  maxWidth: number = 1920
-): Promise<string> {
-  return new Promise((resolve) => {
-    const canvas = document.createElement('canvas')
-    const ctx = canvas.getContext('2d')!
+// 懒加载Hook
+export function useLazyImage(src: string, placeholder?: string) {
+  const [imageSrc, setImageSrc] = useState(placeholder || src)
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [error, setError] = useState(false)
+
+  useEffect(() => {
+    if (!src) return
+
     const img = new Image()
     
     img.onload = () => {
-      // 计算新尺寸
-      let { width, height } = img
-      if (width > maxWidth) {
-        height = (height * maxWidth) / width
-        width = maxWidth
-      }
-      
-      canvas.width = width
-      canvas.height = height
-      
-      // 绘制图片
-      ctx.drawImage(img, 0, 0, width, height)
-      
-      // 转换为压缩的data URL
-      const compressedDataUrl = canvas.toDataURL('image/jpeg', quality)
-      resolve(compressedDataUrl)
+      setImageSrc(src)
+      setIsLoaded(true)
     }
     
-    img.src = dataUrl
-  })
+    img.onerror = () => {
+      setError(true)
+      setIsLoaded(true)
+    }
+    
+    img.src = src
+
+    // 清理函数
+    return () => {
+      img.onload = null
+      img.onerror = null
+    }
+  }, [src])
+
+  return { imageSrc, isLoaded, error }
+}
+
+// 图片组件
+export function OptimizedImage({
+  src,
+  alt,
+  width,
+  height,
+  className,
+  lazy = true,
+  priority = false,
+  ...props
+}: {
+  src: string
+  alt: string
+  width?: number
+  height?: number
+  className?: string
+  lazy?: boolean
+  priority?: boolean
+} & React.ImgHTMLAttributes<HTMLImageElement>) {
+  const optimizer = ImageOptimizer.getInstance()
+  const webpSrc = optimizer.generateWebPUrl(src)
+  const placeholder = optimizer.generatePlaceholder(width || 400, height || 300)
+  
+  const { imageSrc, isLoaded, error } = useLazyImage(webpSrc, placeholder)
+
+  return (
+    <div 
+      className={`image-container ${className || ''}`}
+      style={{
+        width: width ? `${width}px` : '100%',
+        height: height ? `${height}px` : 'auto',
+        position: 'relative',
+        overflow: 'hidden'
+      }}
+    >
+      <img
+        src={imageSrc}
+        alt={alt}
+        width={width}
+        height={height}
+        loading={lazy && !priority ? 'lazy' : 'eager'}
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          transition: 'opacity 0.3s ease',
+          opacity: isLoaded ? 1 : 0.7
+        }}
+        {...props}
+      />
+      {!isLoaded && !error && (
+        <div 
+          className="image-placeholder"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            background: '#f3f4f6',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          <div className="loading-spinner"></div>
+        </div>
+      )}
+      {error && (
+        <div 
+          className="image-error"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            background: '#fef2f2',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#dc2626'
+          }}
+        >
+          图片加载失败
+        </div>
+      )}
+    </div>
+  )
+}
+
+// 背景图片优化组件
+export function OptimizedBackgroundImage({
+  src,
+  children,
+  className,
+  ...props
+}: {
+  src: string
+  children: React.ReactNode
+  className?: string
+} & React.HTMLAttributes<HTMLDivElement>) {
+  const optimizer = ImageOptimizer.getInstance()
+  const webpSrc = optimizer.generateWebPUrl(src)
+  const { imageSrc, isLoaded } = useLazyImage(webpSrc)
+
+  return (
+    <div
+      className={`optimized-bg-image ${className || ''}`}
+      style={{
+        backgroundImage: `url(${imageSrc})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        transition: 'opacity 0.3s ease',
+        opacity: isLoaded ? 1 : 0.7,
+        ...props.style
+      }}
+      {...props}
+    >
+      {children}
+    </div>
+  )
 } 
