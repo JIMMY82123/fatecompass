@@ -833,3 +833,341 @@ body {
     backdrop-filter: blur(2px);
   }
 }
+
+/* 移动端优化和用户体验改进 */
+
+/* 1. 按钮交互反馈增强 */
+button:active {
+  transform: scale(0.98);
+  transition: transform 0.1s ease;
+}
+
+.btn-primary:active,
+.btn-secondary:active {
+  transform: scale(0.95);
+  transition: all 0.1s ease;
+}
+
+/* 2. 移动端底部按钮溢出修复 */
+@media (max-width: 768px) {
+  /* 确保底部按钮不会超出屏幕 */
+  .bottom-button-container {
+    padding-bottom: env(safe-area-inset-bottom, 20px);
+    margin-bottom: 20px;
+  }
+  
+  /* 修复iPhone底部安全区域问题 */
+  .mobile-safe-bottom {
+    padding-bottom: max(20px, env(safe-area-inset-bottom));
+  }
+  
+  /* 确保按钮在移动端有足够的点击区域 */
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* 移动端按钮间距优化 */
+  .mobile-button-group {
+    gap: 12px;
+    padding: 16px;
+  }
+  
+  /* 防止按钮文字换行导致的布局问题 */
+  .mobile-button-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/* 3. 触摸设备优化 */
+@media (hover: none) and (pointer: coarse) {
+  /* 移除hover效果，增强active效果 */
+  .hover-3d:hover,
+  .card-elevated:hover,
+  .glass-card:hover {
+    transform: none;
+  }
+  
+  /* 增强触摸反馈 */
+  .hover-3d:active,
+  .card-elevated:active,
+  .glass-card:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+  
+  /* 优化触摸目标大小 */
+  * {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* 4. 进度指示器优化 */
+.progress-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 1000;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #d4c7a8 0%, #b8a885 100%);
+  transition: width 0.3s ease;
+}
+
+/* 5. 加载状态优化 */
+.loading-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.loading-spinner-optimized {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(212, 199, 168, 0.3);
+  border-top: 3px solid #d4c7a8;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* 6. 错误状态样式 */
+.error-state {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px 0;
+  color: #dc2626;
+}
+
+/* 7. 成功状态样式 */
+.success-state {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px 0;
+  color: #16a34a;
+}
+
+/* 8. 移动端字体大小优化 */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  h2 {
+    font-size: 1.5rem !important;
+    line-height: 1.3 !important;
+  }
+  
+  h3 {
+    font-size: 1.25rem !important;
+    line-height: 1.4 !important;
+  }
+  
+  p {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+  }
+}
+
+/* 9. 移动端间距优化 */
+@media (max-width: 768px) {
+  .mobile-spacing {
+    padding: 16px;
+    margin: 8px;
+  }
+  
+  .mobile-section {
+    padding: 32px 16px;
+  }
+  
+  .mobile-card {
+    margin: 8px 0;
+    padding: 16px;
+  }
+}
+
+/* 10. 可访问性优化 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 11. 高对比度模式支持 */
+@media (prefers-contrast: high) {
+  .btn-primary {
+    border: 2px solid #000;
+  }
+  
+  .card-elevated {
+    border: 1px solid #000;
+  }
+}
+
+/* 12. 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+  .auto-dark {
+    background-color: #1a1a1a;
+    color: #ffffff;
+  }
+  
+  .auto-dark .card-elevated {
+    background-color: #2a2a2a;
+    border-color: #404040;
+  }
+}
+
+/* 13. 性能优化 - 减少重绘 */
+.optimize-repaint {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* 14. 移动端滚动优化 */
+@media (max-width: 768px) {
+  .mobile-scroll {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+  
+  /* 防止iOS橡皮筋效果影响布局 */
+  .mobile-container {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* 15. 移动端键盘优化 */
+@media (max-width: 768px) {
+  .mobile-input {
+    font-size: 16px; /* 防止iOS缩放 */
+  }
+  
+  .mobile-form {
+    padding-bottom: 200px; /* 为键盘留出空间 */
+  }
+}
+
+/* 16. 移动端视频优化 */
+@media (max-width: 768px) {
+  .mobile-video {
+    width: 100%;
+    height: auto;
+    max-height: 50vh;
+  }
+  
+  .mobile-video-container {
+    position: relative;
+    width: 100%;
+    background: #000;
+  }
+}
+
+/* 17. 移动端模态框优化 */
+@media (max-width: 768px) {
+  .mobile-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+  
+  .mobile-modal-content {
+    width: 100%;
+    max-width: 400px;
+    max-height: 80vh;
+    overflow-y: auto;
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+  }
+}
+
+/* 18. 移动端导航优化 */
+@media (max-width: 768px) {
+  .mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #e5e7eb;
+    padding: 8px 0;
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
+    z-index: 100;
+  }
+  
+  .mobile-nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px;
+    font-size: 12px;
+    color: #6b7280;
+  }
+  
+  .mobile-nav-item.active {
+    color: #d4c7a8;
+  }
+}
+
+/* 19. 移动端分享按钮优化 */
+@media (max-width: 768px) {
+  .mobile-share {
+    position: fixed;
+    bottom: 80px;
+    right: 16px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #d4c7a8;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 99;
+  }
+}
+
+/* 20. 移动端性能监控样式 */
+.performance-indicator {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  z-index: 9999;
+  display: none;
+}
+
+.performance-indicator.show {
+  display: block;
+}
