@@ -7,20 +7,76 @@ import Image from 'next/image'
 import { Phone, Mail, Heart, Target, Briefcase, Star, ArrowRight } from 'lucide-react'
 import Navigation from '@/components/Navigation'
 import Testimonials from '@/components/Testimonials'
-import VideoTestimonials from '@/components/VideoTestimonials'
-import VisualEffects from '@/components/VisualEffects'
+import VideoTestimonialsSimple from '@/components/VideoTestimonialsSimple'
 import SEOHead from '@/components/SEOHead'
 import StructuredData from '@/components/StructuredData'
 
+// 图片懒加载hook
+const useImageLazyLoad = (src: string) => {
+  const [imageSrc, setImageSrc] = useState<string>('')
+  const [imageRef, setImageRef] = useState<HTMLImageElement | null>(null)
+
+  useEffect(() => {
+    let observer: IntersectionObserver
+    let didCancel = false
+
+    if (imageRef && imageSrc === '') {
+      if (IntersectionObserver) {
+        observer = new IntersectionObserver(
+          entries => {
+            entries.forEach(entry => {
+              if (
+                !didCancel &&
+                (entry.intersectionRatio > 0 || entry.isIntersecting)
+              ) {
+                setImageSrc(src)
+                if (imageRef) observer.unobserve(imageRef)
+              }
+            })
+          },
+          {
+            threshold: 0.01,
+            rootMargin: '75%',
+          }
+        )
+        observer.observe(imageRef)
+      } else {
+        // Fallback for older browsers
+        setImageSrc(src)
+      }
+    }
+    return () => {
+      didCancel = true
+      if (observer && observer.unobserve && imageRef) {
+        observer.unobserve(imageRef)
+      }
+    }
+  }, [src, imageSrc, imageRef])
+
+  return [imageSrc, setImageRef] as const
+}
+
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true)
+  // 临时重定向到简化版本
+  return <HomeSimple />
+}
+
+function HomeSimple() {
+  const [isLoading, setIsLoading] = useState(false) // 改为false，立即显示内容
   const [showScrollTop, setShowScrollTop] = useState(false)
   const [email, setEmail] = useState('')
 
   useEffect(() => {
-    // Simulate loading
-    const timer = setTimeout(() => setIsLoading(false), 2000)
-    return () => clearTimeout(timer)
+    // Simulate loading with shorter time and error handling
+    const timer = setTimeout(() => setIsLoading(false), 1000)
+    
+    // Fallback: force loading to complete after 3 seconds
+    const fallbackTimer = setTimeout(() => setIsLoading(false), 3000)
+    
+    return () => {
+      clearTimeout(timer)
+      clearTimeout(fallbackTimer)
+    }
   }, [])
 
   useEffect(() => {
@@ -62,10 +118,12 @@ export default function Home() {
       
       <StructuredData type="website" data={{}} />
       <StructuredData type="organization" data={{}} />
+      <StructuredData type="person" data={{}} />
+      <StructuredData type="localBusiness" data={{}} />
       
       <div className="min-h-screen relative overflow-hidden">
         {/* Visual Effects */}
-        <VisualEffects />
+        {/* Visual Effects removed for performance */}
         
         {/* Dynamic Background */}
         <div className="fixed inset-0 z-0">
@@ -143,9 +201,9 @@ export default function Home() {
             >
                               <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-tight font-serif text-shadow-lg">
                   <span className="text-gold-300">
-                    玄印命理 · FateCompass
-                  </span>
-                </h1>
+                  玄印命理 · FateCompass
+                </span>
+              </h1>
               <p className="text-2xl md:text-3xl lg:text-4xl text-white mb-10 font-light italic text-shadow-md">
                 Oriental Wisdom. For Your Life's Turning Point.
               </p>
@@ -162,7 +220,7 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="flex flex-col sm:flex-row gap-6 justify-center items-center"
             >
-                              <a
+              <a
                 href="https://wa.me/8615914228258?text=I want to get my reading"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -290,15 +348,11 @@ export default function Home() {
                 </div>
 
                 <div className="mt-12">
-                  <a
-                    href="https://wa.me/8615914228258?text=I want to learn more about Master 玄印's services"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-primary inline-flex items-center space-x-3 px-8 py-4 text-lg font-semibold"
-                  >
-                    <Phone className="w-5 h-5" />
-                    <span>Consult Now</span>
-                  </a>
+                  <Link href="/services">
+                    <button className="btn-primary inline-flex items-center space-x-3 px-8 py-4 text-lg font-semibold">
+                      <span>Explore Services</span>
+                    </button>
+                  </Link>
                 </div>
               </motion.div>
             </div>
@@ -439,7 +493,7 @@ export default function Home() {
         <Testimonials />
         
         {/* ⑤ Video Testimonials Section - 视频评价增强信任 */}
-        <VideoTestimonials />
+        <VideoTestimonialsSimple />
 
         {/* ⑥ Why Choose Us Section - 为什么选择我们 */}
         <section className="section-padding bg-white relative">
@@ -582,15 +636,11 @@ export default function Home() {
                   Deep personal destiny reading based on Four Pillars to understand who you truly are and what path will bring you peace, success, and alignment.
                 </p>
                 <div className="text-3xl font-bold text-navy-900 mb-6">$79 USD</div>
-                <a
-                  href="https://wa.me/8615914228258?text=I want to learn about Life Destiny Reading service"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-primary inline-flex items-center space-x-3 px-8 py-4 text-lg font-semibold"
-                >
-                  <Phone className="w-5 h-5" />
-                  <span>Consult Now</span>
-                </a>
+                <Link href="/services">
+                  <button className="btn-primary inline-flex items-center space-x-3 px-8 py-4 text-lg font-semibold">
+                    <span>Learn More</span>
+                  </button>
+                </Link>
               </motion.div>
               
               <motion.div
@@ -615,15 +665,11 @@ export default function Home() {
                   A deep love reading that blends Eastern energy wisdom with modern relationship insight.
                 </p>
                 <div className="text-2xl font-bold text-navy-900 mb-4">$69 USD</div>
-                <a
-                  href="https://wa.me/8615914228258?text=I want to learn about Relationship Compatibility Reading service"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-gradient-to-r from-pink-500 to-red-600 text-white px-6 py-3 rounded-full font-semibold hover:from-pink-600 hover:to-red-700 transition-all duration-300 inline-flex items-center space-x-2"
-                >
-                  <Phone className="w-4 h-4" />
-                  <span>Consult Now</span>
-                </a>
+                <Link href="/services">
+                  <button className="bg-gradient-to-r from-pink-500 to-red-600 text-white px-6 py-3 rounded-full font-semibold hover:from-pink-600 hover:to-red-700 transition-all duration-300 inline-flex items-center space-x-2">
+                    <span>Learn More</span>
+                  </button>
+                </Link>
               </motion.div>
               
               <motion.div
@@ -651,15 +697,11 @@ export default function Home() {
                   Not just jewelry — a spiritual compass tuned to your destiny with custom-made talismans.
                 </p>
                 <div className="text-2xl font-bold text-navy-900 mb-4">$129 USD</div>
-                <a
-                  href="https://wa.me/8615914228258?text=I want to learn about Personalized Talisman & Energy Guide service"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-gradient-to-r from-green-500 to-teal-600 text-white px-6 py-3 rounded-full font-semibold hover:from-green-600 hover:to-teal-700 transition-all duration-300 inline-flex items-center space-x-2"
-                >
-                  <Phone className="w-4 h-4" />
-                  <span>Consult Now</span>
-                </a>
+                <Link href="/services">
+                  <button className="bg-gradient-to-r from-green-500 to-teal-600 text-white px-6 py-3 rounded-full font-semibold hover:from-green-600 hover:to-teal-700 transition-all duration-300 inline-flex items-center space-x-2">
+                    <span>Learn More</span>
+                  </button>
+                </Link>
               </motion.div>
             </div>
           </div>
@@ -697,6 +739,10 @@ export default function Home() {
                     alt="Donald Trump"
                     fill
                     className="object-cover rounded-full"
+                    sizes="(max-width: 768px) 60px, 80px"
+                    loading="lazy"
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                   />
                 </div>
                 <h3 className="text-xl font-bold text-navy-900 mb-4 text-center">Donald Trump</h3>
@@ -721,6 +767,10 @@ export default function Home() {
                     alt="Oprah Winfrey"
                     fill
                     className="object-cover rounded-full"
+                    sizes="(max-width: 768px) 60px, 80px"
+                    loading="lazy"
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                   />
                 </div>
                 <h3 className="text-xl font-bold text-navy-900 mb-4 text-center">Oprah Winfrey</h3>
@@ -745,6 +795,10 @@ export default function Home() {
                     alt="Bill Gates"
                     fill
                     className="object-cover rounded-full"
+                    sizes="(max-width: 768px) 60px, 80px"
+                    loading="lazy"
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                   />
                 </div>
                 <h3 className="text-xl font-bold text-navy-900 mb-4 text-center">Bill Gates</h3>
@@ -769,6 +823,10 @@ export default function Home() {
                     alt="Madonna"
                     fill
                     className="object-cover rounded-full"
+                    sizes="(max-width: 768px) 60px, 80px"
+                    loading="lazy"
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                   />
                 </div>
                 <h3 className="text-xl font-bold text-navy-900 mb-4 text-center">Madonna</h3>
@@ -793,6 +851,10 @@ export default function Home() {
                     alt="Tom Cruise"
                     fill
                     className="object-cover rounded-full"
+                    sizes="(max-width: 768px) 60px, 80px"
+                    loading="lazy"
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                   />
                 </div>
                 <h3 className="text-xl font-bold text-navy-900 mb-4 text-center">Tom Cruise</h3>
@@ -817,6 +879,10 @@ export default function Home() {
                     alt="Mark Zuckerberg"
                     fill
                     className="object-cover rounded-full"
+                    sizes="(max-width: 768px) 60px, 80px"
+                    loading="lazy"
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                   />
                 </div>
                 <h3 className="text-xl font-bold text-navy-900 mb-4 text-center">Mark Zuckerberg</h3>
@@ -854,14 +920,14 @@ export default function Home() {
                   href="https://wa.me/8615914228258?text=I want to get a free initial reading"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-white text-navy-900 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 flex items-center space-x-2 shadow-lg hover:shadow-xl"
+                  className="bg-white text-navy-900 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 flex items-center space-x-2 shadow-lg hover:shadow-xl min-h-[44px] touch-manipulation"
                 >
                   <Phone className="w-5 h-5" />
                   <span>Get Free Reading Now</span>
                 </a>
                 <a
                   href="mailto:chenxiao0801@hotmail.com?subject=I want to learn about Master 玄印's services"
-                  className="bg-navy-800 text-white px-8 py-4 rounded-full font-semibold hover:bg-navy-700 transition-all duration-300 flex items-center space-x-2 shadow-lg hover:shadow-xl border border-navy-600"
+                  className="bg-navy-800 text-white px-8 py-4 rounded-full font-semibold hover:bg-navy-700 transition-all duration-300 flex items-center space-x-2 shadow-lg hover:shadow-xl border border-navy-600 min-h-[44px] touch-manipulation"
                 >
                   <Mail className="w-5 h-5" />
                   <span>Email Consultation</span>
@@ -871,18 +937,18 @@ export default function Home() {
               {/* Email Subscription */}
               <div className="max-w-md mx-auto">
                 <h3 className="text-lg font-semibold text-white mb-3">Subscribe for Spiritual Tips</h3>
-                <form onSubmit={handleEmailSubmit} className="flex space-x-2">
+                <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-2">
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
                     required
-                    className="flex-1 px-4 py-3 rounded-full text-navy-900 text-sm focus:outline-none focus:ring-2 focus:ring-gold-500"
+                    className="flex-1 px-4 py-3 rounded-full text-navy-900 text-sm focus:outline-none focus:ring-2 focus:ring-gold-500 min-h-[44px]"
                   />
                   <button 
                     type="submit"
-                    className="bg-gold-500 text-white px-6 py-3 rounded-full text-sm hover:bg-gold-600 transition-colors font-semibold"
+                    className="bg-gold-500 text-white px-6 py-3 rounded-full text-sm hover:bg-gold-600 transition-colors font-semibold min-h-[44px] touch-manipulation"
                   >
                     Subscribe
                   </button>

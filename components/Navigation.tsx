@@ -111,7 +111,7 @@ export default function Navigation() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-white p-3 touch-manipulation"
+            className="md:hidden text-white p-4 touch-manipulation min-h-[44px] min-w-[44px] flex items-center justify-center"
             aria-label="Toggle menu"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -126,45 +126,45 @@ export default function Navigation() {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-navy-900/95 backdrop-blur-md rounded-lg mt-2 overflow-hidden"
           >
-            <div className="px-4 py-6 space-y-4">
+            <div className="px-4 py-6 space-y-2">
               <Link 
                 href="/" 
-                className="block text-cream-200 hover:text-white transition-colors font-medium py-3 touch-manipulation"
+                className="block text-cream-200 hover:text-white transition-colors font-medium py-4 touch-manipulation min-h-[44px] flex items-center"
                 onClick={() => setIsOpen(false)}
               >
                 Home
               </Link>
               <Link 
                 href="/services" 
-                className="block text-cream-200 hover:text-white transition-colors font-medium py-3 touch-manipulation"
+                className="block text-cream-200 hover:text-white transition-colors font-medium py-4 touch-manipulation min-h-[44px] flex items-center"
                 onClick={() => setIsOpen(false)}
               >
                 Services
               </Link>
               <Link 
                 href="/blog" 
-                className="block text-cream-200 hover:text-white transition-colors font-medium py-3 touch-manipulation"
+                className="block text-cream-200 hover:text-white transition-colors font-medium py-4 touch-manipulation min-h-[44px] flex items-center"
                 onClick={() => setIsOpen(false)}
               >
                 Blog
               </Link>
               <Link 
                 href="/about" 
-                className="block text-cream-200 hover:text-white transition-colors font-medium py-3 touch-manipulation"
+                className="block text-cream-200 hover:text-white transition-colors font-medium py-4 touch-manipulation min-h-[44px] flex items-center"
                 onClick={() => setIsOpen(false)}
               >
                 About
               </Link>
               <Link 
                 href="/wisdom" 
-                className="block text-cream-200 hover:text-white transition-colors font-medium py-3 touch-manipulation"
+                className="block text-cream-200 hover:text-white transition-colors font-medium py-4 touch-manipulation min-h-[44px] flex items-center"
                 onClick={() => setIsOpen(false)}
               >
                 Wisdom
               </Link>
               <Link 
                 href="/contact" 
-                className="block text-cream-200 hover:text-white transition-colors font-medium py-3 touch-manipulation"
+                className="block text-cream-200 hover:text-white transition-colors font-medium py-4 touch-manipulation min-h-[44px] flex items-center"
                 onClick={() => setIsOpen(false)}
               >
                 Contact
@@ -175,10 +175,10 @@ export default function Navigation() {
                 href="https://wa.me/8615914228258"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="gold-gradient text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-2"
+                className="gold-gradient text-white px-6 py-4 rounded-full font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-2 min-h-[44px] touch-manipulation"
                 onClick={() => setIsOpen(false)}
               >
-                <Phone className="w-4 h-4" />
+                <Phone className="w-5 h-5" />
                 <span>Consult Now</span>
               </a>
             </div>
