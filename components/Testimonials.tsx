@@ -1,9 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { Star } from 'lucide-react'
-import Image from 'next/image'
+import { Star, ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react'
 
 const testimonials = [
   {
@@ -57,6 +56,76 @@ const testimonials = [
 ]
 
 export default function Testimonials() {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+  const [isPaused, setIsPaused] = useState(false)
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
+  const autoPlayRef = useRef<NodeJS.Timeout>()
+
+  // Auto-play functionality
+  useEffect(() => {
+    if (!isAutoPlaying || isPaused) return
+
+    autoPlayRef.current = setInterval(() => {
+      setCurrentIndex((prevIndex) => {
+        const nextIndex = prevIndex + 1
+        return nextIndex >= testimonials.length ? 0 : nextIndex
+      })
+    }, 3000)
+
+    return () => {
+      if (autoPlayRef.current) {
+        clearInterval(autoPlayRef.current)
+      }
+    }
+  }, [isAutoPlaying, isPaused])
+
+  // Scroll to current index
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      const cardWidth = 320 // w-80
+      const gap = 24 // gap-6
+      const scrollPosition = currentIndex * (cardWidth + gap)
+      
+      scrollContainerRef.current.scrollTo({
+        left: scrollPosition,
+        behavior: 'smooth'
+      })
+    }
+  }, [currentIndex])
+
+  // Pause on hover
+  const handleMouseEnter = () => {
+    setIsPaused(true)
+  }
+
+  const handleMouseLeave = () => {
+    setIsPaused(false)
+  }
+
+  // Manual controls
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => {
+      const nextIndex = prevIndex + 1
+      return nextIndex >= testimonials.length ? 0 : nextIndex
+    })
+  }
+
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) => {
+      const prevIndexValue = prevIndex - 1
+      return prevIndexValue < 0 ? testimonials.length - 1 : prevIndexValue
+    })
+  }
+
+  const toggleAutoPlay = () => {
+    setIsAutoPlaying(!isAutoPlaying)
+  }
+
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index)
+  }
+
   return (
     <section className="section-padding bg-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
@@ -72,41 +141,102 @@ export default function Testimonials() {
           </h2>
         </motion.div>
 
-        {/* Horizontal Testimonials Grid */}
-        <div className="relative scroll-shadow">
-          <div className="flex overflow-x-auto scrollbar-hide horizontal-scroll horizontal-scroll-touch horizontal-scroll-performance horizontal-scroll-smooth horizontal-scroll-accessible horizontal-scroll-keyboard horizontal-scroll-memory pb-8 gap-6 md:gap-8 horizontal-cards">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={testimonial.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="flex-shrink-0 w-80 md:w-96 bg-white rounded-xl shadow-lg border border-gray-100 p-6 md:p-8 testimonial-card"
-              >
-                {/* Avatar */}
-                <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-4">
-                  <span className="text-gray-700 font-bold text-lg">{testimonial.avatar}</span>
-                </div>
+        {/* Carousel Container */}
+        <div 
+          className="relative"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          {/* Navigation Arrows */}
+          <button
+            onClick={prevSlide}
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 bg-white hover:bg-gray-50 text-gray-700 p-3 rounded-full shadow-lg border border-gray-200 transition-all duration-300 hover:scale-110"
+            aria-label="Previous testimonial"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
 
-                {/* Name */}
-                <h3 className="text-lg font-bold text-gray-900 mb-3 testimonial-name">
-                  {testimonial.name}
-                </h3>
+          <button
+            onClick={nextSlide}
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 bg-white hover:bg-gray-50 text-gray-700 p-3 rounded-full shadow-lg border border-gray-200 transition-all duration-300 hover:scale-110"
+            aria-label="Next testimonial"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
 
-                {/* Rating */}
-                <div className="flex space-x-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
-                  ))}
-                </div>
+          {/* Auto-play Toggle */}
+          <button
+            onClick={toggleAutoPlay}
+            className="absolute top-4 right-4 z-10 bg-white hover:bg-gray-50 text-gray-700 p-2 rounded-full shadow-lg border border-gray-200 transition-all duration-300"
+            aria-label={isAutoPlaying ? "Pause auto-play" : "Start auto-play"}
+          >
+            {isAutoPlaying ? (
+              <Pause className="w-4 h-4" />
+            ) : (
+              <Play className="w-4 h-4" />
+            )}
+          </button>
 
-                {/* Review */}
-                <p className="text-gray-600 italic leading-relaxed testimonial-text">
-                  "{testimonial.review}"
-                </p>
-              </motion.div>
+          {/* Horizontal Testimonials Grid */}
+          <div className="relative scroll-shadow">
+            <div 
+              ref={scrollContainerRef}
+              className="flex overflow-x-auto scrollbar-hide horizontal-scroll horizontal-scroll-touch horizontal-scroll-performance horizontal-scroll-smooth horizontal-scroll-accessible horizontal-scroll-keyboard horizontal-scroll-memory pb-8 gap-6 md:gap-8 horizontal-cards"
+            >
+              {testimonials.map((testimonial, index) => (
+                <motion.div
+                  key={testimonial.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="flex-shrink-0 w-80 md:w-96 bg-white rounded-xl shadow-lg border border-gray-100 p-6 md:p-8 testimonial-card"
+                >
+                  {/* Avatar */}
+                  <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-4">
+                    <span className="text-gray-700 font-bold text-lg">{testimonial.avatar}</span>
+                  </div>
+
+                  {/* Name */}
+                  <h3 className="text-lg font-bold text-gray-900 mb-3 testimonial-name">
+                    {testimonial.name}
+                  </h3>
+
+                  {/* Rating */}
+                  <div className="flex space-x-1 mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+                    ))}
+                  </div>
+
+                  {/* Review */}
+                  <p className="text-gray-600 italic leading-relaxed testimonial-text">
+                    "{testimonial.review}"
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Progress Dots */}
+          <div className="flex justify-center mt-8 space-x-2">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all duration-300 ${
+                  index === currentIndex
+                    ? 'bg-yellow-400 scale-125'
+                    : 'bg-gray-300 hover:bg-gray-400'
+                }`}
+                aria-label={`Go to testimonial ${index + 1}`}
+              />
             ))}
+          </div>
+
+          {/* Progress Counter */}
+          <div className="text-center mt-3 text-sm text-gray-600">
+            {currentIndex + 1} / {testimonials.length}
           </div>
         </div>
 
