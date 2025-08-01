@@ -101,7 +101,6 @@ export default function MobileOptimizer({ children }: MobileOptimizerProps) {
     <div 
       className={`mobile-optimizer ${isMobile ? 'mobile-device' : ''} ${isFirefox ? 'firefox-browser' : ''}`}
       style={{
-        minHeight: isMobile ? `${viewportHeight}px` : '100vh',
         minHeight: isMobile ? 'calc(var(--vh, 1vh) * 100)' : '100vh'
       }}
     >
