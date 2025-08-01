@@ -9,7 +9,6 @@ interface MobileOptimizerProps {
 export default function MobileOptimizer({ children }: MobileOptimizerProps) {
   const [isMobile, setIsMobile] = useState(false)
   const [isFirefox, setIsFirefox] = useState(false)
-  const [viewportHeight, setViewportHeight] = useState(0)
 
   useEffect(() => {
     // 检测移动设备
@@ -29,7 +28,6 @@ export default function MobileOptimizer({ children }: MobileOptimizerProps) {
     const setVH = () => {
       const vh = window.innerHeight * 0.01
       document.documentElement.style.setProperty('--vh', `${vh}px`)
-      setViewportHeight(window.innerHeight)
     }
 
     // 初始化检查
