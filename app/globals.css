@@ -1895,3 +1895,167 @@ button:active {
     color: #f9fafb;
   }
 }
+
+/* 横向滚动优化 */
+
+/* 隐藏滚动条 */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}
+
+/* 横向滚动容器 */
+.horizontal-scroll {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 横向卡片布局优化 */
+.horizontal-cards {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+/* 移动端横向滚动优化 */
+@media (max-width: 768px) {
+  .horizontal-cards {
+    gap: 1rem;
+    padding: 0.5rem 0;
+  }
+  
+  .testimonial-card {
+    min-width: 280px;
+    max-width: 320px;
+  }
+}
+
+/* 平板端横向滚动优化 */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .horizontal-cards {
+    gap: 1.25rem;
+  }
+  
+  .testimonial-card {
+    min-width: 320px;
+    max-width: 380px;
+  }
+}
+
+/* 桌面端横向滚动优化 */
+@media (min-width: 1025px) {
+  .horizontal-cards {
+    gap: 1.5rem;
+  }
+  
+  .testimonial-card {
+    min-width: 360px;
+    max-width: 400px;
+  }
+}
+
+/* 横向滚动触摸优化 */
+.horizontal-scroll-touch {
+  touch-action: pan-x;
+  overscroll-behavior-x: contain;
+}
+
+/* 横向滚动性能优化 */
+.horizontal-scroll-performance {
+  will-change: scroll-position;
+  transform: translateZ(0);
+}
+
+/* 横向滚动动画 */
+.horizontal-scroll-smooth {
+  scroll-behavior: smooth;
+}
+
+/* 横向滚动指示器 */
+.scroll-indicator {
+  position: relative;
+}
+
+.scroll-indicator::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 20px;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.8));
+  pointer-events: none;
+}
+
+/* 横向滚动阴影效果 */
+.scroll-shadow {
+  position: relative;
+}
+
+.scroll-shadow::before,
+.scroll-shadow::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 20px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.scroll-shadow::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(255,255,255,1), transparent);
+}
+
+.scroll-shadow::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(255,255,255,1), transparent);
+}
+
+/* 横向滚动响应式优化 */
+@media (max-width: 640px) {
+  .horizontal-scroll {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .testimonial-card {
+    margin-right: 1rem;
+  }
+}
+
+/* 横向滚动无障碍优化 */
+.horizontal-scroll-accessible {
+  outline: none;
+}
+
+.horizontal-scroll-accessible:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* 横向滚动键盘导航 */
+.horizontal-scroll-keyboard {
+  scroll-behavior: smooth;
+}
+
+/* 横向滚动内存优化 */
+.horizontal-scroll-memory {
+  contain: layout style paint;
+}
+
+/* 横向滚动动画减少运动偏好 */
+@media (prefers-reduced-motion: reduce) {
+  .horizontal-scroll-smooth {
+    scroll-behavior: auto;
+  }
+  
+  .testimonial-card {
+    transition: none;
+  }
+}
