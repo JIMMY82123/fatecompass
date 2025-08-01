@@ -2,10 +2,18 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Phone, ArrowRight, Star, ChevronLeft, ChevronRight } from 'lucide-react'
+import Image from 'next/image'
+import { Phone, Mail, Heart, Target, Briefcase, Star, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
+import Navigation from '@/components/Navigation'
+import Testimonials from '@/components/Testimonials'
+import VideoTestimonialsSimple from '@/components/VideoTestimonialsSimple'
+import SEOHead from '@/components/SEOHead'
+import StructuredData from '@/components/StructuredData'
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(false)
   const [showScrollTop, setShowScrollTop] = useState(false)
+  const [email, setEmail] = useState('')
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
   const [isHovered, setIsHovered] = useState(false)
 
@@ -66,6 +74,19 @@ export default function Home() {
     return () => clearInterval(interval)
   }, [testimonials.length, isHovered])
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
+  const handleEmailSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    console.log('Email submitted:', email)
+    setEmail('')
+  }
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
@@ -89,299 +110,572 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* Dynamic Background */}
-      <div className="fixed inset-0 z-0">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1920&h=1080&q=80')`,
-          }}
-        ></div>
-        <div className="absolute inset-0 bg-black/40"></div>
-      </div>
-
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-navy-900/95 backdrop-blur-md shadow-xl border-b border-white/10">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="flex items-center justify-between h-20">
-            <Link href="/" className="flex items-center space-x-4 group">
-              <div className="w-12 h-12 bg-gradient-to-br from-gold-400 to-amber-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                <span className="text-white font-bold text-lg">玄</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-2xl font-bold text-white">玄印命理</span>
-                <span className="text-sm text-gold-300 font-medium tracking-wide">FateCompass</span>
-              </div>
-            </Link>
-
-            <div className="hidden md:flex items-center space-x-8">
-              <Link href="/" className="text-white hover:text-gold-300 transition-colors font-semibold">Home</Link>
-              <Link href="/services" className="text-white hover:text-gold-300 transition-colors font-semibold">Services</Link>
-              <Link href="/about" className="text-white hover:text-gold-300 transition-colors font-semibold">About</Link>
-              <Link href="/contact" className="text-white hover:text-gold-300 transition-colors font-semibold">Contact</Link>
-            </div>
-
-            <a
-              href="https://wa.me/8615914228258"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-gold-500 text-navy-900 px-4 py-2 rounded-full font-semibold hover:bg-gold-400 transition-colors flex items-center space-x-2"
-            >
-              <Phone className="w-4 h-4" />
-              <span>Contact</span>
-            </a>
-          </div>
+    <>
+      <SEOHead
+        title="Fate Compass | 玄印命理 · Xuan Yin - Your Destiny Decoded by Eastern Wisdom"
+        description="Feeling lost in life? Master 玄印 helps you discover your destiny through ancient Eastern astrology. Career guidance, relationship compatibility, and life purpose readings."
+        keywords="life purpose, career guidance, relationship compatibility, Eastern astrology, BaZi reading, destiny, lost feeling, compass, 玄印, Xuan Yin"
+        ogTitle="Fate Compass | 玄印命理 · Xuan Yin - Your Destiny Decoded"
+        ogDescription="Discover your life purpose with Master 玄印. Ancient Eastern wisdom for modern souls seeking clarity and direction."
+        canonical="https://fatecompass.net"
+      />
+      
+      <StructuredData type="website" data={{}} />
+      <StructuredData type="organization" data={{}} />
+      <StructuredData type="person" data={{}} />
+      <StructuredData type="localBusiness" data={{}} />
+      
+      <div className="min-h-screen relative overflow-hidden">
+        {/* Dynamic Background */}
+        <div className="fixed inset-0 z-0">
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1920&h=1080&q=80')`,
+            }}
+          ></div>
+          <div className="absolute inset-0 bg-black/40"></div>
         </div>
-      </nav>
 
-      {/* Hero Section */}
-      <section className="relative z-10 pt-32 pb-20 min-h-screen flex items-center">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-tight">
-            <span className="text-gold-300">玄印命理 · FateCompass</span>
-          </h1>
-          <p className="text-2xl md:text-3xl lg:text-4xl text-white mb-10 font-light italic">
-            Oriental Wisdom. For Your Life's Turning Point.
-          </p>
-          <p className="text-lg md:text-xl lg:text-2xl text-gray-100 max-w-4xl mx-auto leading-relaxed mb-12">
-            Feeling lost in life? Let ancient Eastern wisdom guide you to clarity, 
-            purpose, and success. Think of it as life coaching with cosmic timing - 
-            discover your true path with Master 玄印.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <a
-              href="https://wa.me/8615914228258?text=I want to get my reading"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-gold-500 text-navy-900 px-10 py-5 rounded-full font-semibold hover:bg-gold-400 transition-colors flex items-center space-x-3 text-lg"
-            >
-              <Phone className="w-6 h-6" />
-              <span>Get My Reading</span>
-            </a>
-            <Link href="/services">
-              <button className="border-2 border-white text-white px-10 py-5 rounded-full font-semibold hover:bg-white hover:text-navy-900 transition-colors text-lg">
-                Explore Services
-              </button>
-            </Link>
-          </div>
-        </div>
-      </section>
+        <Navigation />
 
-      {/* Introduction Section */}
-      <section className="py-20 bg-white/95 backdrop-blur-sm relative">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Left Column - Content */}
-            <div>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-navy-900 mb-8 font-serif leading-tight">
-                Who is Master 玄印?
-              </h2>
-              <p className="text-xl lg:text-2xl text-gray-700 mb-10 leading-relaxed">
-                With over 10 years of deep study in Eastern wisdom and the ancient Four Pillars system, 
-                Master 玄印 has helped hundreds of Americans find their true path. Think of it as 
-                combining the depth of ancient knowledge with the practicality of modern life coaching.
+        {/* ① Hero Section */}
+        <section id="hero" className="relative z-10 pt-32 pb-20 min-h-screen flex items-center">
+          <div className="max-w-6xl mx-auto px-4 text-center">
+            <div className="mb-12">
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-tight font-serif text-shadow-lg">
+                <span className="text-gold-300">
+                  玄印命理 · FateCompass
+                </span>
+              </h1>
+              <p className="text-2xl md:text-3xl lg:text-4xl text-white mb-10 font-light italic text-shadow-md">
+                Oriental Wisdom. For Your Life's Turning Point.
               </p>
-              
-              <div className="space-y-8">
-                <div className="flex items-start space-x-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-gold-400 to-amber-600 rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg transform rotate-12">
-                    <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-                      <div className="w-4 h-4 bg-gradient-to-br from-red-500 to-pink-600 rounded-full"></div>
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-navy-900 mb-3">Life Purpose Discovery</h3>
-                    <p className="text-lg text-gray-700 leading-relaxed">Understand your unique talents and the path that will bring you true fulfillment - like having a personal life coach with cosmic timing insights.</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start space-x-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-pink-400 to-rose-600 rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg transform -rotate-6">
-                    <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-                      <div className="w-6 h-6 bg-gradient-to-br from-pink-500 to-red-500 rounded-full relative">
-                        <div className="absolute top-1 left-1 w-2 h-2 bg-white rounded-full"></div>
-                        <div className="absolute top-1 right-1 w-2 h-2 bg-white rounded-full"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-navy-900 mb-3">Relationship Clarity</h3>
-                    <p className="text-lg text-gray-700 leading-relaxed">Find your soulmate or understand why certain relationships keep repeating - using energy compatibility analysis that goes beyond surface attraction.</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start space-x-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-600 rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg transform rotate-6">
-                    <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-                      <div className="w-6 h-6 bg-gradient-to-br from-green-500 to-teal-600 rounded-full relative">
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="w-3 h-3 bg-white rounded-full"></div>
+              <p className="text-lg md:text-xl lg:text-2xl text-gray-100 max-w-4xl mx-auto leading-relaxed text-shadow-sm">
+                Feeling lost in life? Let ancient Eastern wisdom guide you to clarity, 
+                purpose, and success. Think of it as life coaching with cosmic timing - 
+                discover your true path with Master 玄印.
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+              <a
+                href="https://wa.me/8615914228258?text=I want to get my reading"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary flex items-center space-x-3 px-10 py-5 text-lg font-semibold"
+              >
+                <Phone className="w-6 h-6" />
+                <span>Get My Reading</span>
+              </a>
+              <Link href="/services">
+                <button className="btn-secondary px-10 py-5 text-lg font-semibold border-2 border-white text-white hover:bg-white hover:text-navy-900">
+                  Explore Services
+                </button>
+              </Link>
+              <Link href="/wisdom">
+                <button className="btn-secondary px-10 py-5 text-lg font-semibold border-2 border-white text-white hover:bg-white hover:text-navy-900">
+                  Learn Eastern Wisdom
+                </button>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ② Intro Section */}
+        <section id="intro" className="section-padding bg-white/95 backdrop-blur-sm relative">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              {/* Left Column */}
+              <div className="relative">
+                <div className="card-elevated bg-gradient-to-br from-cream-100 to-gold-100 rounded-3xl p-10 glass-card float-card">
+                  <div className="text-center">
+                    <div className="relative w-40 h-40 mx-auto mb-8">
+                      <div className="absolute inset-0 bg-gradient-to-br from-gold-400 to-gold-600 rounded-full opacity-20 animate-pulse"></div>
+                      <div className="relative w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 rounded-full flex items-center justify-center overflow-hidden">
+                        <div className="w-36 h-36 bg-gradient-to-br from-cream-100 to-cream-200 rounded-full flex items-center justify-center overflow-hidden">
+                          <div className="w-32 h-32 bg-gradient-to-br from-navy-800 to-navy-900 rounded-full flex items-center justify-center overflow-hidden relative">
+                            <Image
+                              src="/images/master-xuan-yin.jpg"
+                              alt="Master 玄印 - Traditional Eastern Wisdom Practitioner"
+                              fill
+                              className="object-cover rounded-full"
+                              priority
+                            />
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-navy-900 mb-3">Financial Timing</h3>
-                    <p className="text-lg text-gray-700 leading-relaxed">Know the best times to invest, start businesses, or make major financial decisions - like having a financial advisor who understands cosmic timing.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-12">
-                <Link href="/services">
-                  <button className="bg-gold-500 text-navy-900 px-8 py-4 rounded-full font-semibold hover:bg-gold-400 transition-colors inline-flex items-center space-x-3 text-lg">
-                    <span>Explore Services</span>
-                  </button>
-                </Link>
-              </div>
-            </div>
-
-            {/* Right Column - Image */}
-            <div className="relative">
-              <div className="bg-gradient-to-br from-cream-100 to-gold-100 rounded-3xl p-10 shadow-xl">
-                <div className="text-center">
-                  <div className="relative w-40 h-40 mx-auto mb-8">
-                    <div className="absolute inset-0 bg-gradient-to-br from-gold-400 to-gold-600 rounded-full opacity-20 animate-pulse"></div>
-                    <div className="relative w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 rounded-full flex items-center justify-center overflow-hidden">
-                      <div className="w-36 h-36 bg-gradient-to-br from-cream-100 to-cream-200 rounded-full flex items-center justify-center overflow-hidden">
-                        <div className="w-32 h-32 bg-gradient-to-br from-navy-800 to-navy-900 rounded-full flex items-center justify-center overflow-hidden relative">
-                          <div className="text-white text-6xl font-bold">玄</div>
-                          <div className="absolute inset-0 bg-black/20 rounded-full"></div>
-                        </div>
+                    <h3 className="text-2xl font-bold text-navy-900 mb-4 font-serif">Master 玄印</h3>
+                    <p className="text-gray-700 mb-6">Traditional Eastern Wisdom Practitioner</p>
+                    <div className="flex justify-center space-x-4">
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-gold-600">15+</div>
+                        <div className="text-sm text-gray-600">Years Experience</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-gold-600">1000+</div>
+                        <div className="text-sm text-gray-600">Happy Clients</div>
                       </div>
                     </div>
                   </div>
-                  <h3 className="text-3xl font-bold text-navy-900 mb-6 font-serif">Ancient Eastern Wisdom</h3>
-                  <p className="text-lg text-gray-700 leading-relaxed">
-                    For thousands of years, Eastern astrology has guided souls through life's most challenging moments. 
-                    Now, this wisdom is available to you through Master 玄印.
-                  </p>
                 </div>
               </div>
-              {/* Floating elements */}
-              <div className="absolute -top-6 -right-6 w-10 h-10 bg-gold-300 rounded-full opacity-60 animate-pulse"></div>
-              <div className="absolute -bottom-6 -left-6 w-8 h-8 bg-navy-300 rounded-full opacity-40 animate-pulse" style={{animationDelay: '1s'}}></div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Testimonials Section */}
-      <section className="py-20 bg-gradient-to-br from-navy-900 to-purple-900 relative">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 font-serif">
-              See what our clients say about their BaZi AI analysis journey
-            </h2>
-          </div>
-
-          {/* Testimonials Carousel */}
-          <div className="relative">
-            {/* Navigation Arrows */}
-            <button
-              onClick={prevTestimonial}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 bg-white hover:bg-gray-50 text-gray-700 p-3 rounded-full shadow-lg border border-gray-200 transition-all duration-300 hover:scale-110"
-              aria-label="Previous testimonial"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-
-            <button
-              onClick={nextTestimonial}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 bg-white hover:bg-gray-50 text-gray-700 p-3 rounded-full shadow-lg border border-gray-200 transition-all duration-300 hover:scale-110"
-              aria-label="Next testimonial"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-
-                        {/* Testimonial Card */}
-            <div 
-              className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 max-w-4xl mx-auto transition-all duration-500"
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-            >
-              <div className="text-center">
-                {/* Debug info */}
-                <div className="text-xs text-gray-400 mb-2">
-                  当前: {currentTestimonial} | 总数: {testimonials.length} | 悬停: {isHovered ? '是' : '否'}
-                </div>
-                {/* Avatar */}
-                <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <span className="text-gray-700 font-bold text-xl">{testimonials[currentTestimonial].name.charAt(0)}</span>
-                </div>
-
-                {/* Name */}
-                <h3 className="text-2xl font-bold text-white mb-4">
-                  {testimonials[currentTestimonial].name}
-                </h3>
-
-                {/* Rating */}
-                <div className="flex justify-center space-x-1 mb-6">
-                  {[...Array(testimonials[currentTestimonial].rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                  ))}
-                </div>
-
-                {/* Review */}
-                <p className="text-gray-200 italic leading-relaxed text-lg mb-6">
-                  "{testimonials[currentTestimonial].review}"
+              {/* Right Column */}
+              <div>
+                <h2 className="text-4xl md:text-5xl font-bold text-navy-900 mb-8 font-serif leading-tight">
+                  When You Feel Lost, 
+                  <span className="text-gold-600"> Ancient Wisdom Finds You</span>
+                </h2>
+                <p className="text-xl text-gray-700 mb-8 leading-relaxed">
+                  Life's crossroads can be overwhelming. But what if you had a compass 
+                  that's been guiding souls for thousands of years? That's what Eastern 
+                  wisdom offers - not just answers, but a deeper understanding of your 
+                  unique path.
                 </p>
-
-                {/* Category */}
-                <div className="inline-block bg-gold-500 text-navy-900 px-4 py-2 rounded-full text-sm font-semibold">
-                  {testimonials[currentTestimonial].category}
+                
+                <div className="space-y-6">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-gold-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <Target className="w-6 h-6 text-gold-600" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-navy-900 mb-2">Find Your Purpose</h3>
+                      <p className="text-gray-700">Discover what you're truly meant to do in this lifetime</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-gold-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <Briefcase className="w-6 h-6 text-gold-600" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-navy-900 mb-2">Career Clarity</h3>
+                      <p className="text-gray-700">Understand your strengths and the perfect timing for success</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-gold-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <Heart className="w-6 h-6 text-gold-600" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-navy-900 mb-2">Relationship Harmony</h3>
+                      <p className="text-gray-700">Build deeper connections and understand compatibility</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
+        </section>
 
-            {/* Progress Dots */}
-            <div className="flex justify-center mt-8 space-x-2">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentTestimonial(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === currentTestimonial
-                      ? 'bg-gold-400 scale-125'
-                      : 'bg-gray-400 hover:bg-gray-300'
-                  }`}
-                  aria-label={`Go to testimonial ${index + 1}`}
-                />
-              ))}
+        {/* ③ Services Section */}
+        <section id="services" className="section-padding bg-gradient-to-br from-navy-900 to-navy-800 text-white relative">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold mb-8 font-serif leading-tight">
+                Your <span className="text-gold-400">Destiny Awaits</span>
+              </h2>
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                Choose the guidance that resonates with your current life situation
+              </p>
             </div>
 
-            {/* Progress Counter */}
-            <div className="text-center mt-4 text-sm text-gray-300">
-              {currentTestimonial + 1} / {testimonials.length} (每3秒自动切换)
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Service 1 */}
+              <div className="card-elevated bg-white/10 backdrop-blur-sm rounded-3xl p-8 hover:bg-white/20 transition-all duration-300 glass-card float-card">
+                <div className="text-center mb-6">
+                  <div className="w-16 h-16 bg-gold-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Target className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4">Life Purpose Reading</h3>
+                  <p className="text-gray-300 mb-6">
+                    Discover your true calling and the unique gifts you bring to this world
+                  </p>
+                  <ul className="text-left space-y-2 text-gray-300">
+                    <li className="flex items-center">
+                      <Star className="w-4 h-4 text-gold-400 mr-2" />
+                      Your core strengths and talents
+                    </li>
+                    <li className="flex items-center">
+                      <Star className="w-4 h-4 text-gold-400 mr-2" />
+                      Ideal career paths and timing
+                    </li>
+                    <li className="flex items-center">
+                      <Star className="w-4 h-4 text-gold-400 mr-2" />
+                      Life mission and purpose
+                    </li>
+                  </ul>
+                </div>
+                <a
+                  href="https://wa.me/8615914228258?text=I want a Life Purpose Reading"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary w-full text-center"
+                >
+                  Get Your Reading
+                </a>
+              </div>
+
+              {/* Service 2 */}
+              <div className="card-elevated bg-white/10 backdrop-blur-sm rounded-3xl p-8 hover:bg-white/20 transition-all duration-300 glass-card float-card">
+                <div className="text-center mb-6">
+                  <div className="w-16 h-16 bg-gold-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Heart className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4">Relationship Compatibility</h3>
+                  <p className="text-gray-300 mb-6">
+                    Understand your relationship dynamics and find true compatibility
+                  </p>
+                  <ul className="text-left space-y-2 text-gray-300">
+                    <li className="flex items-center">
+                      <Star className="w-4 h-4 text-gold-400 mr-2" />
+                      Partner compatibility analysis
+                    </li>
+                    <li className="flex items-center">
+                      <Star className="w-4 h-4 text-gold-400 mr-2" />
+                      Communication patterns
+                    </li>
+                    <li className="flex items-center">
+                      <Star className="w-4 h-4 text-gold-400 mr-2" />
+                      Timing for relationships
+                    </li>
+                  </ul>
+                </div>
+                <a
+                  href="https://wa.me/8615914228258?text=I want a Relationship Compatibility Reading"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary w-full text-center"
+                >
+                  Get Your Reading
+                </a>
+              </div>
+
+              {/* Service 3 */}
+              <div className="card-elevated bg-white/10 backdrop-blur-sm rounded-3xl p-8 hover:bg-white/20 transition-all duration-300 glass-card float-card">
+                <div className="text-center mb-6">
+                  <div className="w-16 h-16 bg-gold-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Briefcase className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4">Financial Timing</h3>
+                  <p className="text-gray-300 mb-6">
+                    Make the right financial decisions at the perfect time
+                  </p>
+                  <ul className="text-left space-y-2 text-gray-300">
+                    <li className="flex items-center">
+                      <Star className="w-4 h-4 text-gold-400 mr-2" />
+                      Investment timing guidance
+                    </li>
+                    <li className="flex items-center">
+                      <Star className="w-4 h-4 text-gold-400 mr-2" />
+                      Career advancement timing
+                    </li>
+                    <li className="flex items-center">
+                      <Star className="w-4 h-4 text-gold-400 mr-2" />
+                      Wealth accumulation cycles
+                    </li>
+                  </ul>
+                </div>
+                <a
+                  href="https://wa.me/8615914228258?text=I want a Financial Timing Reading"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary w-full text-center"
+                >
+                  Get Your Reading
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ④ Testimonials Section */}
+        <section className="py-20 bg-gradient-to-br from-navy-900 to-purple-900 relative">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 font-serif">
+                See what our clients say about their BaZi AI analysis journey
+              </h2>
+            </div>
+
+            {/* Testimonials Carousel */}
+            <div className="relative">
+              {/* Navigation Arrows */}
+              <button
+                onClick={prevTestimonial}
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 bg-white hover:bg-gray-50 text-gray-700 p-3 rounded-full shadow-lg border border-gray-200 transition-all duration-300 hover:scale-110"
+                aria-label="Previous testimonial"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+
+              <button
+                onClick={nextTestimonial}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 bg-white hover:bg-gray-50 text-gray-700 p-3 rounded-full shadow-lg border border-gray-200 transition-all duration-300 hover:scale-110"
+                aria-label="Next testimonial"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+
+              {/* Testimonial Card */}
+              <div 
+                className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 max-w-4xl mx-auto transition-all duration-500"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              >
+                <div className="text-center">
+                  {/* Debug info */}
+                  <div className="text-xs text-gray-400 mb-2">
+                    当前: {currentTestimonial} | 总数: {testimonials.length} | 悬停: {isHovered ? '是' : '否'}
+                  </div>
+                  {/* Avatar */}
+                  <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <span className="text-gray-700 font-bold text-xl">{testimonials[currentTestimonial].name.charAt(0)}</span>
+                  </div>
+
+                  {/* Name */}
+                  <h3 className="text-2xl font-bold text-white mb-4">
+                    {testimonials[currentTestimonial].name}
+                  </h3>
+
+                  {/* Rating */}
+                  <div className="flex justify-center space-x-1 mb-6">
+                    {[...Array(testimonials[currentTestimonial].rating)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                    ))}
+                  </div>
+
+                  {/* Review */}
+                  <p className="text-gray-200 italic leading-relaxed text-lg mb-6">
+                    "{testimonials[currentTestimonial].review}"
+                  </p>
+
+                  {/* Category */}
+                  <div className="inline-block bg-gold-500 text-navy-900 px-4 py-2 rounded-full text-sm font-semibold">
+                    {testimonials[currentTestimonial].category}
+                  </div>
+                </div>
+              </div>
+
+              {/* Progress Dots */}
+              <div className="flex justify-center mt-8 space-x-2">
+                {testimonials.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentTestimonial(index)}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      index === currentTestimonial
+                        ? 'bg-gold-400 scale-125'
+                        : 'bg-gray-400 hover:bg-gray-300'
+                    }`}
+                    aria-label={`Go to testimonial ${index + 1}`}
+                  />
+                ))}
+              </div>
+
+              {/* Progress Counter */}
+              <div className="text-center mt-4 text-sm text-gray-300">
+                {currentTestimonial + 1} / {testimonials.length} (每3秒自动切换)
+              </div>
+              
+              {/* Status Info */}
+              <div className="text-center mt-4">
+                <div className="text-white text-sm mb-2">
+                  {isHovered ? '⏸️ 已暂停' : '▶️ 自动播放中'} | {currentTestimonial + 1} / {testimonials.length}
+                </div>
+                <button 
+                  onClick={() => setCurrentTestimonial(prev => (prev + 1) % testimonials.length)}
+                  className="bg-gold-500 text-navy-900 px-4 py-2 rounded-full text-sm font-semibold hover:bg-gold-400 transition-colors"
+                >
+                  手动切换测试
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ⑤ Video Testimonials Section */}
+        <VideoTestimonialsSimple />
+
+        {/* ⑥ Why Choose Us Section */}
+        <section id="why-choose-us" className="section-padding bg-white relative">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-navy-900 mb-8 font-serif leading-tight">
+                Why Choose <span className="text-gold-600">Master 玄印</span>
+              </h2>
+              <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+                Ancient wisdom meets modern understanding for your life's journey
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="text-center">
+                <div className="w-20 h-20 bg-gold-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Target className="w-10 h-10 text-gold-600" />
+                </div>
+                <h3 className="text-xl font-bold text-navy-900 mb-4">15+ Years Experience</h3>
+                <p className="text-gray-700">Deep expertise in traditional Eastern wisdom</p>
+              </div>
+              
+              <div className="text-center">
+                <div className="w-20 h-20 bg-gold-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Heart className="w-10 h-10 text-gold-600" />
+                </div>
+                <h3 className="text-xl font-bold text-navy-900 mb-4">1000+ Happy Clients</h3>
+                <p className="text-gray-700">Proven track record of life-changing guidance</p>
+              </div>
+              
+              <div className="text-center">
+                <div className="w-20 h-20 bg-gold-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Briefcase className="w-10 h-10 text-gold-600" />
+                </div>
+                <h3 className="text-xl font-bold text-navy-900 mb-4">Personalized Approach</h3>
+                <p className="text-gray-700">Every reading is unique to your situation</p>
+              </div>
+              
+              <div className="text-center">
+                <div className="w-20 h-20 bg-gold-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Star className="w-10 h-10 text-gold-600" />
+                </div>
+                <h3 className="text-xl font-bold text-navy-900 mb-4">Modern Application</h3>
+                <p className="text-gray-700">Ancient wisdom for today's challenges</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ⑦ CTA Section */}
+        <section className="section-padding bg-gradient-to-r from-navy-900 to-navy-800 text-white relative">
+          <div className="max-w-4xl mx-auto px-4 text-center">
+            <h2 className="text-4xl md:text-5xl font-bold mb-8 font-serif leading-tight">
+              Ready to <span className="text-gold-400">Discover Your Path</span>?
+            </h2>
+            <p className="text-xl text-gray-300 mb-10 max-w-3xl mx-auto">
+              Don't let life's confusion hold you back. Get the clarity you need 
+              to make confident decisions and move forward with purpose.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
+              <a
+                href="https://wa.me/8615914228258?text=I want to get my reading"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary flex items-center space-x-3 px-10 py-5 text-lg font-semibold"
+              >
+                <Phone className="w-6 h-6" />
+                <span>Start Your Journey</span>
+              </a>
+              <Link href="/services">
+                <button className="btn-secondary px-10 py-5 text-lg font-semibold border-2 border-white text-white hover:bg-white hover:text-navy-900">
+                  Learn More
+                </button>
+              </Link>
+            </div>
+
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
+              <h3 className="text-2xl font-bold mb-6">Stay Connected</h3>
+              <p className="text-gray-300 mb-6">
+                Get insights and wisdom delivered to your inbox
+              </p>
+              <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  className="flex-1 px-4 py-3 rounded-lg border border-gray-600 bg-white/10 text-white placeholder-gray-400 focus:outline-none focus:border-gold-500"
+                  required
+                />
+                <button
+                  type="submit"
+                  className="btn-primary px-6 py-3 font-semibold"
+                >
+                  Subscribe
+                </button>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="bg-navy-900 text-white py-16">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+              <div>
+                <div className="flex items-center space-x-3 mb-6">
+                  <div className="w-12 h-12 bg-gold-500 rounded-full flex items-center justify-center">
+                    <span className="text-white font-bold text-xl">玄</span>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold">Fate Compass</h3>
+                    <p className="text-gray-400 text-sm">Your Destiny Guide</p>
+                  </div>
+                </div>
+                <p className="text-gray-400 mb-6">
+                  Ancient Eastern wisdom for modern souls seeking clarity and direction.
+                </p>
+                <div className="flex space-x-4">
+                  <a href="https://wa.me/8615914228258" className="text-gray-400 hover:text-gold-500 transition-colors">
+                    <Phone className="w-5 h-5" />
+                  </a>
+                  <a href="mailto:contact@fatecompass.net" className="text-gray-400 hover:text-gold-500 transition-colors">
+                    <Mail className="w-5 h-5" />
+                  </a>
+                </div>
+              </div>
+              
+              <div>
+                <h4 className="text-lg font-bold mb-6">Solutions</h4>
+                <ul className="space-y-3">
+                  <li><a href="/services" className="text-gray-400 hover:text-gold-500 transition-colors">Life Purpose Reading</a></li>
+                  <li><a href="/services" className="text-gray-400 hover:text-gold-500 transition-colors">Relationship Compatibility</a></li>
+                  <li><a href="/services" className="text-gray-400 hover:text-gold-500 transition-colors">Financial Timing</a></li>
+                  <li><a href="/services" className="text-gray-400 hover:text-gold-500 transition-colors">Career Guidance</a></li>
+                </ul>
+              </div>
+              
+              <div>
+                <h4 className="text-lg font-bold mb-6">Quick Links</h4>
+                <ul className="space-y-3">
+                  <li><a href="/about" className="text-gray-400 hover:text-gold-500 transition-colors">About Master 玄印</a></li>
+                  <li><a href="/wisdom" className="text-gray-400 hover:text-gold-500 transition-colors">Eastern Wisdom</a></li>
+                  <li><a href="/blog" className="text-gray-400 hover:text-gold-500 transition-colors">Blog & Insights</a></li>
+                  <li><a href="/contact" className="text-gray-400 hover:text-gold-500 transition-colors">Contact Us</a></li>
+                </ul>
+              </div>
+              
+              <div>
+                <h4 className="text-lg font-bold mb-6">Legal</h4>
+                <ul className="space-y-3">
+                  <li><a href="/privacy" className="text-gray-400 hover:text-gold-500 transition-colors">Privacy Policy</a></li>
+                  <li><a href="/terms" className="text-gray-400 hover:text-gold-500 transition-colors">Terms of Service</a></li>
+                  <li><a href="/disclaimer" className="text-gray-400 hover:text-gold-500 transition-colors">Disclaimer</a></li>
+                </ul>
+              </div>
             </div>
             
-            {/* Status Info */}
-            <div className="text-center mt-4">
-              <div className="text-white text-sm mb-2">
-                {isHovered ? '⏸️ 已暂停' : '▶️ 自动播放中'} | {currentTestimonial + 1} / {testimonials.length}
-              </div>
-              <button 
-                onClick={() => setCurrentTestimonial(prev => (prev + 1) % testimonials.length)}
-                className="bg-gold-500 text-navy-900 px-4 py-2 rounded-full text-sm font-semibold hover:bg-gold-400 transition-colors"
-              >
-                手动切换测试
-              </button>
+            <div className="border-t border-gray-800 mt-12 pt-8 text-center">
+              <p className="text-gray-400">
+                © 2024 Fate Compass. All rights reserved. Ancient wisdom for modern souls.
+              </p>
             </div>
           </div>
-        </div>
-      </section>
+        </footer>
 
-      {/* Scroll to Top Button */}
-      {showScrollTop && (
-        <button
-          onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-50 bg-gold-500 text-white p-3 rounded-full shadow-lg hover:bg-gold-600 transition-all duration-300"
-        >
-          <ArrowRight className="w-6 h-6 transform rotate-[-90deg]" />
-        </button>
-      )}
-    </div>
+        {/* Scroll to Top Button */}
+        {showScrollTop && (
+          <button
+            onClick={scrollToTop}
+            className="fixed bottom-8 right-8 w-12 h-12 bg-gold-500 text-white rounded-full shadow-lg hover:bg-gold-600 transition-all duration-300 z-50"
+          >
+            <ArrowRight className="w-6 h-6 transform rotate-[-90deg] mx-auto" />
+          </button>
+        )}
+      </div>
+    </>
   )
 } 
